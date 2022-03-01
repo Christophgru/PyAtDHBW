@@ -1,0 +1,13 @@
+Wie speichert man Passwörter richtig?
+
+Passwörter sollten niemals direkt als String gespeichert werden.
+Stattdessen sollte ein sogenannter hash gespeichert werden, eine art prüfsumme, die für jedes passwort einzigartig ist.
+Die Berechnung des Passwortes aus einem dazugehörigen hash ist sehr rechenaufwendig, sodass,
+sollte es zu einem datenleck kommen, die hashes der passwörter nahezu wertlos für die Angreifer sind.
+
+Wenn der User also sein passwort eingibt, generieren wir aus diesem einen hash,
+und vergleichen diesen mit dem hash des originalpasswortes in der Datenbank.
+
+Um das Berechnen des Passwortes aus dem Hash weiter zu erschweren, kann man den algorithmus rekursiv laufen lassen und
+das passwort nach jedem mal um eine bestimmte für jedes Passwort einzigartig Ziffernfolge ergänzen
+und dadurch das Passwort "salten".
