@@ -1,0 +1,5 @@
+Standard kniffel regeln wiki
+Spielstand abspeichern
+       Spiel als klasse
+       klasse.tabelle()
+       pickle(Spiel)-->json
