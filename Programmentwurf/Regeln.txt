@@ -3,3 +3,10 @@ Spielstand abspeichern
        Spiel als klasse
        klasse.tabelle()
        pickle(Spiel)-->json
+
+Datei Spiel
+Datei User
+Datei Main
+Datei Console
+
+Pylint in Konsole, nicht in Umgebung
