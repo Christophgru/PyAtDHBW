@@ -57,7 +57,7 @@ def gen_hash_pw(password: str):
         password,
         bcrypt.gensalt(5)
     )
-    #print("Salt:"+str(bcrypt.gensalt()))
+    # print("Salt:"+str(bcrypt.gensalt()))
     return hashed.decode()
 
 
@@ -110,17 +110,18 @@ def writedata(data):
         json.dump(frozen, outfile)
 
 
-def readdata() -> dict:
+def readdata(filepath: str = "") -> dict:
     """
     :return: returnt Daten der json Datei 'Snackdaten.json'
     """
     try:
-        with open('snackdaten3.json', encoding="utf-8") as infile:
+        filepath = filepath + 'snackdaten3.json'
+        with open(filepath, 'r', encoding="utf-8") as infile:
             jsondata = json.load(infile)
         thawed = jsonpickle.decode(jsondata)
         return thawed
     except FileNotFoundError:
-        print("Json file konnte nicht gefunden werden")
+        print("\n\nJson file konnte nicht gefunden werden")
         return {}
 
 
@@ -291,8 +292,10 @@ def checkjson(status: int):
         # Testzugriff
         if var["Product"]["1"].price is not None:
             return status
-    except FileNotFoundError:
+    except FileNotFoundError or KeyError:
         print("FileError")
+        return -1
+    except KeyError:
         return -1
     else:
         return status
