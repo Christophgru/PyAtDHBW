@@ -99,6 +99,10 @@ class User:
         """
         self.index = len(readdata()["User"])
 
+    def get(self, param):
+        if param == "username": return self.username
+        if param == "password": return self.password
+
 
 def writedata(data):
     """
@@ -125,12 +129,13 @@ def readdata(filepath: str = "") -> dict:
         return {}
 
 
-def analyzeinput(key, aktuellerstatus, usernumber) -> int:
+def analyzeinput(key, aktuellerstatus, usernumber, filepath: str = "") -> int:
     """
 
     :param usernumber: Der index des den Automaten angemeldeten Kundens
     :param key: Die zu analysierende Eingabe
     :param aktuellerstatus: Der aktuelle Status des Systems
+    :param filepath: optionaler verweis von aufrufenden folder zur json datei
     :return: Der Status in den das System, je nach Eingabe gesetzt werden soll
     """
     if key in "L" or key in "l":
@@ -146,8 +151,12 @@ def analyzeinput(key, aktuellerstatus, usernumber) -> int:
         returner = 6
 
     elif key in "K" or key in "k":
-        balance = readdata()["User"][str(usernumber)].balance
-        print("Ihr aktueller balance beträgt " + str(balance) + "€")
+        try:
+            balance = readdata(filepath)["User"][str(usernumber)].balance
+            print("Ihr aktueller balance beträgt " + str(balance) + "€")
+        except KeyError:
+            return aktuellerstatus
+
         returner = aktuellerstatus
 
     else:
@@ -229,16 +238,16 @@ def nutzerhinzufuegen(username: str, password: str) -> int:
     return index
 
 
-def welcome():
+def welcome(filepath: str = ""):
     """
 
     :return: Der Index des Nutezrs und Status 5, der den Nutzer ins Hauptmenü sendet
     """
     # print(list(map(lambda c: f'{c}: {c.get("name")}', readdata().get("User"))))
-    user = readdata()["User"]
+    user = readdata(filepath)["User"]
     for i in range(1, len(user) + 1):
-        userdieserschleife = user[str(i)]
-        print(str(i), " : ", userdieserschleife.username)
+        useri: User = user[str(i)]
+        print(str(i), " : ", useri.get("username"))
     usernummer = input(
         "\n\n\nHerzlich Wilkommen am schnieken Snackautomaten\n"
         "Bitte geben Sie Ihre usernummer ein\n"
@@ -251,8 +260,8 @@ def welcome():
     password = input("Bitte geben Sie ihr passwort ein")
 
     try:
-        if check_password(password, readdata()["User"][usernummer].password):
-            print("Hallo ", readdata()["User"][str(usernummer)].username)
+        if check_password(password, readdata(filepath)["User"][usernummer].get("password")):
+            print("Hallo ", readdata(filepath)["User"][str(usernummer)].get("username"))
         else:
             print("Wrong Password, please try again")
             return 0, 0
