@@ -9,9 +9,9 @@ class Spiel:
         # Todo:init
         self.dicedict: dict = {}
         for i in range(0, 4):
-            self.dicedict[i] = dice.dice()
-        self.boolPvP: bool = None
-        self.spielblock: spielblock = spielblock
+            self.dicedict[i] = dice.Dice()
+        self.boolPvP: bool = False
+        self.spielblock: spielblock.Spielblock = spielblock
         self.nrround: int = 0
         self.activeplayer: int = 1
         self.player1: player.Player
@@ -20,7 +20,7 @@ class Spiel:
     def spielstarten(
             self):
         self.boolPvP = self.choosegamemode()
-        # todo spieler initialisieren
+        # todo spieler initialisieren (player 2 als e)
         while not self.spielvorbei(False):
             self.wuerfeln()
             self.spielerwechsel()

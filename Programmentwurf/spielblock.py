@@ -1,4 +1,6 @@
-class spielblock:
+# steve
+
+class Spielblock:
     def __init__(self): """
     
         #todo:init spielblock
