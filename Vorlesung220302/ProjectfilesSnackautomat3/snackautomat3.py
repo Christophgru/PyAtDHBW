@@ -12,6 +12,8 @@ import json
 import bcrypt
 import jsonpickle
 
+filepath = ""
+
 
 class Product:
     """
@@ -37,7 +39,7 @@ class Product:
         """
         :return:
         """
-        self.amount -= 1
+        self.amount = str(int(self.amount) - 1)
 
     def update_index(self):
         """
@@ -114,13 +116,14 @@ def writedata(data):
         json.dump(frozen, outfile)
 
 
-def readdata(filepath: str = "") -> dict:
+def readdata() -> dict:
     """
     :return: returnt Daten der json Datei 'Snackdaten.json'
     """
     try:
-        filepath = filepath + 'snackdaten3.json'
-        with open(filepath, 'r', encoding="utf-8") as infile:
+        path = __file__
+        path = path.rstrip("snackautomat3.py")+ "snackdaten3.json"
+        with open(path, 'r', encoding="utf-8") as infile:
             jsondata = json.load(infile)
         thawed = jsonpickle.decode(jsondata)
         return thawed
@@ -129,13 +132,12 @@ def readdata(filepath: str = "") -> dict:
         return {}
 
 
-def analyzeinput(key, aktuellerstatus, usernumber, filepath: str = "") -> int:
+def analyzeinput(key, aktuellerstatus, usernumber) -> int:
     """
 
     :param usernumber: Der index des den Automaten angemeldeten Kundens
     :param key: Die zu analysierende Eingabe
     :param aktuellerstatus: Der aktuelle Status des Systems
-    :param filepath: optionaler verweis von aufrufenden folder zur json datei
     :return: Der Status in den das System, je nach Eingabe gesetzt werden soll
     """
     if key in "L" or key in "l":
@@ -152,7 +154,8 @@ def analyzeinput(key, aktuellerstatus, usernumber, filepath: str = "") -> int:
 
     elif key in "K" or key in "k":
         try:
-            balance = readdata(filepath)["User"][str(usernumber)].balance
+            user: User = readdata()["User"][str(usernumber)]
+            balance = user.get("balance")
             print("Ihr aktueller balance beträgt " + str(balance) + "€")
         except KeyError:
             return aktuellerstatus
@@ -238,13 +241,13 @@ def nutzerhinzufuegen(username: str, password: str) -> int:
     return index
 
 
-def welcome(filepath: str = ""):
+def welcome():
     """
 
     :return: Der Index des Nutezrs und Status 5, der den Nutzer ins Hauptmenü sendet
     """
     # print(list(map(lambda c: f'{c}: {c.get("name")}', readdata().get("User"))))
-    user = readdata(filepath)["User"]
+    user = readdata()["User"]
     for i in range(1, len(user) + 1):
         useri: User = user[str(i)]
         print(str(i), " : ", useri.get("username"))
@@ -260,8 +263,8 @@ def welcome(filepath: str = ""):
     password = input("Bitte geben Sie ihr passwort ein")
 
     try:
-        if check_password(password, readdata(filepath)["User"][usernummer].get("password")):
-            print("Hallo ", readdata(filepath)["User"][str(usernummer)].get("username"))
+        if check_password(password, readdata()["User"][usernummer].get("password")):
+            print("Hallo ", readdata()["User"][str(usernummer)].get("username"))
         else:
             print("Wrong Password, please try again")
             return 0, 0
