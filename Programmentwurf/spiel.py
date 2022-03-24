@@ -14,13 +14,15 @@ class Spiel:
         self.spielblock: spielblock.Spielblock = spielblock
         self.nrround: int = 0
         self.activeplayer: int = 1
-        self.player1: player.Player
-        self.player2: player.Player
+        self.player1: player.Player = None
+        self.player2: player.Player = None
 
     def spielstarten(
             self):
         self.boolPvP = self.choosegamemode()
-        # todo spieler initialisieren (player 2 als e)
+
+        self.player1 = player.Player(True, "")
+        if   # todo spieler initialisieren (player 2 als e)
         while not self.spielvorbei(False):
             self.wuerfeln()
             self.spielerwechsel()
