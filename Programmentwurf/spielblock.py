@@ -11,9 +11,9 @@ class Spielblock:
         #todo: ausgabe
         """
 
-    def punkteeinlesen(self): """
+    def punkteeinlesen(self, spieler: int, dicearr: dict, wahl): """
     
-        #todo:punteeinlesen
+        #todo:punkte fuer spieler in tabelle eintragen
         """
 
     def savetojson(self): """
