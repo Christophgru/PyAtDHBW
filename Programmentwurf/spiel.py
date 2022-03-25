@@ -2,7 +2,6 @@
 ausgaben an Console nur ueber methoden in ui, um alle "oberflaechen aktionen" zu kapseln
 """
 
-
 import dice
 import spielblock
 import player
@@ -17,18 +16,19 @@ class Spiel:
         for i in range(0, 4):
             self.dicedict[i] = dice.Dice()
         self.boolPvP: bool = False
-        self.spielblock: spielblock.Spielblock = spielblock
+        self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
         self.nrround: int = 0
         self.activeplayer: int = 1
         self.player1: player.Player = None
         self.player2: player.Player = None
         self.ui = ui.UI()
+        self.ui.welcome()
 
     def spielstarten(self):
         self.boolPvP = self.choosegamemode()
 
         self.player1 = player.Player(True, "")
-        if ui.UI.pvp_or_pve():
+        if self.ui.pvp_or_pve():
             self.player2 = player.Player(True, "")
         else:
             self.player2 = player.Player(False, "")
@@ -46,14 +46,19 @@ class Spiel:
         anzahlwuerfe = 1
 
         while anzahlwuerfe <= 3:  # wuerfel waehlen
-
-            for j in range(0, len(gewaehltewuerfel)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
-                self.dicedict.get(j).deactivate()
-            for j in range(len(gewaehltewuerfel), len(self.dicedict)):  # und einer weniger gewuerfelt
-                self.dicedict.get(j).wuerfeln()
-            gewaehltewuerfel = self.ui.choosediceorcheck(gewaehltewuerfel, self.dicedict)
-            if len(gewaehltewuerfel) == 5:  # wenn alle wuerfel gewaehlt sind stopp
+            try:
+                for j in range(0, len(gewaehltewuerfel)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
+                    self.dicedict.get(j).deactivate()
+                for j in range(len(gewaehltewuerfel), len(self.dicedict)):  # und einer weniger gewuerfelt
+                    self.dicedict.get(j).throw()
+                gewaehltewuerfel = self.ui.choosediceorcheck(gewaehltewuerfel, self.dicedict)
+                if len(gewaehltewuerfel) == 5:  # wenn alle wuerfel gewaehlt sind stopp
+                    break
+            except (KeyboardInterrupt,TypeError) as e:
+                print("Keine Wuerfel ausgewaehlt")
+                anzahlwuerfe -= 1
                 break
+            anzahlwuerfe += 1
 
         # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
         if len(gewaehltewuerfel) < 5:
@@ -73,7 +78,7 @@ class Spiel:
         self.spielblock.punkteeinlesen(self.activeplayer, gewaehltewuerfel, wahl)
 
         # alle wuerfel wieder aktivieren
-        for dicex in self.dicedict:
+        for dicex in self.dicedict.values():
             dicex.activate()
 
     def spielvorbei(self, spielvorbei: bool):
