@@ -1,3 +1,5 @@
+#todo: yannic
+
 class Player:
     def __init__(self, istecht: bool, name: str):
         self.istecht: bool = istecht
@@ -8,6 +10,7 @@ class Player:
         """
 
     def eintragwaehlen(self, wuerfelarr: dict) -> int: """
-    # todo: bekommt wuerfel in array in finaler position waehlt aus was damit gemacht werden soll (), gibt int zurück, wo die punkte eingetragen werden sollen
+    # todo: bekommt wuerfel in array in finaler position waehlt aus was damit gemacht werden soll (), gibt int zurück,
+    wo die punkte eingetragen werden sollen
 
         """

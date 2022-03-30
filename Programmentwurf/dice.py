@@ -13,7 +13,7 @@ class Dice:
 
     def throw(self) -> int: """
     
-        #todo:set self. aufgen auf random wert
+        todo:set self. aufgen auf random wert
         """
 
     def deactivate(self): """
