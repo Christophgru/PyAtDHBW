@@ -45,13 +45,16 @@ class Spiel:
         gewaehltewuerfel: dict = {}
         anzahlwuerfe = 1
 
+        for j in range(0, len(self.dicedict)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
+            self.dicedict.get(j).activate()
+
         while anzahlwuerfe <= 3:  # wuerfel waehlen
             try:
                 for j in range(0, len(gewaehltewuerfel)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
                     self.dicedict.get(j).deactivate()
                 for j in range(len(gewaehltewuerfel), len(self.dicedict)):  # und einer weniger gewuerfelt
                     self.dicedict.get(j).throw()
-                gewaehltewuerfel = self.ui.choosediceorcheck(gewaehltewuerfel, self.dicedict)
+                self.ui.choosediceorcheck(gewaehltewuerfel, self.dicedict)
                 if len(gewaehltewuerfel) == 5:  # wenn alle wuerfel gewaehlt sind stopp
                     break
             except (KeyboardInterrupt,TypeError) as e:
@@ -66,20 +69,16 @@ class Spiel:
             for j in range(len(gewaehltewuerfel) + 1, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
                 dicex = None
                 while dicex is None and k <= 5:  # ...finde einen wuerfel, der noch aktiviert war
-                    if self.dicedict.get(k).isactivated():
+                    if self.dicedict.get(k).isactivated:
                         dicex = self.dicedict.get(k)
                     k += 1
-                gewaehltewuerfel[j] = dicex  # und fuege diesen wuerfel als gewaehlt ein
+                gewaehltewuerfel[j-1] = dicex  # und fuege diesen wuerfel als gewaehlt ein
 
         # waehle was eingetragen werden soll
         wahl = self.ui.choose_action_with_dice_arr(gewaehltewuerfel)
 
         # gib das eingelesene an spielblockblock weiter
         self.spielblock.punkteeinlesen(self.activeplayer, gewaehltewuerfel, wahl)
-
-        # alle wuerfel wieder aktivieren
-        for dicex in self.dicedict.values():
-            dicex.activate()
 
     def spielvorbei(self, spielvorbei: bool):
         """
