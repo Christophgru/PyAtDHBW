@@ -37,6 +37,7 @@ class Spiel:
             self.wuerfeln()
             self.spielerwechsel()
         self.spielvorbei(True)
+        return True
 
     def wuerfeln(self):
         """
@@ -57,7 +58,7 @@ class Spiel:
                 self.ui.choosediceorcheck(gewaehltewuerfel, self.dicedict)
                 if len(gewaehltewuerfel) == 5:  # wenn alle wuerfel gewaehlt sind stopp
                     break
-            except (KeyboardInterrupt,TypeError) as e:
+            except (KeyboardInterrupt, TypeError) as e:
                 print("Keine Wuerfel ausgewaehlt")
                 anzahlwuerfe -= 1
                 break
@@ -72,7 +73,7 @@ class Spiel:
                     if self.dicedict.get(k).isactivated:
                         dicex = self.dicedict.get(k)
                     k += 1
-                gewaehltewuerfel[j-1] = dicex  # und fuege diesen wuerfel als gewaehlt ein
+                gewaehltewuerfel[j - 1] = dicex  # und fuege diesen wuerfel als gewaehlt ein
 
         # waehle was eingetragen werden soll
         wahl = self.ui.choose_action_with_dice_arr(gewaehltewuerfel)
@@ -80,19 +81,22 @@ class Spiel:
         # gib das eingelesene an spielblockblock weiter
         self.spielblock.punkteeinlesen(self.activeplayer, gewaehltewuerfel, wahl)
 
-    def spielvorbei(self, spielvorbei: bool):
+    def spielvorbei(self, spielvorbei: bool)-> bool:
         """
-        todo: wenn param spielvorbei    = false->   schau ob noch weiter gespiel werden kann
+        todo:yan wenn param spielvorbei    = false->   schau ob noch weiter gespiel werden kann
                                                 (alle felder ausgefüllt: abfrage Steve)
                                         =true->     Sieger ausgeben, (spiel speichern?)
         """
 
+        #anfrage steve:
+        return self.spielblock.allezeilenvoll()
+
     def spielerwechsel(self):
         """
-            todo anderen spieler aktivieren, aufruf an ui um spieler zu informieren
+            todo:yan  anderen spieler aktivieren, aufruf an ui um spieler zu informieren
                """
 
     def choosegamemode(self) -> bool:
         """
-          todo: abfrage ob pvp oder pve, return tru if pvp else return false
+          todo:yan abfrage ob pvp oder pve, return tru if pvp else return false
               """

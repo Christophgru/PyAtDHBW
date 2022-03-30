@@ -8,12 +8,12 @@ class UI:
 
     def pvp_or_pve(self) -> bool:
         """
-               todo: abfrage ob pvp oder pve, return true if pvp
+               todo: Elias: abfrage ob pvp oder pve, return true if pvp
                """
 
     def choosediceorcheck(self, schon_gewaehlte_wuerfel_dict: dict, gewuerfelte_wuerfel_dict: dict):
         """
-            todo: waehle aus gewuerfelte_wuerfel_dict ais den aktiven wuerfeln (dice.isactivated->bool) die passenden aus
+            todo: Elias: waehle aus gewuerfelte_wuerfel_dict ais den aktiven wuerfeln (dice.isactivated->bool) die passenden aus
             Fuege die gewaehlten wuerfel zum schon gewaehlte wuerfel dict hinzu, und gib dieses zurück
                 """
 
@@ -26,9 +26,9 @@ class UI:
 
     def choose_action_with_dice_arr(self, dict) -> int:
         """
-           todo:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
+           todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
            absprechen, je nachdem was er haben will um zeile zu identifizieren
                """
 
     def welcome(self):
-        """todo ausgabe: herzlich willkommen, spielregeln usw."""
+        """todo: Elias: ausgabe: herzlich willkommen, spielregeln usw."""
