@@ -1,7 +1,6 @@
 # todo elias
 
 
-
 class UI:
     def __init__(self):
         self.output = None
@@ -11,14 +10,16 @@ class UI:
                todo: Elias: abfrage ob pvp oder pve, return true if pvp
                """
 
-    def choosediceorcheck(self, schon_gewaehlte_wuerfel_dict: dict, gewuerfelte_wuerfel_dict: dict):
+    def choosediceorcheck(self, schon_gewaehlte_wuerfel_dict: dict, wuerfel_im_becher: dict):
         """
-            todo: Elias: waehle aus gewuerfelte_wuerfel_dict ais den aktiven wuerfeln (dice.isactivated->bool) die passenden aus
-            Fuege die gewaehlten wuerfel zum schon gewaehlte wuerfel dict hinzu, und gib dieses zurück
+            todo: Elias: waehle aus gewuerfelte_wuerfel_dict aus den aktiven wuerfeln (dice.isactivated->bool) die
+            passenden aus
+            Fuege die gewaehlten wuerfel zum schon_gewaehlte_wuerfel_dict hinzu. Änderungen hier gelten auch
+            im Hauptprogramm, deshalb keine rückgabe notwendig
                 """
 
         # um das programm zu testen habe ich (christoph) einfach immer den ersten noch aktiven würfel ausgewählt
-        for wuerfelx in gewuerfelte_wuerfel_dict.values():
+        for wuerfelx in wuerfel_im_becher.values():
             if wuerfelx.isactivated:
                 schon_gewaehlte_wuerfel_dict[len(schon_gewaehlte_wuerfel_dict)] = wuerfelx
                 wuerfelx.deactivate()

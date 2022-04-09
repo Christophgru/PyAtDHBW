@@ -13,7 +13,7 @@ class Spiel:
     def __init__(self):
         # Todo:init
         self.dicedict: dict = {}
-        for i in range(0, 4):
+        for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
         self.boolPvP: bool = False
         self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
@@ -28,7 +28,7 @@ class Spiel:
         self.boolPvP = self.choosegamemode()
 
         self.player1 = player.Player(True, "")
-        if self.ui.pvp_or_pve():
+        if self.boolPvP:
             self.player2 = player.Player(True, "")
         else:
             self.player2 = player.Player(False, "")
@@ -100,3 +100,4 @@ class Spiel:
         """
           todo:yan abfrage ob pvp oder pve, return tru if pvp else return false
               """
+        self.ui.pvp_or_pve()
