@@ -40,6 +40,7 @@ class UI:
             q += 1
         x = input(print("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen?"
                         "Falls Nein geben sie 0 ein, ansosnen den Würfelindex"))
+        jjjjjj
 
 
     def choose_action_with_dice_arr(self, dict) -> int:
