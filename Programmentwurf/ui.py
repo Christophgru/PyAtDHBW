@@ -24,14 +24,23 @@ class UI:
             passenden aus
             Fuege die gewaehlten wuerfel zum schon_gewaehlte_wuerfel_dict hinzu. Änderungen hier gelten auch
             im Hauptprogramm, deshalb keine rückgabe notwendig
-                """
+            """
+        print("Gewählte Würfel:\n")
+        q = 1
+        for wuerfel in wuerfel_im_becher.values():
+            if wuerfel.isdeactivated:
+                print(q, ":", wuerfel.augen)
+            q += 1
 
-        # um das programm zu testen habe ich (christoph) einfach immer den ersten noch aktiven würfel ausgewählt
+        print("\nGewürfelte Würfel:\n")
+        q = 1
         for wuerfelx in wuerfel_im_becher.values():
             if wuerfelx.isactivated:
-                schon_gewaehlte_wuerfel_dict[len(schon_gewaehlte_wuerfel_dict)] = wuerfelx
-                wuerfelx.deactivate()
-                break
+                print(q, ":", wuerfelx.augen)
+            q += 1
+        x = input(print("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen?"
+                        "Falls Nein geben sie 0 ein, ansosnen den Würfelindex"))
+
 
     def choose_action_with_dice_arr(self, dict) -> int:
         """
