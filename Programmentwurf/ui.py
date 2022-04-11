@@ -62,7 +62,21 @@ class UI:
            absprechen, je nachdem was er haben will um zeile zu identifizieren
                """
         spielblock.ausgabe()
-        print("")
+        while True:
+            try:
+                x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen")
+                x = int(x)
+                break
+            except ValueError as e:
+                print("Geben sie bloß Zeahlen ein")
+            if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
+                print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19")
+            elif x < 1 or x > 19:
+                print("Geben sie nur Zahlen zwischen 1 und 19 ein")
+        return x
+
+
+
 
 
     def welcome(self):
