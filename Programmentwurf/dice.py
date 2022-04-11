@@ -2,6 +2,7 @@
 import random
 
 
+
 class Dice:
     def __init__(self):
         self.augen = None
@@ -16,6 +17,7 @@ class Dice:
         """setzte activated auf F und augen auf -1 oder so
         """
         self.isactivated = False
+
         self.augen = None
 
     def activate(self):

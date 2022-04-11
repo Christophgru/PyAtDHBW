@@ -11,7 +11,7 @@ class TestSnackautomat3(TestCase):
 
     def testSpielStarten(self):
         spiel = Spiel.Spiel()
-        # self.assertTrue(spiel.spielstarten())
+        self.assertTrue(spiel.spielstarten())
 
     def testSpielblock(self):
         block: Block = Block.Spielblock()
