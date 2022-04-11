@@ -25,7 +25,7 @@ class UI:
                 wuerfelx.deactivate()
                 break
 
-    def choose_action_with_dice_arr(self, dict) -> int:
+    def choose_action_with_dice_arr(self, wuerfelarray:dict) -> int:
         """
            todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
            absprechen, je nachdem was er haben will um zeile zu identifizieren

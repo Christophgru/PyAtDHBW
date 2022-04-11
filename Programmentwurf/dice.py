@@ -1,5 +1,4 @@
 # ali
-import self as self
 
 
 class Dice:
@@ -16,7 +15,6 @@ class Dice:
         """setzte activated auf F und augen auf -1 oder so
         """
         self.isactivated = False
-        self.augen = -1
 
     def activate(self):
         """setzte activated auf T"""
