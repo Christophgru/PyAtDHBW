@@ -25,8 +25,7 @@ class Spiel:
         self.ui.welcome()
 
     def spielstarten(self):
-        self.boolPvP = self.choosegamemode()
-
+        self.boolPvP = self.ui.pvp_or_pve()
         self.player1 = player.Player(True, "")
         if self.boolPvP:
             self.player2 = player.Player(True, "")
@@ -82,26 +81,20 @@ class Spiel:
         # gib das eingelesene an spielblockblock weiter
         self.spielblock.punkteeinlesen(wahl, self.activeplayer, self.dicedict.values())
 
+    def spielvorbei(self, spielvorbei: bool) -> bool:
+        if spielvorbei:
+            return self.spielblock.gamened()
+        else:
+            if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
+                self.ui.endgame(self.player1.name)
+            else:
+                self.ui.endgame(self.player2.name)
 
-def spielvorbei(self, spielvorbei: bool) -> bool:
-    """
-    todo:yan wenn param spielvorbei    = false->   schau ob noch weiter gespiel werden kann
-                                            (alle felder ausgefüllt: abfrage Steve)
-                                    =true->     Sieger ausgeben, (spiel speichern?)
-    """
-
-    # anfrage steve:
-    return self.spielblock.allezeilenvoll()
-
-
-def spielerwechsel(self):
-    """
-        todo:yan  anderen spieler aktivieren, aufruf an ui um spieler zu informieren
-           """
-
-
-def choosegamemode(self) -> bool:
-    """
-      todo:yan abfrage ob pvp oder pve, return tru if pvp else return false
-          """
-    self.ui.pvp_or_pve()
+    def spielerwechsel(self):
+        if self.activeplayer == 0:
+            self.activeplayer = 1
+            self.ui.chooseplayer(self.player2.name)
+            self.nrround = +1
+        else:
+            self.activeplayer = 0
+            self.ui.chooseplayer(self.player1.name)
