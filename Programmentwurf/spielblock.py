@@ -6,17 +6,28 @@ class Spielblock:
     indexlist = ["Einser","Zweier","Dreier","Vierer","Funfer","Sechser","Oben","Bonus","GesamtOben",
                  "Dreierpasch","Viererpasch","Full-House","Kleine-Straße","Große-Straße","Kniffel",
                  "Chance","Unten","Oben","Gesamt"]
+    first_line = [[0 for x in range(2)] for y in range(6)]
+    second_line = [[0 for z in range(2)] for k in range(7)]
+    for i in range(6):
+        for y in range(2):
+            first_line[i][y] = False
+    for i in range(7):
+        for y in range(2):
+            second_line[i][y] = False
+    oben = [False,False]
+    unten = [False,False]
+    ende = [False, False]
+    endstand = [0,0]
 
     def __init__(self):
-        liste = [{"1": {"Einser": [0, 0]}}, {"2": {"Zweier": [0, 0]}}, {"3": {"Dreier": [0, 0]}},
-                 {"4": {"Vierer": [0, 0]}},
-                 {"5": {"Funfer": [0, 0]}}, {"6": {"Sechser": [0, 0]}}, {"7": {"Oben": [0, 0]}},
-                 {"8": {"Bonus": [0, 0]}},
-                 {"9": {"GesamtOben": [0, 0]}}, {"10": {"Dreierpasch": [0, 0]}}, {"11": {"Viererpasch": [0, 0]}},
-                 {"12": {"Full-House": [0, 0]}},
-                 {"13": {"Kleine-Straße": [0, 0]}}, {"14": {"Große-Straße": [0, 0]}}, {"15": {"Kniffel": [0, 0]}},
-                 {"16": {"Chance": [0, 0]}},
-                 {"17": {"Unten": [0, 0]}}, {"18": {"Oben": [0, 0]}}, {"19": {"Gesamt": [0, 0]}}]
+        liste = [{"1": {"Einser": [None, None]}}, {"2": {"Zweier": [None, None]}}, {"3": {"Dreier": [None, None]}},
+                 {"4": {"Vierer": [None, None]}}, {"5": {"Funfer": [None, None]}},
+                 {"6": {"Sechser": [None, None]}}, {"7": {"Oben": [None, None]}}, {"8": {"Bonus": [None, None]}},
+                 {"9": {"GesamtOben": [None, None]}}, {"10": {"Dreierpasch": [None, None]}}, {"11": {"Viererpasch": [None, None]}},
+                 {"12": {"Full-House": [None, None]}}, {"13": {"Kleine-Straße": [None, None]}},
+                 {"14": {"Große-Straße": [None, None]}}, {"15": {"Kniffel": [None, None]}}, {"16": {"Chance": [None, None]}},
+                 {"17": {"Unten": [None, None]}}, {"18": {"Oben": [None, None]}}, {"19": {"Gesamt": [None, None]}}]
+
         self.freeze(liste)
 
     def freeze(self, item):
@@ -36,24 +47,28 @@ class Spielblock:
         category = column[str(row)]
         shelf = category[self.indexlist[row-1]]
         calc_sum = 0
-        if row <= 5:
-            for number in value:
-                if number == row-1:
-                    calc_sum += number
-            shelf[player] = calc_sum
-        if row == 9 or row == 10 or row == 15:
+        if row == 10 or row == 11 or row == 16:
             for number in value:
                 calc_sum += number
             shelf[player] = calc_sum
-        if row == 11:
-            shelf[player] = 25
         if row == 12:
-            shelf[player] = 30
+            shelf[player] = 25
         if row == 13:
-            shelf[player] = 40
+            shelf[player] = 30
         if row == 14:
+            shelf[player] = 40
+        if row == 15:
             shelf[player] = 50
+        if row <= 6:
+            for number in value:
+                if number == row:
+                    calc_sum += number
+            shelf[player] = calc_sum
+            self.first_line[row-1][player] = True
+        else:
+            self.second_line[row-10][player] = True
         self.freeze(block)
+        self.valuing(player)
 
     def ausgabe(self):
         trie = self.thaw()
@@ -61,16 +76,98 @@ class Spielblock:
             print(trie[i])
 
     def valuing(self, player):
-        plan = self.thaw()
-        column = plan[6]
-        category = column["5"]
-        shelf = category[self.indexlist[5]]
+        folder = self.thaw()
+        calcoben1 = 0
+        calcoben2 = 0
+        calcunten1 = 0
+        calcunten2 = 0
+        calc_sum = 0
+        for i in range(6):
+            if self.first_line[i][player]:
+                if player == 0:
+                    calcoben1 += 1
+                else:
+                    calcoben2 += 1
 
-    def allezeilenvoll(self):
-        x = liste.__getitem__(18).get("19").get("Gesamt")
-        x1 = x.__getitem__(0)
-        x2 = x.__getitem__(1)
-        if x1 == 0 or x2 == 0:
-            return False
-        else:
+        for i in range(7):
+            if self.second_line[i][player]:
+                if player == 0:
+                    calcunten1 += 1
+                else:
+                    calcunten2 += 1
+        if calcoben1 == 6 or calcoben2 == 6:
+            for i in range(1, 7):
+                column = folder[i - 1]
+                category = column[str(i)]
+                shelf = category[self.indexlist[i - 1]]
+                calc_sum += shelf[player]
+            column = folder[6]
+            category = column[str(7)]
+            shelf = category[self.indexlist[6]]
+            shelf[player] = calc_sum
+            self.freeze(folder)
+            if calc_sum >= 63:
+                folder = self.thaw()
+                column = folder[7]
+                category = column[str(8)]
+                shelf = category[self.indexlist[7]]
+                shelf[player] = 35
+                self.freeze(folder)
+                folder = self.thaw()
+                column = folder[8]
+                category = column[str(9)]
+                shelf = category[self.indexlist[8]]
+                shelf[player] = calc_sum + 35
+                column = folder[17]
+                category = column[str(18)]
+                shelf = category[self.indexlist[17]]
+                shelf[player] = calc_sum + 35
+                self.oben[player] = True
+                self.freeze(folder)
+            else:
+                folder = self.thaw()
+                column = folder[8]
+                category = column[str(9)]
+                shelf = category[self.indexlist[8]]
+                shelf[player] = calc_sum
+                column = folder[17]
+                category = column[str(18)]
+                shelf = category[self.indexlist[17]]
+                shelf[player] = calc_sum
+                self.oben[player] = True
+                self.freeze(folder)
+        if calcunten1 == 7 or calcunten2 == 7:
+            for i in range(10, 17):
+                column = folder[i - 1]
+                category = column[str(i)]
+                shelf = category[self.indexlist[i - 1]]
+                calc_sum += shelf[player]
+            column = folder[16]
+            category = column[str(17)]
+            shelf = category[self.indexlist[16]]
+            shelf[player] = calc_sum
+            self.unten[player] = True
+            self.freeze(folder)
+        if self.unten[player] and self.oben[player]:
+            folder = self.thaw()
+            column = folder[16]
+            category = column[str(17)]
+            shelf = category[self.indexlist[16]]
+            calc1 = shelf[player]
+            column = folder[17]
+            category = column[str(18)]
+            shelf = category[self.indexlist[17]]
+            calc2 = shelf[player]
+            column = folder[18]
+            category = column[str(19)]
+            shelf = category[self.indexlist[18]]
+            shelf[player] = calc1 + calc2
+            self.endstand[player] = calc1 + calc2
+            self.ende[player] = True
+            self.freeze(folder)
+
+    def gamened(self):
+        if self.ende[0] and self.ende[1]:
             return True
+        else:
+            return False
