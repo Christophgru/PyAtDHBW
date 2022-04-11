@@ -1,9 +1,15 @@
 # todo elias
+import string
+import spielblock
 
 
 class UI:
     def __init__(self):
         self.output = None
+
+    def choosename(self, playernumber) -> string:
+        name = input(print("Spieler ", playernumber, ", bitte wählen sie ihren Namen"))
+        return name
 
     def pvp_or_pve(self) -> bool:
         """
@@ -61,6 +67,26 @@ class UI:
            todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
            absprechen, je nachdem was er haben will um zeile zu identifizieren
                """
+        spielblock.ausgabe()
+        while True:
+            try:
+                x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen")
+                x = int(x)
+                break
+            except ValueError as e:
+                print("Geben sie bloß Zahlen ein")
+            if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
+                print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19")
+            elif x < 1 or x > 19:
+                print("Geben sie nur Zahlen zwischen 1 und 19 ein")
+        return x
+
+    def chooseplayer(self, playername):
+        print("Es ist ", playername, "dran")
+
+    def endgame(self, winner):
+        spielblock.ausgabe()
+        print("Der Gewinner ist", winner)
 
     def welcome(self):
         """todo: Elias: ausgabe: herzlich willkommen, spielregeln usw."""
