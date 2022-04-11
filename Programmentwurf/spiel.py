@@ -11,7 +11,6 @@ import ui
 class Spiel:
 
     def __init__(self):
-        # Todo:init
         self.dicedict: dict = {}
         for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
