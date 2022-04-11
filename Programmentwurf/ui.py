@@ -9,8 +9,8 @@ class UI:
         """
                """
         while True:
-            ret = input(print("Wollen sie gegen eine andere Person spielen drücken sie: 1\n"
-                              "Wollen sie gegen einen Computer spielen drücken sie    : 2\n"))
+            ret = input("Wollen sie gegen eine andere Person spielen drücken sie: 1\n"
+                        "Wollen sie gegen einen Computer spielen drücken sie    : 2\n")
             if ret == '1':
                 return True
             elif ret == '2':
@@ -25,21 +25,35 @@ class UI:
             Fuege die gewaehlten wuerfel zum schon_gewaehlte_wuerfel_dict hinzu. Änderungen hier gelten auch
             im Hauptprogramm, deshalb keine rückgabe notwendig
             """
-        print("Gewählte Würfel:\n")
-        q = 1
-        for wuerfel in wuerfel_im_becher.values():
-            if wuerfel.isdeactivated:
-                print(q, ":", wuerfel.augen)
-            q += 1
+        again = True
+        while again:
+            again = False
+            print("Gewählte Würfel:\n")
+            q = 1
+            for wuerfel in wuerfel_im_becher.values():
+                if wuerfel.isdeactivated:
+                    print(q, ":", wuerfel.augen)
+                q += 1
 
-        print("\nGewürfelte Würfel:\n")
-        q = 1
-        for wuerfelx in wuerfel_im_becher.values():
-            if wuerfelx.isactivated:
-                print(q, ":", wuerfelx.augen)
-            q += 1
-        x = input(print("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen?"
-                        "Falls Nein geben sie 0 ein, ansosnen den Würfelindex"))
+            print("\nGewürfelte Würfel:\n")
+            q = 1
+            for wuerfelx in wuerfel_im_becher.values():
+                if wuerfelx.isactivated:
+                    print(q, ":", wuerfelx.augen)
+                q += 1
+            eing = input("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen"
+                         "oder gewürfelte Würfel beiseite legen, dann geben si ebitte den Würfelindex ein"
+                         "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen")
+            eing = eing.split(",")
+            for x in eing:
+                if x == 1 or x == 2 or x == 3 or x == 4 or x == 5:
+                    if wuerfel_im_becher[int(x)-1].isactivated:
+                        wuerfel_im_becher[int(x)-1].deactivate()
+                    else:
+                        wuerfel_im_becher[int(x)-1].activate()
+                elif x != 0:
+                    print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
+                    again = True
 
 
     def choose_action_with_dice_arr(self, wuerfelarray:dict) -> int:
