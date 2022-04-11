@@ -48,9 +48,9 @@ class UI:
                 if wuerfelx.isactivated:
                     print(q, ":", wuerfelx.augen)
                 q += 1
-            eing = input("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen "
-                         "oder gewürfelte Würfel beiseite legen, dann geben si ebitte den Würfelindex ein "
-                         "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen")
+            eing = input("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen \n"
+                         "oder gewürfelte Würfel beiseite legen, dann geben si ebitte den Würfelindex ein \n"
+                         "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n")
             eing = eing.split(",")
             for x in eing:
                 if x == 1 or x == 2 or x == 3 or x == 4 or x == 5:
@@ -91,5 +91,5 @@ class UI:
 
     def welcome(self):
         """todo: Elias: ausgabe: herzlich willkommen, spielregeln usw."""
-        print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen."
+        print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
               "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
