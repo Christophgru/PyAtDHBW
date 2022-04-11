@@ -87,9 +87,10 @@ class Spiel:
                                                 (alle felder ausgefüllt: abfrage Steve)
                                         =true->     Sieger ausgeben, (spiel speichern?)
         """
+        if spielvorbei:
+            return self.spielblock.allezeilenvoll()
+        else:
 
-        #anfrage steve:
-        return self.spielblock.allezeilenvoll()
 
     def spielerwechsel(self):
         """
