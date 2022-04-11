@@ -4,8 +4,9 @@ import spielblock
 
 
 class UI:
-    def __init__(self):
+    def __init__(self, sb:spielblock.Spielblock):
         self.output = None
+        self.spielblock=sb
 
     def choosename(self, playernumber) -> string:
         name = input(print("Spieler ", playernumber, ", bitte wählen sie ihren Namen"))
@@ -24,7 +25,7 @@ class UI:
             else:
                 print("Geben sie bitte nur 1 oder 2 ein")
 
-    def choosediceorcheck(self, schon_gewaehlte_wuerfel_dict: dict, wuerfel_im_becher: dict):
+    def choosediceorcheck(self, wuerfel_im_becher: dict):
         """
             todo: Elias: waehle aus gewuerfelte_wuerfel_dict aus den aktiven wuerfeln (dice.isactivated->bool) die
             passenden aus
@@ -37,7 +38,7 @@ class UI:
             print("Gewählte Würfel:\n")
             q = 1
             for wuerfel in wuerfel_im_becher.values():
-                if wuerfel.isdeactivated:
+                if not wuerfel.isactivated:
                     print(q, ":", wuerfel.augen)
                 q += 1
 
@@ -47,8 +48,8 @@ class UI:
                 if wuerfelx.isactivated:
                     print(q, ":", wuerfelx.augen)
                 q += 1
-            eing = input("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen"
-                         "oder gewürfelte Würfel beiseite legen, dann geben si ebitte den Würfelindex ein"
+            eing = input("Wollen sie schon ausgewählte Würfek wieder in den Becher werfen "
+                         "oder gewürfelte Würfel beiseite legen, dann geben si ebitte den Würfelindex ein "
                          "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen")
             eing = eing.split(",")
             for x in eing:
@@ -67,7 +68,7 @@ class UI:
            todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
            absprechen, je nachdem was er haben will um zeile zu identifizieren
                """
-        spielblock.ausgabe()
+        self.spielblock.ausgabe()
         while True:
             try:
                 x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen")
@@ -85,7 +86,7 @@ class UI:
         print("Es ist ", playername, "dran")
 
     def endgame(self, winner):
-        spielblock.ausgabe()
+        self.spielblock.ausgabe()
         print("Der Gewinner ist", winner)
 
     def welcome(self):
