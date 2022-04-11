@@ -7,8 +7,16 @@ class UI:
 
     def pvp_or_pve(self) -> bool:
         """
-               todo: Elias: abfrage ob pvp oder pve, return true if pvp
                """
+        while True:
+            ret = input(print("Wollen sie gegen eine andere Person spielen drücken sie: 1\n"
+                              "Wollen sie gegen einen Computer spielen drücken sie    : 2\n"))
+            if ret == '1':
+                return True
+            elif ret == '2':
+                return False
+            else:
+                print("Geben sie bitte nur 1 oder 2 ein")
 
     def choosediceorcheck(self, schon_gewaehlte_wuerfel_dict: dict, wuerfel_im_becher: dict):
         """
@@ -33,3 +41,5 @@ class UI:
 
     def welcome(self):
         """todo: Elias: ausgabe: herzlich willkommen, spielregeln usw."""
+        print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen."
+              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
