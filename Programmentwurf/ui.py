@@ -2,6 +2,7 @@
 import string
 import spielblock
 
+
 class UI:
     def __init__(self):
         self.output = None
