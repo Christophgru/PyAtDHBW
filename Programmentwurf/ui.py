@@ -1,5 +1,5 @@
 # todo elias
-
+import spielblock
 
 class UI:
     def __init__(self):
@@ -61,6 +61,9 @@ class UI:
            todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
            absprechen, je nachdem was er haben will um zeile zu identifizieren
                """
+        spielblock.ausgabe()
+        print("")
+
 
     def welcome(self):
         """todo: Elias: ausgabe: herzlich willkommen, spielregeln usw."""
