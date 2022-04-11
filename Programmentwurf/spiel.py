@@ -11,14 +11,13 @@ import ui
 class Spiel:
 
     def __init__(self):
-        # Todo:init
         self.dicedict: dict = {}
         for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
         self.boolPvP: bool = False
         self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
         self.nrround: int = 0
-        self.activeplayer: int = 1
+        self.activeplayer: int = 0
         self.player1: player.Player = None
         self.player2: player.Player = None
         self.ui = ui.UI()
@@ -26,11 +25,11 @@ class Spiel:
 
     def spielstarten(self):
         self.boolPvP = self.ui.pvp_or_pve()
-        self.player1 = player.Player(True, "")
+        self.player1 = player.Player(True, self.ui.choosename(1))
         if self.boolPvP:
-            self.player2 = player.Player(True, "")
+            self.player2 = player.Player(True, self.ui.choosename(2))
         else:
-            self.player2 = player.Player(False, "")
+            self.player2 = player.Player(False, "E-Gegner")
 
         while not self.spielvorbei(False):
             self.wuerfeln()
@@ -51,12 +50,11 @@ class Spiel:
         while anzahlwuerfe <= 3:  # anzahl w
             try:
 
-                for j in range(0, len(self.dicedict)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
+                for j in range(0, len(self.dicedict)):  # Alle wuerfel werden gewuerfelt
                     if self.dicedict.get(j).isactivated():
                         self.dicedict.get(j).throw()
                     else:
                         self.dicedict.get(j).deactivate()
-                    # und einer weniger gewuerfelt
 
                 self.ui.choosediceorcheck(self.dicedict)
             except (KeyboardInterrupt, TypeError) as e:
@@ -71,12 +69,30 @@ class Spiel:
 
             # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
             for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
-                dicex = None
                 if self.dicedict.get(j).isactivated:  # ...finde einen wuerfel, der noch aktiviert war
-                    dicex = self.dicedict.get(j)
+                    self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
         wahl = self.ui.choose_action_with_dice_arr(self.dicedict)
+        #todo: undo test next line
+        #wahl=self.nrround+1
+        # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
+        augenarray: list = [None, None, None, None, None]
+        for k in range(0, len(self.dicedict)):
+            augen = self.dicedict.get(k).augen
+            if augen is None:
+                augen = -1
+            augenarray[k] = augen
+
+        # gib das eingelesene an spielblock weiter
+        self.spielblock.punkteeinlesen(wahl, self.activeplayer, augenarray)
+
+    def spielvorbei(self, spielvorbei: bool) -> bool:
+        """
+        todo:yan wenn param spielvorbei    = false->   schau ob noch weiter gespiel werden kann
+                                                (alle felder ausgefüllt: abfrage Steve)
+                                        =true->     Sieger ausgeben, (spiel speichern?)
+        """
 
         # gib das eingelesene an spielblockblock weiter
         self.spielblock.punkteeinlesen(wahl, self.activeplayer, self.dicedict.values())
