@@ -20,7 +20,7 @@ class Spiel:
         self.activeplayer: int = 0
         self.player1: player.Player = None
         self.player2: player.Player = None
-        self.ui = ui.UI()
+        self.ui = ui.UI(self.spielblock)
         self.ui.welcome()
 
     def spielstarten(self):
@@ -51,10 +51,11 @@ class Spiel:
             try:
 
                 for j in range(0, len(self.dicedict)):  # Alle wuerfel werden gewuerfelt
-                    if self.dicedict.get(j).isactivated():
-                        self.dicedict.get(j).throw()
+                    wuerfelx = self.dicedict.get(j)
+                    if wuerfelx.isactivated is True:
+                        wuerfelx.throw()
                     else:
-                        self.dicedict.get(j).deactivate()
+                        wuerfelx.deactivate()
 
                 self.ui.choosediceorcheck(self.dicedict)
             except (KeyboardInterrupt, TypeError) as e:
@@ -74,8 +75,8 @@ class Spiel:
 
         # waehle was eingetragen werden soll
         wahl = self.ui.choose_action_with_dice_arr(self.dicedict)
-        #todo: undo test next line
-        #wahl=self.nrround+1
+        # todo: undo test next line
+        # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]
         for k in range(0, len(self.dicedict)):
@@ -88,17 +89,7 @@ class Spiel:
         self.spielblock.punkteeinlesen(wahl, self.activeplayer, augenarray)
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
-        """
-        todo:yan wenn param spielvorbei    = false->   schau ob noch weiter gespiel werden kann
-                                                (alle felder ausgefüllt: abfrage Steve)
-                                        =true->     Sieger ausgeben, (spiel speichern?)
-        """
-
-        # gib das eingelesene an spielblockblock weiter
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, self.dicedict.values())
-
-    def spielvorbei(self, spielvorbei: bool) -> bool:
-        if spielvorbei:
+        if not spielvorbei:
             return self.spielblock.gamened()
         else:
             if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
