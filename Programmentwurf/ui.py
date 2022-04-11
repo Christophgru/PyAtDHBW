@@ -53,7 +53,7 @@ class UI:
                          "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen")
             eing = eing.split(",")
             for x in eing:
-                if x == 1 or x == 2 or x == 3 or x == 4 or x == 5:
+                if x == "1" or x == "2" or x == "3" or x == "4" or x == "5":
                     if wuerfel_im_becher[int(x)-1].isactivated:
                         wuerfel_im_becher[int(x)-1].deactivate()
                     else:
