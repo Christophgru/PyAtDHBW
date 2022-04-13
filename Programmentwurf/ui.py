@@ -65,8 +65,6 @@ class UI:
 
     def choose_action_with_dice_arr(self, wuerfelarray: dict, block: spielblock.Spielblock, playernumber: int) -> int:
         """
-           todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
-           absprechen, je nachdem was er haben will um zeile zu identifizieren
                """
         self.spielblock.ausgabe()
         while True:
@@ -74,7 +72,7 @@ class UI:
                 x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
                 x = int(x)
                 break
-            except ValueError as e:
+            except ValueError:
                 print("Geben sie bloß Zahlen ein\n")
         while True:
             if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
@@ -129,9 +127,6 @@ class UI:
                   "Für eine neue Auswahl geben sie etwas anders ein")
         if q == '0':
             return x
-
-
-
 
 
 def chooseplayer(self, playername):
