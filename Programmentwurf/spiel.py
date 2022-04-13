@@ -58,18 +58,20 @@ class Spiel:
                         wuerfelx.deactivate()
 
                 self.ui.choosediceorcheck(self.dicedict)
-
-                anzahlwuerfe += 1
             except (KeyboardInterrupt, TypeError) as e:
                 print("Keine Wuerfel ausgewaehlt")
                 anzahlwuerfe -= 1
                 break
+            anzahlwuerfe += 1
 
+            for j in range(0, len(self.dicedict)):
+                if self.dicedict.get(j).isactivated:
+                    anzahlgewaehlt += 1
 
             # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
-        for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
-            if not self.dicedict.get(j).isactivated:  # ...finde einen wuerfel, der noch aktiviert war
-                self.dicedict.get(j).deactivate()
+            for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
+                if self.dicedict.get(j).isactivated:  # ...finde einen wuerfel, der noch aktiviert war
+                    self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
         wahl = self.ui.choose_action_with_dice_arr(self.dicedict)
@@ -84,7 +86,7 @@ class Spiel:
             augenarray[k] = augen
 
         # gib das eingelesene an spielblock weiter
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, augenarray)
+        self.spielblock.punkteeinlesen(wahl, self.activeplayer, *augenarray)
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
         if not spielvorbei:

@@ -73,13 +73,22 @@ class UI:
             try:
                 x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
                 x = int(x)
-                break
             except ValueError as e:
                 print("Geben sie bloß Zahlen ein\n")
             if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
                 print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
             elif x < 1 or x > 19:
                 print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
+            if x<7:
+                if spielblock.first_line[x-1][playernumber]:
+                        print("Zeile bereits gefüllt")
+                else:
+                    break
+            if x>9:
+                if spielblock.second_line[x-10][playernumber]:
+                    print("Zeile bereits gefüllt")
+                else:
+                    break
         return x
 
     def chooseplayer(self, playername):
