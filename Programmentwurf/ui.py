@@ -73,8 +73,10 @@ class UI:
             try:
                 x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
                 x = int(x)
+                break
             except ValueError as e:
                 print("Geben sie bloß Zahlen ein\n")
+        while True:
             if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
                 print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
             elif x < 1 or x > 19:
@@ -89,16 +91,61 @@ class UI:
                     print("Zeile bereits gefüllt")
                 else:
                     break
-        return x
+            sortdice = sorted(wuerfelarray)
+            maxequal = 0
+            secondequal = 0
+            equal = 1
+            for q in range(len(sortdice)):
+                if q != range(len(sortdice)):
+                    if sortdice[q] == sortdice[q + 1]:
+                        equal += 1
+            if maxequal < equal:
+                maxequal = equal
+            elif maxequal != equal:
+                secondequal = equal
 
-    def chooseplayer(self, playername):
-        print("\n\n\nEs ist ", playername, "dran")
+            if x == 10:
+                if maxequal > 2:
+                    return x
+            elif x == 11:
+                if maxequal > 3:
+                    return x
+            elif x == 12:
+                if maxequal == 3 and secondequal == 2:
+                    return x
 
-    def endgame(self, winner):
-        self.spielblock.ausgabe()
-        print("Der Gewinner ist", winner)
+            elif x == 13:
+                return x
+            elif x == 14:
+                if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice)-1] == 6:
+                    return x
+            elif x == 15:
+                if maxequal == 5:
+                    return x
+            elif x == 16:
+                return x
+        q = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                  "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                  "Für eine neue Auswahl geben sie etwas anders ein")
+        if q == '0':
+            return x
 
-    def welcome(self):
-        """todo: Elias: ausgabe: herzlich willkommen, spielregeln usw."""
-        print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
-              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+
+
+
+
+def chooseplayer(self, playername):
+    print("\n\n\nEs ist ", playername, "dran")
+
+
+def endgame(self, winner):
+    self.spielblock.ausgabe()
+    print("Der Gewinner ist", winner)
+
+
+def welcome(self):
+    """
+
+    """
+    print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
+          "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
