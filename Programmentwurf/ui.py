@@ -4,12 +4,13 @@ import spielblock
 
 
 class UI:
-    def __init__(self, sb:spielblock.Spielblock):
+    def __init__(self, sb: spielblock.Spielblock):
         self.output = None
-        self.spielblock=sb
+        self.spielblock = sb
 
     def choosename(self, playernumber) -> string:
-        name = input(print("Spieler ", playernumber, ", bitte wählen sie ihren Namen"))
+        eingabe = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
+        name = input(eingabe)
         return name
 
     def pvp_or_pve(self) -> bool:
@@ -54,16 +55,15 @@ class UI:
             eing = eing.split(",")
             for x in eing:
                 if x == "1" or x == "2" or x == "3" or x == "4" or x == "5":
-                    if wuerfel_im_becher[int(x)-1].isactivated:
-                        wuerfel_im_becher[int(x)-1].deactivate()
+                    if wuerfel_im_becher[int(x) - 1].isactivated:
+                        wuerfel_im_becher[int(x) - 1].deactivate()
                     else:
-                        wuerfel_im_becher[int(x)-1].activate()
+                        wuerfel_im_becher[int(x) - 1].activate()
                 elif x != "0":
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-
-    def choose_action_with_dice_arr(self, wuerfelarray:dict) -> int:
+    def choose_action_with_dice_arr(self, wuerfelarray: dict) -> int:
         """
            todo: Elias:abfrage an user was mit den gewürfelten würfeln eingetragen werden soll. rückgabe int/string mit steve
            absprechen, je nachdem was er haben will um zeile zu identifizieren
@@ -79,13 +79,13 @@ class UI:
                 print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
             elif x < 1 or x > 19:
                 print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
-            if x<7:
-                if spielblock.first_line[x-1][playernumber]:
-                        print("Zeile bereits gefüllt")
+            if x < 7:
+                if spielblock.first_line[x - 1][playernumber]:
+                    print("Zeile bereits gefüllt")
                 else:
                     break
-            if x>9:
-                if spielblock.second_line[x-10][playernumber]:
+            if x > 9:
+                if spielblock.second_line[x - 10][playernumber]:
                     print("Zeile bereits gefüllt")
                 else:
                     break
