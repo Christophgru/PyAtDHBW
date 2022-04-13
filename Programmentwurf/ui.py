@@ -1,6 +1,8 @@
 # todo elias
 import string
 import spielblock
+import spiel
+import dice
 
 
 class UI:
@@ -113,6 +115,13 @@ class UI:
                     return x
 
             elif x == 13:
+                count = 0
+                for i in range(len(sortdice)):
+                    if sortdice[i] == sortdice[i+1]-1:
+                        count += 1
+                if count <= 4:
+                    return x
+
                 return x
             elif x == 14:
                 if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice)-1] == 6:
@@ -126,6 +135,8 @@ class UI:
                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                   "Für eine neue Auswahl geben sie etwas anders ein")
         if q == '0':
+            for i in range(len(spiel.Spiel.dicedict)):
+                spiel.Spiel.dicedict[i].augen = 0
             return x
 
 
