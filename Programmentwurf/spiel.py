@@ -43,7 +43,6 @@ class Spiel:
               """
         anzahlwuerfe = 1
 
-        anzahlgewaehlt = 0
         for j in range(0, len(self.dicedict)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
             self.dicedict.get(j).activate()
 
@@ -62,11 +61,14 @@ class Spiel:
                 print("Keine Wuerfel ausgewaehlt")
                 anzahlwuerfe -= 1
                 break
-            anzahlwuerfe += 1
 
+            anzahlgewaehlt = 0
             for j in range(0, len(self.dicedict)):
-                if self.dicedict.get(j).isactivated:
+                if not self.dicedict.get(j).isactivated:
                     anzahlgewaehlt += 1
+            if anzahlgewaehlt == 5:
+                anzahlwuerfe = 3
+            anzahlwuerfe += 1
 
             # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
             for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...

@@ -11,7 +11,8 @@ class UI:
         self.spielblock = sb
 
     def choosename(self, playernumber) -> string:
-        name = input(print("Spieler ", playernumber, ", bitte wählen sie ihren Namen"))
+        aufforderung:string="Spieler "+str(playernumber)+ ", bitte wählen sie ihren Namen"
+        name = input(aufforderung)
         return name
 
     def pvp_or_pve(self) -> bool:
@@ -140,18 +141,18 @@ class UI:
             return x
 
 
-def chooseplayer(self, playername):
-    print("\n\n\nEs ist ", playername, "dran")
+    def chooseplayer(self, playername):
+        print("\n\n\nEs ist ", playername, "dran")
 
 
-def endgame(self, winner):
-    self.spielblock.ausgabe()
-    print("Der Gewinner ist", winner)
+    def endgame(self, winner):
+        self.spielblock.ausgabe()
+        print("Der Gewinner ist", winner)
 
 
-def welcome(self):
-    """
+    def welcome(self):
+        """
 
-    """
-    print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
-          "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+        """
+        print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
+              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
