@@ -6,12 +6,14 @@ import dice
 
 
 class UI:
-    def __init__(self, sb: spielblock.Spielblock):
+    def __init__(self, sb: spielblock.Spielblock, sp: spiel.Spiel):
         self.output = None
         self.spielblock = sb
+        self.spiel = spiel.Spiel(self.Spiel)
 
     def choosename(self, playernumber) -> string:
-        name = input(print("Spieler ", playernumber, ", bitte wählen sie ihren Namen"))
+        aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
+        name = input(aufforderung)
         return name
 
     def pvp_or_pve(self) -> bool:
@@ -65,10 +67,13 @@ class UI:
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-    def choose_action_with_dice_arr(self, wuerfelarray: dict, block: spielblock.Spielblock, playernumber: int) -> int:
+    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int) -> int:
         """
                """
         self.spielblock.ausgabe()
+
+        augenarray =[wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
+                     wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
         while True:
             try:
                 x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
@@ -85,73 +90,73 @@ class UI:
                 if block.first_line[x - 1][playernumber]:
                     print("Zeile bereits gefüllt")
                 else:
-                    break
+                    return x
             if x > 9:
                 if block.second_line[x - 10][playernumber]:
                     print("Zeile bereits gefüllt")
                 else:
                     break
-            sortdice = sorted(wuerfelarray)
-            maxequal = 0
-            secondequal = 0
-            equal = 1
-            for q in range(len(sortdice)):
-                if q != range(len(sortdice)):
-                    if sortdice[q] == sortdice[q + 1]:
-                        equal += 1
-            if maxequal < equal:
-                maxequal = equal
-            elif maxequal != equal:
-                secondequal = equal
+        sortdice = sorted(augenarray)
+        maxequal = 0
+        secondequal = 0
+        equal = 1
+        for q in range(len(sortdice)-1):
+            if q != range(len(sortdice)):
+                if sortdice[q] == sortdice[q + 1]:
+                    equal += 1
+                    if maxequal < equal:
+                        maxequal = equal
+                    elif maxequal != equal:
+                        secondequal = equal
+                else:
+                    equal = 1
 
-            if x == 10:
-                if maxequal > 2:
-                    return x
-            elif x == 11:
-                if maxequal > 3:
-                    return x
-            elif x == 12:
-                if maxequal == 3 and secondequal == 2:
-                    return x
-
-            elif x == 13:
-                count = 0
-                for i in range(len(sortdice)):
-                    if sortdice[i] == sortdice[i+1]-1:
-                        count += 1
-                if count <= 4:
-                    return x
-
+        if x == 10:
+            if maxequal > 2:
                 return x
-            elif x == 14:
-                if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice)-1] == 6:
-                    return x
-            elif x == 15:
-                if maxequal == 5:
-                    return x
-            elif x == 16:
+        elif x == 11:
+            if maxequal > 3:
                 return x
+        elif x == 12:
+            if maxequal == 3 and secondequal == 2:
+                return x
+
+        elif x == 13:
+            count = 0
+            for i in range(len(sortdice)):
+                if sortdice[i] == sortdice[i + 1] - 1:
+                    count += 1
+            if count <= 4:
+                return x
+
+            return x
+        elif x == 14:
+            if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                return x
+        elif x == 15:
+            if maxequal == 5:
+                return x
+        elif x == 16:
+            return x
         q = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                   "Für eine neue Auswahl geben sie etwas anders ein")
         if q == '0':
-            for i in range(len(spiel.Spiel.dicedict)):
-                spiel.Spiel.dicedict[i].augen = 0
-            return x
+            for i in range(len(self.spiel.dicedict)):
+                self.spiel.dicedict[i].augen = 0
+                return x
 
+    def chooseplayer(self, playername):
+        print("\n\n\nEs ist ", playername, "dran")
 
-def chooseplayer(self, playername):
-    print("\n\n\nEs ist ", playername, "dran")
+    def endgame(self, winner):
+        self.spielblock.ausgabe()
+        print("Der Gewinner ist", winner)
 
+    def welcome(self):
+        """
 
-def endgame(self, winner):
-    self.spielblock.ausgabe()
-    print("Der Gewinner ist", winner)
-
-
-def welcome(self):
-    """
-
-    """
-    print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
-          "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+        """
+        print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
+              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+        return
