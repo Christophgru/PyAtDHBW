@@ -6,10 +6,10 @@ import dice
 
 
 class UI:
-    def __init__(self, sb: spielblock.Spielblock, sp: spiel.Spiel):
+    def __init__(self, sb: spielblock.Spielblock):
         self.output = None
         self.spielblock = sb
-        self.spiel = spiel.Spiel(self.Spiel)
+        self.leer = False
 
     def choosename(self, playernumber) -> string:
         aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
@@ -123,7 +123,7 @@ class UI:
 
         elif x == 13:
             count = 0
-            for i in range(len(sortdice)):
+            for i in range(len(sortdice)-1):
                 if sortdice[i] == sortdice[i + 1] - 1:
                     count += 1
             if count <= 4:
@@ -142,9 +142,8 @@ class UI:
                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                   "Für eine neue Auswahl geben sie etwas anders ein")
         if q == '0':
-            for i in range(len(self.spiel.dicedict)):
-                self.spiel.dicedict[i].augen = 0
-                return x
+            leer = True
+            return x
 
     def chooseplayer(self, playername):
         print("\n\n\nEs ist ", playername, "dran")
