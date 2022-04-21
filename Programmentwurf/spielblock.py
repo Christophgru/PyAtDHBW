@@ -14,10 +14,10 @@ class Spielblock:
     for i in range(7):
         for y in range(2):
             second_line[i][y] = False
-    oben = [False,False]
-    unten = [False,False]
+    oben = [False, False]
+    unten = [False, False]
     ende = [False, False]
-    endstand = [0,0]
+    endstand = [0, 0]
 
     def __init__(self):
         liste = [{"1": {"Einser      ": [None, None]}}, {"2": {"Zweier      ": [None, None]}}, {"3": {"Dreier      ": [None, None]}},
