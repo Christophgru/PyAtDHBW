@@ -43,7 +43,6 @@ class Spiel:
               """
         anzahlwuerfe = 1
 
-        anzahlgewaehlt = 0
         for j in range(0, len(self.dicedict)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
             self.dicedict.get(j).activate()
 
@@ -58,21 +57,30 @@ class Spiel:
                         wuerfelx.deactivate()
 
                 self.ui.choosediceorcheck(self.dicedict)
-
-                anzahlwuerfe += 1
             except (KeyboardInterrupt, TypeError) as e:
                 print("Keine Wuerfel ausgewaehlt")
                 anzahlwuerfe -= 1
                 break
 
+            anzahlgewaehlt = 0
+            for j in range(0, len(self.dicedict)):
+                if not self.dicedict.get(j).isactivated:
+                    anzahlgewaehlt += 1
+            if anzahlgewaehlt == 5:
+                anzahlwuerfe = 3
+            anzahlwuerfe += 1
 
             # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
-        for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
-            if not self.dicedict.get(j).isactivated:  # ...finde einen wuerfel, der noch aktiviert war
-                self.dicedict.get(j).deactivate()
+            for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
+                if self.dicedict.get(j).isactivated:  # ...finde einen wuerfel, der noch aktiviert war
+                    self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self.ui.choose_action_with_dice_arr(self.dicedict)
+        wahl = self.ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer)
+        if self.dicedict[0] == 0:
+            leer = True
+        else:
+            leer = False
         # todo: undo test next line
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
@@ -84,7 +92,8 @@ class Spiel:
             augenarray[k] = augen
 
         # gib das eingelesene an spielblock weiter
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, augenarray)
+
+        self.spielblock.punkteeinlesen(wahl, self.activeplayer, leer, *augenarray)
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
         if not spielvorbei:
