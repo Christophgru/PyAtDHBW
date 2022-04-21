@@ -77,6 +77,10 @@ class Spiel:
 
         # waehle was eingetragen werden soll
         wahl = self.ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer)
+        if self.dicedict[0] == 0:
+            leer = True
+        else:
+            leer = False
         # todo: undo test next line
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
@@ -88,7 +92,8 @@ class Spiel:
             augenarray[k] = augen
 
         # gib das eingelesene an spielblock weiter
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, *augenarray)
+
+        self.spielblock.punkteeinlesen(wahl, self.activeplayer, leer, *augenarray)
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
         if not spielvorbei:
