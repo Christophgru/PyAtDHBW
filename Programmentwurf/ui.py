@@ -83,19 +83,20 @@ class UI:
                     print("Geben sie bloß Zahlen ein\n")
                 if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
                     print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
+                    break
                 elif x < 1 or x > 19:
                     print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
+                    break
                 if x < 7:
                     if block.first_line[x - 1][playernumber]:
                         print("Zeile bereits gefüllt")
+                        break
                     else:
                         return x
                 if x > 9:
                     if block.second_line[x - 10][playernumber]:
                         print("Zeile bereits gefüllt")
-                    else:
                         break
-            while True:
                 sortdice = sorted(augenarray)
                 maxequal = 1
                 secondequal = 1
