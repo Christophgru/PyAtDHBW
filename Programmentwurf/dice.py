@@ -1,9 +1,10 @@
-# ali
 import random
-
+from datetime import datetime
 
 
 class Dice:
+    random.seed(datetime.now())
+
     def __init__(self):
         self.augen = None
         self.isactivated = False
