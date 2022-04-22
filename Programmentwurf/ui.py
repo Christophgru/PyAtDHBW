@@ -118,7 +118,7 @@ class UI:
                     if maxequal > 3:
                         return x
                 elif x == 12:
-                    if maxequal == 3 and secondequal == 2:
+                    if maxequal == 3 and secondequal == 2 or maxequal == 5:
                         return x
 
                 elif x == 13:
