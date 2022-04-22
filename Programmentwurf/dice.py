@@ -3,11 +3,10 @@ from datetime import datetime
 
 
 class Dice:
-    random.seed(datetime.now())
-
     def __init__(self):
         self.augen = None
         self.isactivated = False
+        random.seed(datetime.now())
 
     def throw(self) -> int:
         """todo:ali set self. augen auf random wert"""
