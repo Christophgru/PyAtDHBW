@@ -6,10 +6,10 @@ import dice
 
 
 class UI:
-    def __init__(self, sb: spielblock.Spielblock, sp: spiel.Spiel):
+    def __init__(self, sb: spielblock.Spielblock):
         self.output = None
         self.spielblock = sb
-        self.spiel = spiel.Spiel(self.Spiel)
+        self.leer = False
 
     def choosename(self, playernumber) -> string:
         aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
@@ -72,79 +72,80 @@ class UI:
                """
         self.spielblock.ausgabe()
 
-        augenarray =[wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
-                     wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
+        augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
+                      wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
         while True:
-            try:
-                x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
-                x = int(x)
-                break
-            except ValueError:
-                print("Geben sie bloß Zahlen ein\n")
-        while True:
-            if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
-                print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
-            elif x < 1 or x > 19:
-                print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
-            if x < 7:
-                if block.first_line[x - 1][playernumber]:
-                    print("Zeile bereits gefüllt")
-                else:
-                    return x
-            if x > 9:
-                if block.second_line[x - 10][playernumber]:
-                    print("Zeile bereits gefüllt")
-                else:
+            while True:
+                try:
+                    x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
+                    x = int(x)
+                except ValueError:
+                    print("Geben sie bloß Zahlen ein\n")
+                if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
+                    print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
                     break
-        sortdice = sorted(augenarray)
-        maxequal = 0
-        secondequal = 0
-        equal = 1
-        for q in range(len(sortdice)-1):
-            if q != range(len(sortdice)):
-                if sortdice[q] == sortdice[q + 1]:
-                    equal += 1
-                    if maxequal < equal:
-                        maxequal = equal
-                    elif maxequal != equal:
-                        secondequal = equal
-                else:
-                    equal = 1
+                elif x < 1 or x > 19:
+                    print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
+                    break
+                if x < 7:
+                    if block.first_line[x - 1][playernumber]:
+                        print("Zeile bereits gefüllt")
+                        break
+                    else:
+                        return x
+                if x > 9:
+                    if block.second_line[x - 10][playernumber]:
+                        print("Zeile bereits gefüllt")
+                        break
+                sortdice = sorted(augenarray)
+                maxequal = 1
+                secondequal = 1
+                equal = 1
+                for q in range(len(sortdice) - 1):
+                    if q != range(len(sortdice)):
+                        if sortdice[q] == sortdice[q + 1]:
+                            equal += 1
+                            if maxequal < equal:
+                                maxequal = equal
+                            elif maxequal != equal:
+                                secondequal = equal
+                        else:
+                            equal = 1
+                if x == 10:
+                    if maxequal > 2:
+                        return x
+                elif x == 11:
+                    if maxequal > 3:
+                        return x
+                elif x == 12:
+                    if maxequal == 3 and secondequal == 2:
+                        return x
 
-        if x == 10:
-            if maxequal > 2:
-                return x
-        elif x == 11:
-            if maxequal > 3:
-                return x
-        elif x == 12:
-            if maxequal == 3 and secondequal == 2:
-                return x
+                elif x == 13:
+                    count = 1
+                    for i in range(len(sortdice) - 1):
+                        if sortdice[i] == sortdice[i + 1] - 1:
+                            count += 1
+                        else:
+                            if sortdice[i] == sortdice[i]:
+                                count = 1
+                    if count >= 4:
+                        return x
 
-        elif x == 13:
-            count = 0
-            for i in range(len(sortdice)):
-                if sortdice[i] == sortdice[i + 1] - 1:
-                    count += 1
-            if count <= 4:
-                return x
-
-            return x
-        elif x == 14:
-            if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
-                return x
-        elif x == 15:
-            if maxequal == 5:
-                return x
-        elif x == 16:
-            return x
-        q = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                  "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                  "Für eine neue Auswahl geben sie etwas anders ein")
-        if q == '0':
-            for i in range(len(self.spiel.dicedict)):
-                self.spiel.dicedict[i].augen = 0
-                return x
+                elif x == 14:
+                    if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                        return x
+                elif x == 15:
+                    if maxequal == 5:
+                        return x
+                elif x == 16:
+                    return x
+                q = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                          "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                          "Für eine neue Auswahl geben sie etwas anders ein")
+                if q == '0':
+                    self.leer = True
+                    return x
 
     def chooseplayer(self, playername):
         print("\n\n\nEs ist ", playername, "dran")
