@@ -79,14 +79,14 @@ class Spiel:
                 anzahlwuerfe = 3
             anzahlwuerfe += 1
 
-            # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
+        # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
             for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
                 if self.dicedict.get(j).isactivated:  # ...finde einen wuerfel, der noch aktiviert war
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer)
-        print(self._ui.leer, "\n")
+        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer, self.player1.name,
+                                                   self.player2.name)
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]

@@ -61,15 +61,15 @@ class UI:
             print("Gewählte Würfel:\n")
             i = 1
             for wuerfel in wuerfel_im_becher.values():
-                if wuerfel.isdeactivated:
-                    print(i, ":", wuerfel.augen)
+                if not wuerfel.isactivated:
+                    print("Würfel", i, ":", wuerfel.augen)
                 i += 1
 
             print("\nGewürfelte Würfel:\n")
             i = 1
             for wuerfelx in wuerfel_im_becher.values():
                 if wuerfelx.isactivated:
-                    print(i, ":", wuerfelx.augen)
+                    print("Würfel", i, ":", wuerfelx.augen)
                 i += 1
 
             eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
@@ -87,9 +87,12 @@ class UI:
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int) -> int:
+    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int,
+                                    name1: string, name2: string) -> int:
         """
 
+        @param name2:
+        @param name1:
         @param wuerfelobjekte:
         @type wuerfelobjekte:
         @param block:
@@ -99,7 +102,7 @@ class UI:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe()
+        self.spielblock.ausgabe(name1, name2)
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
                       wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
@@ -150,14 +153,14 @@ class UI:
                 elif _eingabe == 12:
                     if (maxequal == 3 and secondequal == 2) or maxequal == 5:
                         return _eingabe
-
                 elif _eingabe == 13:
                     count = 1
+
                     for i in range(len(sortdice) - 1):
                         if sortdice[i] == sortdice[i + 1] - 1:
                             count += 1
                         else:
-                            if sortdice[i] == sortdice[i]:
+                            if not sortdice[i] == sortdice[i+1]:
                                 count = 1
                     if count >= 4:
                         return _eingabe
