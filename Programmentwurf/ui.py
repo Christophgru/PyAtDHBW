@@ -61,15 +61,15 @@ class UI:
             print("Gewählte Würfel:\n")
             i = 1
             for wuerfel in wuerfel_im_becher.values():
-                if wuerfel.isdeactivated:
-                    print(i, ":", wuerfel.augen)
+                if not wuerfel.isactivated:
+                    print("Würfel", i, ":", wuerfel.augen)
                 i += 1
 
             print("\nGewürfelte Würfel:\n")
             i = 1
             for wuerfelx in wuerfel_im_becher.values():
                 if wuerfelx.isactivated:
-                    print(i, ":", wuerfelx.augen)
+                    print("Würfel", i, ":", wuerfelx.augen)
                 i += 1
 
             eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
@@ -150,14 +150,14 @@ class UI:
                 elif _eingabe == 12:
                     if (maxequal == 3 and secondequal == 2) or maxequal == 5:
                         return _eingabe
-
                 elif _eingabe == 13:
                     count = 1
+
                     for i in range(len(sortdice) - 1):
                         if sortdice[i] == sortdice[i + 1] - 1:
                             count += 1
                         else:
-                            if sortdice[i] == sortdice[i]:
+                            if not sortdice[i] == sortdice[i+1]:
                                 count = 1
                     if count >= 4:
                         return _eingabe
