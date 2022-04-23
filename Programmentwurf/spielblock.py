@@ -11,9 +11,10 @@ class Spielblock:
     """
 
     """
-    indexlist = ["Einser", "Zweier", "Dreier", "Vierer", "Funfer", "Sechser", "Oben", "Bonus", "GesamtOben",
-                 "Dreierpasch", "Viererpasch", "Full-House", "Kleine-Straße", "Große-Straße", "Kniffel",
-                 "Chance", "Unten", "Oben", "Gesamt"]
+    indexlist = ["Einser      ", "Zweier      ", "Dreier      ", "Vierer      ", "Funfer      ",
+                 "Sechser      ", "Oben        ", "Bonus        ", "GesamtOben  ",
+                 "Dreierpasch  ", "Viererpasch  ", "Full-House   ", "Kleine-Straße" , "Große-Straße", "Kniffel      ",
+                 "Chance      ", "Unten        ", "Oben        ", "Gesamt      "]
 
     first_line = [[0 for x in range(2)] for y in range(6)]
     second_line = [[0 for z in range(2)] for k in range(7)]
