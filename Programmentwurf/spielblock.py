@@ -1,5 +1,6 @@
 """
-@todo Steve bitte Docstrings ausfüllen und if-else in switch case umbauen
+@todo Steve bitte Docstrings ausfüllen/Vorschlag für too many branches in L:71 & => switch case
+@todo/too many branches&statements in 149 muss selbst lösen XD
 """
 
 import json
@@ -41,7 +42,8 @@ class Spielblock:
 
         self.freeze(liste)
 
-    def freeze(self, item):
+    @classmethod
+    def freeze(cls, item):
         """
 
         @param item:
@@ -54,7 +56,8 @@ class Spielblock:
             frozen_list = jsonpickle.encode(item)
             json.dump(frozen_list, freezer)
 
-    def thaw(self):
+    @classmethod
+    def thaw(cls):
         """
 
         @return:
@@ -82,9 +85,9 @@ class Spielblock:
         block = self.thaw()
         column = block[row - 1]
         category = column[str(row)]
-        shelf = category[self.indexlist[row-1]]
+        shelf = category[self.indexlist[row - 1]]
         calc_sum = 0
-        if row == 10 or row == 11 or row == 16:
+        if row in (10, 11, 16):
             for number in value:
                 calc_sum += number
             if leer:
@@ -116,9 +119,9 @@ class Spielblock:
                 if number == row:
                     calc_sum += number
             shelf[player] = calc_sum
-            self.first_line[row-1][player] = True
+            self.first_line[row - 1][player] = True
         else:
-            self.second_line[row-10][player] = True
+            self.second_line[row - 10][player] = True
         self.freeze(block)
         self.valuing(player)
 
@@ -132,15 +135,15 @@ class Spielblock:
         for i in range(trie.__len__()):
             zeile = trie[i]
             stra = ""
-            stra += str(i+1)+"\t"
-            stra += self.indexlist[i]+"\t"
-            zwischen2 = zeile[str(i+1)]
+            stra += str(i + 1) + "\t"
+            stra += self.indexlist[i] + "\t"
+            zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
-            for q in range(2):
-                if zwischen3[q] is None:
+            for j in range(2):
+                if zwischen3[j] is None:
                     stra += "-" + "\t"
                 else:
-                    stra += str(zwischen3[q]) + "\t"
+                    stra += str(zwischen3[j]) + "\t"
             print(stra)
 
     def valuing(self, player):

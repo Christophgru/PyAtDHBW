@@ -1,8 +1,14 @@
+"""
+Dice-class file
+"""
 import random
 from datetime import datetime
 
 
 class Dice:
+    """
+    dice-class, that contains the value of generated dices
+    """
     def __init__(self):
         self.augen = None
         self.isactivated = False
