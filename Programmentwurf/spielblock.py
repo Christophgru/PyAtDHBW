@@ -101,6 +101,7 @@ class Spielblock:
                     stra += str(zwischen3[q]) + "\t"
             print(stra)
 
+
     def valuing(self, player):
         folder = self.thaw()
         calcoben1 = 0

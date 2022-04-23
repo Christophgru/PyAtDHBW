@@ -107,7 +107,7 @@ class UI:
                             equal += 1
                             if maxequal < equal:
                                 maxequal = equal
-                            elif maxequal != equal:
+                            elif secondequal < equal:
                                 secondequal = equal
                         else:
                             equal = 1
@@ -118,7 +118,7 @@ class UI:
                     if maxequal > 3:
                         return x
                 elif x == 12:
-                    if maxequal == 3 and secondequal == 2 or maxequal == 5:
+                    if (maxequal == 3 and secondequal == 2) or maxequal == 5:
                         return x
 
                 elif x == 13:
@@ -127,7 +127,7 @@ class UI:
                         if sortdice[i] == sortdice[i + 1] - 1:
                             count += 1
                         else:
-                            if sortdice[i] == sortdice[i]:
+                            if sortdice[i] != sortdice[i+1]:
                                 count = 1
                     if count >= 4:
                         return x
