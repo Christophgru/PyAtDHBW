@@ -1,5 +1,5 @@
 """
-Dice-class file
+dice-class file
 """
 import random
 from datetime import datetime
