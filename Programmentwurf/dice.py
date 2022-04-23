@@ -18,7 +18,6 @@ class Dice:
         """
         self.isactivated = False
 
-        self.augen = None
 
     def activate(self):
         """setzte activated auf T"""
