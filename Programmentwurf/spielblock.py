@@ -62,9 +62,11 @@ class Spielblock:
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
-    def punkteeinlesen(self, row, player, *value):
+    def punkteeinlesen(self, row, player, leer, *value):
         """
 
+        @param leer:
+        @type leer:
         @param row:
         @type row:
         @param player:
