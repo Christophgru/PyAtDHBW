@@ -1,3 +1,5 @@
+
+
 import json
 import jsonpickle
 
@@ -31,12 +33,12 @@ class Spielblock:
         self.freeze(liste)
 
     def freeze(self, item):
-        with open("Block.json", "w") as freezer:
+        with open("Block.json", "w", encoding="utf-8") as freezer:
             frozen_list = jsonpickle.encode(item)
             json.dump(frozen_list, freezer)
 
     def thaw(self):
-        with open("Block.json") as heater:
+        with open("Block.json", encoding="utf-8") as heater:
             frozen_list = json.load(heater)
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
@@ -194,7 +196,7 @@ class Spielblock:
             self.freeze(folder)
 
     def gamened(self):
-        if self.ende[0] and self.ende[1]:
-            return True
-        else:
-            return False
+        """
+
+        """
+        return self.ende[0] and self.ende[1]
