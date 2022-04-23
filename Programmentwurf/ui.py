@@ -1,75 +1,104 @@
-# todo elias
+"""
+#todo
+"""
 import string
 import spielblock
 
 
 class UI:
+    """
+    User-interface-class
+    """
 
-    def __init__(self, sb: spielblock.Spielblock):
+    def __init__(self, s_b: spielblock.Spielblock):
         self.output = None
-        self.spielblock = sb
+        self.spielblock = s_b
         self.leer = False
 
-    def choosename(self, playernumber) -> string:
+    @classmethod
+    def choosename(cls, playernumber) -> string:
+        """
+
+        @param playernumber:
+        @type playernumber:
+        @return:
+        @rtype:
+        """
         aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
         name = input(aufforderung)
         return name
 
-    def pvp_or_pve(self) -> bool:
+    @classmethod
+    def pvp_or_pve(cls) -> bool:
         """
-               """
+
+        @return:
+        @rtype:
+        """
         while True:
             ret = input("Wollen sie gegen eine andere Person spielen drücken sie: 1\n"
                         "Wollen sie gegen einen Computer spielen drücken sie    : 2\n")
-            if ret == '1':
-                return True
-            elif ret == '2':
-                return False
-            else:
-                print("Geben sie bitte nur 1 oder 2 ein")
+            match ret:
+                case '1':
+                    return True
+                case '2':
+                    return False
+                case _:
+                    print("Geben sie bitte nur 1 oder 2 ein")
 
-    def choosediceorcheck(self,  wuerfel_im_becher: dict):
+    @classmethod
+    def choosediceorcheck(cls, wuerfel_im_becher: dict):
         """
-            todo: Elias: waehle aus gewuerfelte_wuerfel_dict aus den aktiven wuerfeln (dice.isactivated->bool) die
-            passenden aus
-            Fuege die gewaehlten wuerfel zum schon_gewaehlte_wuerfel_dict hinzu. Änderungen hier gelten auch
-            im Hauptprogramm, deshalb keine rückgabe notwendig
-            """
+
+        @param wuerfel_im_becher:
+        @type wuerfel_im_becher:
+        @return:
+        @rtype:
+        """
         again = True
         while again:
             again = False
             print("Gewählte Würfel:\n")
-            q = 1
+            i = 1
             for wuerfel in wuerfel_im_becher.values():
                 if wuerfel.isdeactivated:
-                    print(q, ":", wuerfel.augen)
-                q += 1
+                    print(i, ":", wuerfel.augen)
+                i += 1
 
             print("\nGewürfelte Würfel:\n")
-            q = 1
+            i = 1
             for wuerfelx in wuerfel_im_becher.values():
                 if wuerfelx.isactivated:
-                    print(q, ":", wuerfelx.augen)
-                q += 1
+                    print(i, ":", wuerfelx.augen)
+                i += 1
 
             eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
                          "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n"
                          "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n"
                          "Wenn sie nichts auswählen möchten geben sie 0 ein.\n")
             eing = eing.split(",")
-            for x in eing:
-                if x == "1" or x == "2" or x == "3" or x == "4" or x == "5":
-                    if wuerfel_im_becher[int(x) - 1].isactivated:
-                        wuerfel_im_becher[int(x) - 1].deactivate()
+            for choosen_dice in eing:
+                if choosen_dice in ("1", "2", "3", "4", "5"):
+                    if wuerfel_im_becher[int(choosen_dice) - 1].isactivated:
+                        wuerfel_im_becher[int(choosen_dice) - 1].deactivate()
                     else:
-                        wuerfel_im_becher[int(x) - 1].activate()
-                elif x != "0":
+                        wuerfel_im_becher[int(choosen_dice) - 1].activate()
+                elif choosen_dice != "0":
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
     def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int) -> int:
         """
-               """
+
+        @param wuerfelobjekte:
+        @type wuerfelobjekte:
+        @param block:
+        @type block:
+        @param playernumber:
+        @type playernumber:
+        @return:
+        @rtype:
+        """
         self.spielblock.ausgabe()
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
@@ -77,34 +106,34 @@ class UI:
         while True:
             while True:
                 try:
-                    x = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
-                    x = int(x)
+                    _eing = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
+                    _eingabe = int(_eing)
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
                     break
-                if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
+                if _eingabe in (7, 8, 9, 17, 18, 19):
                     print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
                     break
-                elif x < 1 or x > 19:
+                elif _eingabe < 1 or _eingabe > 19:
                     print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
                     break
-                if x < 7:
-                    if block.first_line[x - 1][playernumber]:
+                if _eingabe < 7:
+                    if block.first_line[_eingabe - 1][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
                     else:
-                        return x
-                if x > 9:
-                    if block.second_line[x - 10][playernumber]:
+                        return _eingabe
+                if _eingabe > 9:
+                    if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
                 sortdice = sorted(augenarray)
                 maxequal = 1
                 secondequal = 1
                 equal = 1
-                for q in range(len(sortdice) - 1):
-                    if q != range(len(sortdice)):
-                        if sortdice[q] == sortdice[q + 1]:
+                for i in range(len(sortdice) - 1):
+                    if i != range(len(sortdice)):
+                        if sortdice[i] == sortdice[i + 1]:
                             equal += 1
                             if maxequal < equal:
                                 maxequal = equal
@@ -112,17 +141,17 @@ class UI:
                                 secondequal = equal
                         else:
                             equal = 1
-                if x == 10:
+                if _eingabe == 10:
                     if maxequal > 2:
-                        return x
-                elif x == 11:
+                        return _eingabe
+                elif _eingabe == 11:
                     if maxequal > 3:
-                        return x
-                elif x == 12:
+                        return _eingabe
+                elif _eingabe == 12:
                     if (maxequal == 3 and secondequal == 2) or maxequal == 5:
-                        return x
+                        return _eingabe
 
-                elif x == 13:
+                elif _eingabe == 13:
                     count = 1
                     for i in range(len(sortdice) - 1):
                         if sortdice[i] == sortdice[i + 1] - 1:
@@ -131,31 +160,51 @@ class UI:
                             if sortdice[i] == sortdice[i]:
                                 count = 1
                     if count >= 4:
-                        return x
+                        return _eingabe
 
-                elif x == 14:
+                elif _eingabe == 14:
                     if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
-                        return x
-                elif x == 15:
+                        return _eingabe
+                elif _eingabe == 15:
                     if maxequal == 5:
-                        return x
-                elif x == 16:
-                    return x
-                q = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                          "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                          "Für eine neue Auswahl geben sie etwas anders ein")
-                if q == '0':
+                        return _eingabe
+                elif _eingabe == 16:
+                    return _eingabe
+                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                               "Für eine neue Auswahl geben sie etwas anders ein")
+                if _einga == '0':
                     self.leer = True
-                    return x
+                    return _eingabe
 
-    def chooseplayer(self, playername):
+    @classmethod
+    def chooseplayer(cls, playername):
+        """
+
+        @param playername:
+        @type playername:
+        @return:
+        @rtype:
+        """
         print("\n\n\nEs ist ", playername, "dran")
 
     def endgame(self, winner):
+        """
+
+        @param winner:
+        @type winner:
+        @return:
+        @rtype:
+        """
         self.spielblock.ausgabe()
         print("Der Gewinner ist", winner)
 
-    def welcome(self):
+    @classmethod
+    def welcome(cls):
+        """
+
+        @return:
+        @rtype:
+        """
         print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
               "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
-        return
