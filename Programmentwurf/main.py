@@ -1,7 +1,16 @@
+"""
+main-file
+"""
+
 import spiel
 
 
 def main():
+    """
+
+    @return: no return -> main method
+    @rtype:
+    """
     neuesspiel = spiel.Spiel()
     neuesspiel.spielstarten()
 

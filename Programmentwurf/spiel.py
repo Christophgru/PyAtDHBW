@@ -1,5 +1,6 @@
 """
-ausgaben an Console nur ueber methoden in ui, um alle "oberflaechen aktionen" zu kapseln
+ausgaben an Console nur ueber methoden in _ui, um alle "oberflaechen aktionen" zu kapseln
+game-class-file
 """
 
 import dice
@@ -9,25 +10,33 @@ import ui
 
 
 class Spiel:
+    """
+    game-class
+    """
 
-    def __init__(self):
+    def __init__(self): # @todo ein Attribut zu viel
         self.dicedict: dict = {}
         for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
-        self.boolPvP: bool = False
+        self.bool_pvp: bool = False
+        self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
         self.nrround: int = 0
         self.activeplayer: int = 0
-        self.player1: player.Player = None
-        self.player2: player.Player = None
-        self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
-        self.ui = ui.UI(self.spielblock)
-        self.ui.welcome()
+        self.player1: player.Player  # einfügen
+        self.player2: player.Player  # einfügen
+        self._ui = ui.UI(self.spielblock)
+        self._ui.welcome()
 
     def spielstarten(self):
-        self.boolPvP = self.ui.pvp_or_pve()
-        self.player1 = player.Player(True, self.ui.choosename(1))
-        if self.boolPvP:
-            self.player2 = player.Player(True, self.ui.choosename(2))
+        """
+
+        @return:
+        @rtype:
+        """
+        self.bool_pvp = self._ui.pvp_or_pve()
+        self.player1 = player.Player(True, self._ui.choosename(1))
+        if self.bool_pvp:
+            self.player2 = player.Player(True, self._ui.choosename(2))
         else:
             self.player2 = player.Player(False, "E-Gegner")
 
@@ -37,7 +46,7 @@ class Spiel:
         self.spielvorbei(True)
         return True
 
-    def wuerfeln(self):
+    def wuerfeln(self): # @todo ein branch zu viel
         """
           würfeln, auswahl, nochmalwürfeln, Wahl (bsp full house...) tätigen, punkteeintragen...
               """
@@ -56,7 +65,7 @@ class Spiel:
                     else:
                         wuerfelx.deactivate()
 
-                self.ui.choosediceorcheck(self.dicedict)
+                self._ui.choosediceorcheck(self.dicedict)
             except (KeyboardInterrupt, TypeError):
                 print("Keine Wuerfel ausgewaehlt")
                 anzahlwuerfe -= 1
@@ -76,7 +85,7 @@ class Spiel:
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self.ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer, self.player1.name,
+        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer, self.player1.name,
                                                    self.player2.name)
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
@@ -89,23 +98,34 @@ class Spiel:
 
         # gib das eingelesene an spielblock weiter
 
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, self.ui.leer, *augenarray)
-        self.ui.leer = False
+        self.spielblock.punkteeinlesen(wahl, self.activeplayer, self._ui.leer, *augenarray)
+        self._ui.leer = False
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
+        """
+
+        @param spielvorbei:
+        @type spielvorbei:
+        @return:
+        @rtype:
+        """
         if not spielvorbei:
-            return self.spielblock.gamened()
+            return self.spielblock.gamened()  # @todo return entfernen oder in den anderen beiden Zeilen return einbauen
+        if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
+            self._ui.endgame(self.player1.name)
         else:
-            if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
-                self.ui.endgame(self.player1.name)
-            else:
-                self.ui.endgame(self.player2.name)
+            self._ui.endgame(self.player2.name)
 
     def spielerwechsel(self):
+        """
+
+        @return:
+        @rtype:
+        """
         if self.activeplayer == 0:
             self.activeplayer = 1
-            self.ui.chooseplayer(self.player2.name)
+            self._ui.chooseplayer(self.player2.name)
             self.nrround = +1
         else:
             self.activeplayer = 0
-            self.ui.chooseplayer(self.player1.name)
+            self._ui.chooseplayer(self.player1.name)
