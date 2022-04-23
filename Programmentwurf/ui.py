@@ -1,8 +1,6 @@
 # todo elias
 import string
 import spielblock
-import spiel
-import dice
 
 
 class UI:
@@ -11,7 +9,6 @@ class UI:
         self.output = None
         self.spielblock = sb
         self.leer = False
-
 
     def choosename(self, playernumber) -> string:
         aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
@@ -31,7 +28,7 @@ class UI:
             else:
                 print("Geben sie bitte nur 1 oder 2 ein")
 
-    def choosediceorcheck(self, schon_gewaehlte_wuerfel_dict: dict, wuerfel_im_becher: dict):
+    def choosediceorcheck(self,  wuerfel_im_becher: dict):
         """
             todo: Elias: waehle aus gewuerfelte_wuerfel_dict aus den aktiven wuerfeln (dice.isactivated->bool) die
             passenden aus
@@ -84,6 +81,7 @@ class UI:
                     x = int(x)
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
+                    break
                 if x == 7 or x == 8 or x == 9 or x == 17 or x == 18 or x == 19:
                     print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
                     break
@@ -121,7 +119,7 @@ class UI:
                     if maxequal > 3:
                         return x
                 elif x == 12:
-                    if maxequal == 3 and secondequal == 2:
+                    if (maxequal == 3 and secondequal == 2) or maxequal == 5:
                         return x
 
                 elif x == 13:
@@ -154,7 +152,7 @@ class UI:
         print("\n\n\nEs ist ", playername, "dran")
 
     def endgame(self, winner):
-        spielblock.ausgabe()
+        self.spielblock.ausgabe()
         print("Der Gewinner ist", winner)
 
     def welcome(self):

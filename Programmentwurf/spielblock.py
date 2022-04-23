@@ -10,9 +10,9 @@ class Spielblock:
     """
 
     """
-    indexlist = ["Einser","Zweier","Dreier","Vierer","Funfer","Sechser","Oben","Bonus","GesamtOben",
-                 "Dreierpasch","Viererpasch","Full-House","Kleine-Straße","Große-Straße","Kniffel",
-                 "Chance","Unten","Oben","Gesamt"]
+    indexlist = ["Einser", "Zweier", "Dreier", "Vierer", "Funfer", "Sechser", "Oben", "Bonus", "GesamtOben",
+                 "Dreierpasch", "Viererpasch", "Full-House", "Kleine-Straße", "Große-Straße", "Kniffel",
+                 "Chance", "Unten", "Oben", "Gesamt"]
 
     first_line = [[0 for x in range(2)] for y in range(6)]
     second_line = [[0 for z in range(2)] for k in range(7)]
@@ -28,13 +28,16 @@ class Spielblock:
     endstand = [0, 0]
 
     def __init__(self):
-        liste = [{"1": {"Einser      ": [None, None]}}, {"2": {"Zweier      ": [None, None]}}, {"3": {"Dreier      ": [None, None]}},
-                 {"4": {"Vierer      ": [None, None]}}, {"5": {"Funfer      ": [None, None]}},
-                 {"6": {"Sechser      ": [None, None]}}, {"7": {"Oben        ": [None, None]}}, {"8": {"Bonus        ": [None, None]}},
-                 {"9": {"GesamtOben  ": [None, None]}}, {"10": {"Dreierpasch  ": [None, None]}}, {"11": {"Viererpasch  ": [None, None]}},
-                 {"12": {"Full-House   ": [None, None]}}, {"13": {"Kleine-Straße": [None, None]}},
-                 {"14": {"Große-Straße": [None, None]}}, {"15": {"Kniffel      ": [None, None]}}, {"16": {"Chance      ": [None, None]}},
-                 {"17": {"Unten        ": [None, None]}}, {"18": {"Oben        ": [None, None]}}, {"19": {"Gesamt      ": [None, None]}}]
+        liste = [{"1": {"Einser      ": [None, None]}}, {"2": {"Zweier      ": [None, None]}},
+                 {"3": {"Dreier      ": [None, None]}}, {"4": {"Vierer      ": [None, None]}},
+                 {"5": {"Funfer      ": [None, None]}}, {"6": {"Sechser      ": [None, None]}},
+                 {"7": {"Oben        ": [None, None]}}, {"8": {"Bonus        ": [None, None]}},
+                 {"9": {"GesamtOben  ": [None, None]}}, {"10": {"Dreierpasch  ": [None, None]}},
+                 {"11": {"Viererpasch  ": [None, None]}}, {"12": {"Full-House   ": [None, None]}},
+                 {"13": {"Kleine-Straße": [None, None]}}, {"14": {"Große-Straße": [None, None]}},
+                 {"15": {"Kniffel      ": [None, None]}}, {"16": {"Chance      ": [None, None]}},
+                 {"17": {"Unten        ": [None, None]}}, {"18": {"Oben        ": [None, None]}},
+                 {"19": {"Gesamt      ": [None, None]}}]
 
         self.freeze(liste)
 
@@ -62,9 +65,10 @@ class Spielblock:
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
-    def punkteeinlesen(self, row, player, *value):
+    def punkteeinlesen(self, row, player, leer, *value):
         """
 
+        @param leer:
         @param row:
         @type row:
         @param player:
@@ -126,10 +130,10 @@ class Spielblock:
         """
         trie = self.thaw()
         for i in range(trie.__len__()):
-            zeile=trie[i]
-            stra=""
-            stra+=str(i+1)+"\t"
-            stra+= self.indexlist[i]+"\t"
+            zeile = trie[i]
+            stra = ""
+            stra += str(i+1)+"\t"
+            stra += self.indexlist[i]+"\t"
             zwischen2 = zeile[str(i+1)]
             zwischen3 = zwischen2[self.indexlist[i]]
             for q in range(2):
