@@ -1,8 +1,14 @@
+"""
+@todo Steve bitte Docstrings ausfüllen und if-else in switch case umbauen
+"""
 import json
 import jsonpickle
 
 
 class Spielblock:
+    """
+
+    """
     indexlist = ["Einser","Zweier","Dreier","Vierer","Funfer","Sechser","Oben","Bonus","GesamtOben",
                  "Dreierpasch","Viererpasch","Full-House","Kleine-Straße","Große-Straße","Kniffel",
                  "Chance","Unten","Oben","Gesamt"]
@@ -31,17 +37,40 @@ class Spielblock:
         self.freeze(liste)
 
     def freeze(self, item):
+        """
+
+        @param item:
+        @type item:
+        @return:
+        @rtype:
+        """
         with open("Block.json", "w") as freezer:
             frozen_list = jsonpickle.encode(item)
             json.dump(frozen_list, freezer)
 
     def thaw(self):
+        """
+
+        @return:
+        @rtype:
+        """
         with open("Block.json") as heater:
             frozen_list = json.load(heater)
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
     def punkteeinlesen(self, row, player, *value):
+        """
+
+        @param row:
+        @type row:
+        @param player:
+        @type player:
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
         block = self.thaw()
         column = block[row - 1]
         category = column[str(row)]
@@ -71,11 +100,23 @@ class Spielblock:
         self.valuing(player)
 
     def ausgabe(self):
+        """
+
+        @return:
+        @rtype:
+        """
         trie = self.thaw()
         for i in range(trie.__len__()):
             print(trie[i])
 
     def valuing(self, player):
+        """
+
+        @param player:
+        @type player:
+        @return:
+        @rtype:
+        """
         folder = self.thaw()
         calcoben1 = 0
         calcoben2 = 0
@@ -167,7 +208,9 @@ class Spielblock:
             self.freeze(folder)
 
     def gamened(self):
-        if self.ende[0] and self.ende[1]:
-            return True
-        else:
-            return False
+        """
+
+        @return:
+        @rtype:
+        """
+        return self.ende[0] and self.ende[1]
