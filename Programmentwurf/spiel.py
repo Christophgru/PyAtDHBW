@@ -15,11 +15,11 @@ class Spiel:
         for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
         self.boolPvP: bool = False
-        self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
         self.nrround: int = 0
         self.activeplayer: int = 0
         self.player1: player.Player = None
         self.player2: player.Player = None
+        self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
         self.ui = ui.UI(self.spielblock)
         self.ui.welcome()
 
@@ -76,7 +76,8 @@ class Spiel:
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self.ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer)
+        wahl = self.ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer, self.player1.name,
+                                                   self.player2.name)
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]

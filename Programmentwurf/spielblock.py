@@ -4,17 +4,20 @@
 """
 
 import json
+import string
+
 import jsonpickle
+from prettytable import PrettyTable
 
 
 class Spielblock:
     """
 
     """
-    indexlist = ["Einser      ", "Zweier      ", "Dreier      ", "Vierer      ", "Funfer      ",
-                 "Sechser      ", "Oben        ", "Bonus        ", "GesamtOben  ",
-                 "Dreierpasch  ", "Viererpasch  ", "Full-House   ", "Kleine-Straße" , "Große-Straße", "Kniffel      ",
-                 "Chance      ", "Unten        ", "Oben        ", "Gesamt      "]
+    indexlist = ["Einser", "Zweier", "Dreier", "Vierer", "Funfer",
+                 "Sechser", "Oben", "Bonus", "GesamtOben",
+                 "Dreierpasch", "Viererpasch", "Full-House", "Kleine-Straße", "Große-Straße", "Kniffel",
+                 "Chance", "Unten", "Oben", "Gesamt"]
 
     first_line = [[0 for x in range(2)] for y in range(6)]
     second_line = [[0 for z in range(2)] for k in range(7)]
@@ -30,16 +33,16 @@ class Spielblock:
     endstand = [0, 0]
 
     def __init__(self):
-        liste = [{"1": {"Einser      ": [None, None]}}, {"2": {"Zweier      ": [None, None]}},
-                 {"3": {"Dreier      ": [None, None]}}, {"4": {"Vierer      ": [None, None]}},
-                 {"5": {"Funfer      ": [None, None]}}, {"6": {"Sechser      ": [None, None]}},
-                 {"7": {"Oben        ": [None, None]}}, {"8": {"Bonus        ": [None, None]}},
-                 {"9": {"GesamtOben  ": [None, None]}}, {"10": {"Dreierpasch  ": [None, None]}},
-                 {"11": {"Viererpasch  ": [None, None]}}, {"12": {"Full-House   ": [None, None]}},
+        liste = [{"1": {"Einser": [None, None]}}, {"2": {"Zweier": [None, None]}},
+                 {"3": {"Dreier": [None, None]}}, {"4": {"Vierer": [None, None]}},
+                 {"5": {"Funfer": [None, None]}}, {"6": {"Sechser": [None, None]}},
+                 {"7": {"Oben": [None, None]}}, {"8": {"Bonus": [None, None]}},
+                 {"9": {"GesamtOben": [None, None]}}, {"10": {"Dreierpasch": [None, None]}},
+                 {"11": {"Viererpasch": [None, None]}}, {"12": {"Full-House": [None, None]}},
                  {"13": {"Kleine-Straße": [None, None]}}, {"14": {"Große-Straße": [None, None]}},
-                 {"15": {"Kniffel      ": [None, None]}}, {"16": {"Chance      ": [None, None]}},
-                 {"17": {"Unten        ": [None, None]}}, {"18": {"Oben        ": [None, None]}},
-                 {"19": {"Gesamt      ": [None, None]}}]
+                 {"15": {"Kniffel": [None, None]}}, {"16": {"Chance": [None, None]}},
+                 {"17": {"Unten": [None, None]}}, {"18": {"Oben": [None, None]}},
+                 {"19": {"Gesamt": [None, None]}}]
 
         self.freeze(liste)
 
@@ -126,26 +129,20 @@ class Spielblock:
         self.freeze(block)
         self.valuing(player)
 
-    def ausgabe(self):
+    def ausgabe(self, name1: string, name2: string):
         """
 
         @return:
         @rtype:
         """
         trie = self.thaw()
+        t = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
         for i in range(trie.__len__()):
             zeile = trie[i]
-            stra = ""
-            stra += str(i + 1) + "\t"
-            stra += self.indexlist[i] + "\t"
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
-            for j in range(2):
-                if zwischen3[j] is None:
-                    stra += "-" + "\t"
-                else:
-                    stra += str(zwischen3[j]) + "\t"
-            print(stra)
+            t.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
+        print(t)
 
     def valuing(self, player):
         """

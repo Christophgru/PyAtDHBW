@@ -87,9 +87,12 @@ class UI:
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int) -> int:
+    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int,
+                                    name1: string, name2: string) -> int:
         """
 
+        @param name2:
+        @param name1:
         @param wuerfelobjekte:
         @type wuerfelobjekte:
         @param block:
@@ -99,7 +102,7 @@ class UI:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe()
+        self.spielblock.ausgabe(name1, name2)
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
                       wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
