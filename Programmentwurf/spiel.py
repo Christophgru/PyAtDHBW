@@ -43,7 +43,6 @@ class Spiel:
               """
         anzahlwuerfe = 1
 
-        anzahlgewaehlt = 0
         for j in range(0, len(self.dicedict)):  # Fuer jeden gewaehlten wuerfel wird einer mehr deaktiviert
             self.dicedict.get(j).activate()
 
@@ -62,11 +61,14 @@ class Spiel:
                 print("Keine Wuerfel ausgewaehlt")
                 anzahlwuerfe -= 1
                 break
-            anzahlwuerfe += 1
 
+            anzahlgewaehlt = 0
             for j in range(0, len(self.dicedict)):
-                if self.dicedict.get(j).isactivated():
+                if not self.dicedict.get(j).isactivated:
                     anzahlgewaehlt += 1
+            if anzahlgewaehlt == 5:
+                anzahlwuerfe = 3
+            anzahlwuerfe += 1
 
             # wenn loop vorbei und nicht alle wuerfel gewaehlt wurden, werden die restlichen wuerfel automatisch zugewiesen
             for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
@@ -74,8 +76,8 @@ class Spiel:
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self.ui.choose_action_with_dice_arr(self.dicedict)
-        # todo: undo test next line
+        wahl = self.ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer)
+        print(self.ui.leer, "\n")
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]
@@ -86,7 +88,9 @@ class Spiel:
             augenarray[k] = augen
 
         # gib das eingelesene an spielblock weiter
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, augenarray)
+
+        self.spielblock.punkteeinlesen(wahl, self.activeplayer, self.ui.leer, *augenarray)
+        self.ui.leer = False
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
         if not spielvorbei:
