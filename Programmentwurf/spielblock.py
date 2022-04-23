@@ -1,13 +1,19 @@
-
+"""
+@todo Steve bitte Docstrings ausfüllen und if-else in switch case umbauen
+"""
 
 import json
 import jsonpickle
 
 
 class Spielblock:
-    indexlist = ["Einser      ","Zweier      ","Dreier      ","Vierer      ","Funfer      ","Sechser      ","Oben        ","Bonus        ","GesamtOben  ",
-                 "Dreierpasch  ","Viererpasch  ","Full-House   ","Kleine-Straße","Große-Straße","Kniffel      ",
-                 "Chance      ","Unten        ","Oben        ","Gesamt      "]
+    """
+
+    """
+    indexlist = ["Einser","Zweier","Dreier","Vierer","Funfer","Sechser","Oben","Bonus","GesamtOben",
+                 "Dreierpasch","Viererpasch","Full-House","Kleine-Straße","Große-Straße","Kniffel",
+                 "Chance","Unten","Oben","Gesamt"]
+
     first_line = [[0 for x in range(2)] for y in range(6)]
     second_line = [[0 for z in range(2)] for k in range(7)]
     for i in range(6):
@@ -33,17 +39,42 @@ class Spielblock:
         self.freeze(liste)
 
     def freeze(self, item):
+        """
+
+        @param item:
+        @type item:
+        @return:
+        @rtype:
+        """
+
         with open("Block.json", "w", encoding="utf-8") as freezer:
             frozen_list = jsonpickle.encode(item)
             json.dump(frozen_list, freezer)
 
     def thaw(self):
+        """
+
+        @return:
+        @rtype:
+        """
         with open("Block.json", encoding="utf-8") as heater:
             frozen_list = json.load(heater)
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
-    def punkteeinlesen(self, row, player, leer,  *value):
+    def punkteeinlesen(self, row, player, *value):
+        """
+
+        @param row:
+        @type row:
+        @param player:
+        @type player:
+        @param value:
+        @type value:
+        @return:
+        @rtype:
+        """
+
         block = self.thaw()
         column = block[row - 1]
         category = column[str(row)]
@@ -88,6 +119,11 @@ class Spielblock:
         self.valuing(player)
 
     def ausgabe(self):
+        """
+
+        @return:
+        @rtype:
+        """
         trie = self.thaw()
         for i in range(trie.__len__()):
             zeile=trie[i]
@@ -105,6 +141,13 @@ class Spielblock:
 
 
     def valuing(self, player):
+        """
+
+        @param player:
+        @type player:
+        @return:
+        @rtype:
+        """
         folder = self.thaw()
         calcoben1 = 0
         calcoben2 = 0
@@ -198,5 +241,7 @@ class Spielblock:
     def gamened(self):
         """
 
+        @return:
+        @rtype:
         """
         return self.ende[0] and self.ende[1]
