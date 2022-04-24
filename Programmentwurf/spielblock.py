@@ -12,7 +12,7 @@ from prettytable import PrettyTable
 
 class Spielblock:
     """
-
+    game-block-class
     """
     indexlist = ["Einser", "Zweier", "Dreier", "Vierer", "Funfer",
                  "Sechser", "Oben", "Bonus", "GesamtOben",
@@ -33,16 +33,16 @@ class Spielblock:
     endstand = [0, 0]
 
     def __init__(self):
-        liste = [{"1": {"Einser": ['-', '-']}}, {"2": {"Zweier": [None, None]}},
-                 {"3": {"Dreier": [None, None]}}, {"4": {"Vierer": [None, None]}},
-                 {"5": {"Funfer": [None, None]}}, {"6": {"Sechser": [None, None]}},
-                 {"7": {"Oben": [None, None]}}, {"8": {"Bonus": [None, None]}},
-                 {"9": {"GesamtOben": [None, None]}}, {"10": {"Dreierpasch": [None, None]}},
-                 {"11": {"Viererpasch": [None, None]}}, {"12": {"Full-House": [None, None]}},
-                 {"13": {"Kleine-Straße": [None, None]}}, {"14": {"Große-Straße": [None, None]}},
-                 {"15": {"Kniffel": [None, None]}}, {"16": {"Chance": [None, None]}},
-                 {"17": {"Unten": [None, None]}}, {"18": {"Oben": [None, None]}},
-                 {"19": {"Gesamt": [None, None]}}]
+        liste = [{"1": {"Einser": ['-', '-']}}, {"2": {"Zweier": ['-', '-']}},
+                 {"3": {"Dreier": ['-', '-']}}, {"4": {"Vierer": ['-', '-']}},
+                 {"5": {"Funfer": ['-', '-']}}, {"6": {"Sechser": ['-', '-']}},
+                 {"7": {"Oben": ['-', '-']}}, {"8": {"Bonus": ['-', '-']}},
+                 {"9": {"GesamtOben": ['-', '-']}}, {"10": {"Dreierpasch": ['-', '-']}},
+                 {"11": {"Viererpasch": ['-', '-']}}, {"12": {"Full-House": ['-', '-']}},
+                 {"13": {"Kleine-Straße": ['-', '-']}}, {"14": {"Große-Straße": ['-', '-']}},
+                 {"15": {"Kniffel": ['-', '-']}}, {"16": {"Chance": ['-', '-']}},
+                 {"17": {"Unten": ['-', '-']}}, {"18": {"Oben": ['-', '-']}},
+                 {"19": {"Gesamt": ['-', '-']}}]
 
         self.freeze(liste)
 
@@ -138,13 +138,13 @@ class Spielblock:
         @rtype: nothing
         """
         trie = self.thaw()
-        t = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
+        _table = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
         for i in range(trie.__len__()):
             zeile = trie[i]
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
-            t.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
-        print(t)
+            _table.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
+        print(_table)
 
     def addoben(self, player, calc_sum, folder):
         """

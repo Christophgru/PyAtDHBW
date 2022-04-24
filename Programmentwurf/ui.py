@@ -3,6 +3,7 @@
 """
 import string
 import spielblock
+import os
 
 
 class UI:
@@ -160,7 +161,7 @@ class UI:
                         if sortdice[i] == sortdice[i + 1] - 1:
                             count += 1
                         else:
-                            if not sortdice[i] == sortdice[i+1]:
+                            if not sortdice[i] == sortdice[i + 1]:
                                 count = 1
                     if count >= 4:
                         return _eingabe
@@ -191,7 +192,7 @@ class UI:
         """
         print("\n\n\nEs ist ", playername, "dran")
 
-    def endgame(self, winner):
+    def endgame(self, winner, name1, name2):
         """
 
         @param winner:
@@ -199,7 +200,7 @@ class UI:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe()
+        self.spielblock.ausgabe(name1, name2)
         print("Der Gewinner ist", winner)
 
     @classmethod
@@ -211,3 +212,8 @@ class UI:
         """
         print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
               "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+
+    @classmethod
+    def clear(cls):
+        os.system('cls' if os.name == 'nt' else 'clear')
+
