@@ -33,7 +33,7 @@ class Spielblock:
     endstand = [0, 0]
 
     def __init__(self):
-        liste = [{"1": {"Einser": [None, None]}}, {"2": {"Zweier": [None, None]}},
+        liste = [{"1": {"Einser": ['-', '-']}}, {"2": {"Zweier": [None, None]}},
                  {"3": {"Dreier": [None, None]}}, {"4": {"Vierer": [None, None]}},
                  {"5": {"Funfer": [None, None]}}, {"6": {"Sechser": [None, None]}},
                  {"7": {"Oben": [None, None]}}, {"8": {"Bonus": [None, None]}},
