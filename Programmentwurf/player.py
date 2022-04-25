@@ -35,39 +35,26 @@ class Player:
         else:
             _ui.choosediceorcheck(dicedict)
 
-    def choose_action_with_dice_arr(self, _ui,
-                                    dicedict,
-                                    spielblock,
-                                    activeplayer,
-                                    p1name,
-                                    spielzug):
-        """
+    def choose_action_with_dice_arr(self, params: dict):
+        if params["activeplayer"] == 1 and not self.istecht:
 
-        @param _ui:
-        @type _ui:
-        @param dicedict:
-        @type dicedict:
-        @param spielblock:
-        @type spielblock:
-        @param activeplayer:
-        @type activeplayer:
-        @param p1name:
-        @type p1name:
-        @param spielzug:
-        @type spielzug:
-        @return:
-        @rtype:
-        """
-        if activeplayer == 1 and not self.istecht:
             options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
-            wahl = options[spielzug - 1]
+            wahl = options[params["nrround"] - 1]
             inputstring: str = str(wahl) + "\n"
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 with patch('sys.stdin', new=StringIO(inputstring)) as fake_in:
-                    if "geben sie etwas anders ein" in fake_out.read(20):
-                        fake_in.write("0\n")
+                    # if "geben sie etwas anders ein" in fake_out.read(20):
+                    #    fake_in.write("0\n0\n")
+                    result = params["ui"].choose_action_with_dice_arr(params["dicedict"],
+                                                                      params["spielblock"],
+                                                                      params["activeplayer"],
+                                                                      [params["player1_name"], self.name],
+                                                                      True)
 
-                    result = _ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, [p1name, self.name])
                     return result
         else:
-            return _ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, [p1name, self.name])
+            return params["ui"].choose_action_with_dice_arr(params["dicedict"],
+                                                            params["spielblock"],
+                                                            params["activeplayer"],
+                                                            [params["player1_name"], self.name])
+
