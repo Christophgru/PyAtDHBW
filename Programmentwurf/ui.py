@@ -3,6 +3,7 @@
 """
 import string
 import spielblock
+import os
 
 
 class UI:
@@ -214,3 +215,7 @@ class UI:
         """
         print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
               "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+
+    @classmethod
+    def clear(cls):
+        os.system('cls' if os.name == 'nt' else 'clear')
