@@ -2,8 +2,8 @@
 #todo
 """
 import string
-import spielblock
 import os
+import spielblock
 
 
 class UI:
@@ -103,10 +103,10 @@ class UI:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe(name1, name2)
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
                       wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
+        self.spielblock.ausgabe(name1, name2, *augenarray)
         while True:
             while True:
                 try:
@@ -118,68 +118,29 @@ class UI:
                 if _eingabe in (7, 8, 9, 17, 18, 19):
                     print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
                     break
-                elif _eingabe < 1 or _eingabe > 19:
+                if _eingabe < 1 or _eingabe > 19:
                     print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
                     break
-                if _eingabe < 7:
+                if _eingabe < 7 or _eingabe == 16:
                     if block.first_line[_eingabe - 1][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                    else:
-                        return _eingabe
+                    return _eingabe
                 if _eingabe > 9:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
                 sortdice = sorted(augenarray)
-                maxequal = 1
-                secondequal = 1
-                equal = 1
-                for i in range(len(sortdice) - 1):
-                    if i != range(len(sortdice)):
-                        if sortdice[i] == sortdice[i + 1]:
-                            equal += 1
-                            if maxequal < equal:
-                                maxequal = equal
-                            elif maxequal != equal:
-                                secondequal = equal
-                        else:
-                            equal = 1
-                if _eingabe == 10:
-                    if maxequal > 2:
-                        return _eingabe
-                elif _eingabe == 11:
-                    if maxequal > 3:
-                        return _eingabe
-                elif _eingabe == 12:
-                    if (maxequal == 3 and secondequal == 2) or maxequal == 5:
-                        return _eingabe
-                elif _eingabe == 13:
-                    count = 1
-
-                    for i in range(len(sortdice) - 1):
-                        if sortdice[i] == sortdice[i + 1] - 1:
-                            count += 1
-                        else:
-                            if not sortdice[i] == sortdice[i + 1]:
-                                count = 1
-                    if count >= 4:
-                        return _eingabe
-
-                elif _eingabe == 14:
-                    if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
-                        return _eingabe
-                elif _eingabe == 15:
-                    if maxequal == 5:
-                        return _eingabe
-                elif _eingabe == 16:
+                check = self.checkline(sortdice, _eingabe)
+                if check:
                     return _eingabe
-                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                               "Für eine neue Auswahl geben sie etwas anders ein")
-                if _einga == '0':
-                    self.leer = True
-                    return _eingabe
+                else:
+                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                                   "Für eine neue Auswahl geben sie etwas anders ein")
+                    if _einga == '0':
+                        self.leer = True
+                        return _eingabe
 
     @classmethod
     def chooseplayer(cls, playername):
@@ -195,6 +156,8 @@ class UI:
     def endgame(self, winner, name1, name2):
         """
 
+        @param name2:
+        @param name1:
         @param winner:
         @type winner:
         @return:
@@ -211,9 +174,54 @@ class UI:
         @rtype:
         """
         print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
-              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte.")
 
     @classmethod
     def clear(cls):
         os.system('cls' if os.name == 'nt' else 'clear')
 
+    @classmethod
+    def checkline(cls, sortdice, _eingabe):
+        check = False
+        equal = 1
+        maxequal = 1
+        secondequal = 1
+        for i in range(len(sortdice) - 1):
+            if i != range(len(sortdice)):
+                if sortdice[i] == sortdice[i + 1]:
+                    equal += 1
+                    if maxequal < equal:
+                        maxequal = equal
+                    elif maxequal != equal:
+                        secondequal = equal
+                else:
+                    equal = 1
+        match _eingabe:
+            case 10:
+                if maxequal > 2:
+                    check = True
+            case 11:
+                if maxequal > 3:
+                    check = True
+            case 12:
+                if (maxequal == 3 and secondequal == 2) or maxequal == 5:
+                    check = True
+            case 13:
+                count = 1
+
+                for i in range(len(sortdice) - 1):
+                    if sortdice[i] == sortdice[i + 1] - 1:
+                        count += 1
+                    else:
+                        if not sortdice[i] == sortdice[i + 1]:
+                            count = 1
+                if count >= 4:
+                    check = True
+
+            case 14:
+                if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                    check = True
+            case 15:
+                if maxequal == 5:
+                    check = True
+        return check
