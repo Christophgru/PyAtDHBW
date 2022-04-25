@@ -79,10 +79,9 @@ class Spiel:
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock,
-                                                    self.activeplayer,
-                                                    self.player1.name,
-                                                    self.player2.name)
+        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer, self.player1.name,
+                                                   self.player2.name)
+        self._ui.clear()
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]
@@ -108,10 +107,9 @@ class Spiel:
         if not spielvorbei:
             return self.spielblock.gamened()
         if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
-            self._ui.endgame(self.player1.name)
+            self._ui.endgame(self.player1.name, self.player1.name, self.player2.name)
         else:
-            self._ui.endgame(self.player2.name)
-        return True
+            self._ui.endgame(self.player2.name, self.player1.name, self.player2.name)
 
     def spielerwechsel(self):
         """
