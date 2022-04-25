@@ -12,7 +12,8 @@ class Dice:
     def __init__(self):
         self.augen = None
         self.isactivated = False
-        random.seed(datetime.now())
+        seed =datetime.now().microsecond
+        random.seed(seed)
 
     def throw(self) -> int:
         """todo:ali set self. augen auf random wert"""
