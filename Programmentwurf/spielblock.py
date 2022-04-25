@@ -35,16 +35,16 @@ class Spielblock:
     endstand = [0, 0]
 
     def __init__(self):
-        liste = [{"1": {"Einser": ['-', '-']}}, {"2": {"Zweier": ['-', '-']}},
-                 {"3": {"Dreier": ['-', '-']}}, {"4": {"Vierer": ['-', '-']}},
-                 {"5": {"Funfer": ['-', '-']}}, {"6": {"Sechser": ['-', '-']}},
-                 {"7": {"Oben": ['-', '-']}}, {"8": {"Bonus": ['-', '-']}},
-                 {"9": {"GesamtOben": ['-', '-']}}, {"10": {"Dreierpasch": ['-', '-']}},
-                 {"11": {"Viererpasch": ['-', '-']}}, {"12": {"Full-House": ['-', '-']}},
-                 {"13": {"Kleine-Straße": ['-', '-']}}, {"14": {"Große-Straße": ['-', '-']}},
-                 {"15": {"Kniffel": ['-', '-']}}, {"16": {"Chance": ['-', '-']}},
-                 {"17": {"Unten": ['-', '-']}}, {"18": {"Oben": ['-', '-']}},
-                 {"19": {"Gesamt": ['-', '-']}}]
+        liste = [{"1": {"Einser": [None, None]}}, {"2": {"Zweier": [None, None]}},
+                 {"3": {"Dreier": [None, None]}}, {"4": {"Vierer": [None, None]}},
+                 {"5": {"Funfer": [None, None]}}, {"6": {"Sechser": [None, None]}},
+                 {"7": {"Oben": [None, None]}}, {"8": {"Bonus": [None, None]}},
+                 {"9": {"GesamtOben": [None, None]}}, {"10": {"Dreierpasch": [None, None]}},
+                 {"11": {"Viererpasch": [None, None]}}, {"12": {"Full-House": [None, None]}},
+                 {"13": {"Kleine-Straße": [None, None]}}, {"14": {"Große-Straße": [None, None]}},
+                 {"15": {"Kniffel": [None, None]}}, {"16": {"Chance": [None, None]}},
+                 {"17": {"Unten": [None, None]}}, {"18": {"Oben": [None, None]}},
+                 {"19": {"Gesamt": [None, None]}}]
 
         self.freeze(liste)
 
@@ -131,7 +131,7 @@ class Spielblock:
         """
         trie = self.thaw()
         _table = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
-        for i in range(trie.__len__()):
+        for i in range(18):
             zeile = trie[i]
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
@@ -149,7 +149,7 @@ class Spielblock:
         @param player: same as in punkteeinlesen(), indicates the player who's playing right now
         @type player: int
         @param calc_sum: int to calculate the values of the rows
-        @param folder: the thawed obkect from json
+        @param folder: the thawed object from json
         @type folder: Spielblock
         """
         for i in range(1, 7):
@@ -266,7 +266,7 @@ class Spielblock:
     def gamened(self):
         """
 
-        @return: the final values of each player
-        @rtype: int
+        @return: bool whether the game is over or not
+        @rtype: bool
         """
         return self.ende[0] and self.ende[1]
