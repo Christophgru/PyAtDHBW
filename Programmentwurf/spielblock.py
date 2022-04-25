@@ -12,7 +12,7 @@ from prettytable import PrettyTable
 
 class Spielblock:
     """
-
+    Class for calculating and entering values of the dice game Kniffel
     """
     indexlist = ["Einser", "Zweier", "Dreier", "Vierer", "Funfer",
                  "Sechser", "Oben", "Bonus", "GesamtOben",
@@ -85,33 +85,23 @@ class Spielblock:
         @return: nothing
         @rtype: nothing
         """
-
+        possible_values = {12: 25, 13: 30, 14: 40, 15: 50}
         block = self.thaw()
         column = block[row - 1]
         category = column[str(row)]
         shelf = category[self.indexlist[row - 1]]
         calc_sum = 0
+        if leer:
+            possible_values[row] = 0
         match row:
             case 12:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 25
+                shelf[player] = possible_values[row]
             case 13:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 30
+                shelf[player] = possible_values[row]
             case 14:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 40
+                shelf[player] = possible_values[row]
             case 15:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 50
+                shelf[player] = possible_values[row]
             case _:
                 if row in (10, 11, 16):
                     for number in value:
@@ -138,13 +128,13 @@ class Spielblock:
         @rtype: nothing
         """
         trie = self.thaw()
-        t = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
+        _table = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
         for i in range(trie.__len__()):
             zeile = trie[i]
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
-            t.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
-        print(t)
+            _table.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
+        print(_table)
 
     def addoben(self, player, calc_sum, folder):
         """
