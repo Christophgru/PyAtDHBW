@@ -117,7 +117,7 @@ class UI:
                     print("Geben sie bloß Zahlen ein\n")
                     break
                 if _eingabe < 1 or _eingabe > 19 or _eingabe in (7, 8, 9, 17, 18, 19):
-                    print("Geben sie nur Zahlen zwischen 1 und 19 ein und nicht 7,8,9,17,18, oder 19\n")
+                    print("Geben sie nur Zahlen zwischen 1 und 16 ein und nicht 7,8,9\n")
                     break
                 if _eingabe < 7:
                     if block.first_line[_eingabe - 1][playernumber]:
