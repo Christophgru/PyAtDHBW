@@ -2,8 +2,8 @@
 #todo
 """
 import string
-import spielblock
 import os
+import spielblock
 
 
 class UI:
@@ -118,15 +118,14 @@ class UI:
                 if _eingabe in (7, 8, 9, 17, 18, 19):
                     print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
                     break
-                elif _eingabe < 1 or _eingabe > 19:
+                if _eingabe < 1 or _eingabe > 19:
                     print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
                     break
-                if _eingabe < 7:
+                if _eingabe < 7 or _eingabe == 16:
                     if block.first_line[_eingabe - 1][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                    else:
-                        return _eingabe
+                    return _eingabe
                 if _eingabe > 9:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
@@ -135,6 +134,7 @@ class UI:
                 maxequal = 1
                 secondequal = 1
                 equal = 1
+                check = False
                 for i in range(len(sortdice) - 1):
                     if i != range(len(sortdice)):
                         if sortdice[i] == sortdice[i + 1]:
@@ -145,41 +145,43 @@ class UI:
                                 secondequal = equal
                         else:
                             equal = 1
-                if _eingabe == 10:
-                    if maxequal > 2:
-                        return _eingabe
-                elif _eingabe == 11:
-                    if maxequal > 3:
-                        return _eingabe
-                elif _eingabe == 12:
-                    if (maxequal == 3 and secondequal == 2) or maxequal == 5:
-                        return _eingabe
-                elif _eingabe == 13:
-                    count = 1
+                match _eingabe:
+                    case 10:
+                        if maxequal > 2:
+                            check = True
+                    case 11:
+                        if maxequal > 3:
+                            check = True
+                    case 12:
+                        if (maxequal == 3 and secondequal == 2) or maxequal == 5:
+                            check = True
+                    case 13:
+                        count = 1
 
-                    for i in range(len(sortdice) - 1):
-                        if sortdice[i] == sortdice[i + 1] - 1:
-                            count += 1
-                        else:
-                            if not sortdice[i] == sortdice[i + 1]:
-                                count = 1
-                    if count >= 4:
-                        return _eingabe
+                        for i in range(len(sortdice) - 1):
+                            if sortdice[i] == sortdice[i + 1] - 1:
+                                count += 1
+                            else:
+                                if not sortdice[i] == sortdice[i+1]:
+                                    count = 1
+                        if count >= 4:
+                            check = True
 
-                elif _eingabe == 14:
-                    if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
-                        return _eingabe
-                elif _eingabe == 15:
-                    if maxequal == 5:
-                        return _eingabe
-                elif _eingabe == 16:
+                    case 14:
+                        if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                            check = True
+                    case 15:
+                        if maxequal == 5:
+                            check = True
+                if check:
                     return _eingabe
-                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                               "Für eine neue Auswahl geben sie etwas anders ein")
-                if _einga == '0':
-                    self.leer = True
-                    return _eingabe
+                else:
+                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                                   "Für eine neue Auswahl geben sie etwas anders ein")
+                    if _einga == '0':
+                        self.leer = True
+                        return _eingabe
 
     @classmethod
     def chooseplayer(cls, playername):
@@ -195,6 +197,8 @@ class UI:
     def endgame(self, winner, name1, name2):
         """
 
+        @param name2:
+        @param name1:
         @param winner:
         @type winner:
         @return:
@@ -216,4 +220,3 @@ class UI:
     @classmethod
     def clear(cls):
         os.system('cls' if os.name == 'nt' else 'clear')
-
