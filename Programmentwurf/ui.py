@@ -103,10 +103,10 @@ class UI:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe(name1, name2)
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
                       wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
+        self.spielblock.ausgabe(name1, name2, *augenarray)
         while True:
             while True:
                 try:
