@@ -125,7 +125,7 @@ class Spielblock:
 
     def ausgabe(self, name1: string, name2: string):
         """
-        Method to prrint the entire Spielblock
+        Method to print the entire Spielblock
         @return: nothing
         @rtype: nothing
         """
