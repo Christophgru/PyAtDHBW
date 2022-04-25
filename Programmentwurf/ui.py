@@ -204,7 +204,7 @@ class UI:
                 if self.maxequal > 3:
                     check = True
             case 12:
-                if (self.maxequal == 3 and self.secondequal == 2) or self.maxequal == 5:
+                if self.maxequal == 3 and self.secondequal == 2:
                     check = True
             case 13:
                 count = 1
@@ -231,13 +231,15 @@ class UI:
         @param sortdice:
         @return:
         """
+        self.maxequal = 1
+        self.secondequal = 1
         checkcounter = 0
         equal = 1
         for i in range(len(sortdice) - 1):
             if sortdice[i] == sortdice[i + 1]:
                 equal += 1
                 if self.maxequal <= equal:
-                    if sortdice[checkcounter] == sortdice[i]:
+                    if not sortdice[checkcounter] == sortdice[i]:
                         self.secondequal = self.maxequal
                     self.maxequal = equal
             else:
