@@ -6,7 +6,6 @@ import os
 import spielblock
 
 
-
 class UI:
     """
     User-interface-class
@@ -135,6 +134,7 @@ class UI:
                 maxequal = 1
                 secondequal = 1
                 equal = 1
+                check = False
                 for i in range(len(sortdice) - 1):
                     if i != range(len(sortdice)):
                         if sortdice[i] == sortdice[i + 1]:
@@ -148,13 +148,13 @@ class UI:
                 match _eingabe:
                     case 10:
                         if maxequal > 2:
-                            return _eingabe
+                            check = True
                     case 11:
                         if maxequal > 3:
-                            return _eingabe
+                            check = True
                     case 12:
                         if (maxequal == 3 and secondequal == 2) or maxequal == 5:
-                            return _eingabe
+                            check = True
                     case 13:
                         count = 1
 
@@ -165,20 +165,23 @@ class UI:
                                 if not sortdice[i] == sortdice[i+1]:
                                     count = 1
                         if count >= 4:
-                            return _eingabe
+                            check = True
 
                     case 14:
                         if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
-                            return _eingabe
+                            check = True
                     case 15:
                         if maxequal == 5:
-                            return _eingabe
-                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                               "Für eine neue Auswahl geben sie etwas anders ein")
-                if _einga == '0':
-                    self.leer = True
+                            check = True
+                if check:
                     return _eingabe
+                else:
+                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                                   "Für eine neue Auswahl geben sie etwas anders ein")
+                    if _einga == '0':
+                        self.leer = True
+                        return _eingabe
 
     @classmethod
     def chooseplayer(cls, playername):
