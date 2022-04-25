@@ -36,7 +36,8 @@ class Player:
                     result = params["ui"].choose_action_with_dice_arr(params["dicedict"],
                                                                       params["spielblock"],
                                                                       params["activeplayer"],
-                                                                      [params["player1_name"], self.name])
+                                                                      [params["player1_name"], self.name],
+                                                                      True)
 
                     return result
         else:
