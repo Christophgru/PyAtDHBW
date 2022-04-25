@@ -19,7 +19,7 @@ class Spiel:
         for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
         self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
-        self.nrround: int = 0
+        self.nrround: int=0
         self.activeplayer: int = 0
         self.player1: player.Player  # einfügen
         self.player2: player.Player  # einfügen
@@ -63,7 +63,7 @@ class Spiel:
                 else:
                     wuerfelx.deactivate()
 
-            self._ui.choosediceorcheck(self.dicedict)
+            self.player2.choosediceorcheck(self.dicedict, self._ui, self.activeplayer)
 
             anzahlgewaehlt = 0
             for j in range(0, len(self.dicedict)):
@@ -79,9 +79,15 @@ class Spiel:
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock, self.activeplayer, self.player1.name,
-                                                   self.player2.name)
+
+        wahl = self.player2.choose_action_with_dice_arr(self._ui,
+                                                        self.dicedict,
+                                                        self.spielblock,
+                                                        self.activeplayer,
+                                                        self.player1.name,
+                                                        self.nrround)
         self._ui.clear()
+
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]
@@ -120,7 +126,7 @@ class Spiel:
         if self.activeplayer == 0:
             self.activeplayer = 1
             self._ui.chooseplayer(self.player2.name)
-            self.nrround = +1
+            self.nrround += 1
         else:
             self.activeplayer = 0
             self._ui.chooseplayer(self.player1.name)
