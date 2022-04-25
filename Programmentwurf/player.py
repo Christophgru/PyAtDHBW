@@ -23,3 +23,16 @@ class Player:
                     ui.choosediceorcheck(dicedict)
         else:
             ui.choosediceorcheck(dicedict)
+
+    def choose_action_with_dice_arr(self, ui,
+                                    dicedict,
+                                    spielblock,
+                                    activeplayer,
+                                    p1name):
+        if activeplayer == 2 and not self.istecht:
+            inputstring = "1\n1\n1\n"
+            with patch('sys.stdout', new=StringIO()) as fake_out:
+                with patch('sys.stdin', new=StringIO(inputstring)) as fake_in:
+                    ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)
+        else:
+            ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)

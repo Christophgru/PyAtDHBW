@@ -79,10 +79,11 @@ class Spiel:
                     self.dicedict.get(j).activate()
 
         # waehle was eingetragen werden soll
-        wahl = self._ui.choose_action_with_dice_arr(self.dicedict, self.spielblock,
+        wahl = self.player2.choose_action_with_dice_arr(self._ui,
+                                                    self.dicedict,
+                                                    self.spielblock,
                                                     self.activeplayer,
-                                                    self.player1.name,
-                                                    self.player2.name)
+                                                    self.player1.name)
         # wahl=self.nrround+1
         # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
         augenarray: list = [None, None, None, None, None]
