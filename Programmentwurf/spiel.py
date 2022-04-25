@@ -60,17 +60,15 @@ class Spiel:
 
             self.player2.choosediceorcheck(self.dicedict, self._ui, self.activeplayer)
 
-            weiterspielen:bool = False
+            weiterspielen: bool = False
             for j in range(0, len(self.dicedict)):
                 if self.dicedict.get(j).isactivated:
-                    weiterspielen=True
+                    weiterspielen = True
             if not weiterspielen:
                 anzahlwuerfe = 2
             anzahlwuerfe += 1
 
-
-
-        #noch einmal wuerfeln
+        # noch einmal wuerfeln
         self.throw()
         # waehle was eingetragen werden soll
 

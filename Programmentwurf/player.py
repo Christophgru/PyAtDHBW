@@ -28,7 +28,7 @@ class Player:
         @rtype:
         """
         if activeplayer == 1 and not self.istecht:
-            inputstring = "1\n"
+            inputstring = "1\n1\n"
             with patch('sys.stdout', new=StringIO()):
                 with patch('sys.stdin', new=StringIO(inputstring)):
                     _ui.choosediceorcheck(dicedict)
