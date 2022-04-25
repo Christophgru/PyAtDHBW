@@ -112,9 +112,9 @@ class Spiel:
         if not spielvorbei:
             return self.spielblock.gamened()  # @todo return entfernen oder in den anderen beiden Zeilen return einbauen
         if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
-            self._ui.endgame(self.player1.name)
+            self._ui.endgame(self.player1.name, self.player1.name, self.player2.name)
         else:
-            self._ui.endgame(self.player2.name)
+            self._ui.endgame(self.player2.name, self.player1.name, self.player2.name)
 
     def spielerwechsel(self):
         """

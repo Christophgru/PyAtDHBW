@@ -144,35 +144,36 @@ class UI:
                                 secondequal = equal
                         else:
                             equal = 1
-                if _eingabe == 10:
-                    if maxequal > 2:
-                        return _eingabe
-                elif _eingabe == 11:
-                    if maxequal > 3:
-                        return _eingabe
-                elif _eingabe == 12:
-                    if (maxequal == 3 and secondequal == 2) or maxequal == 5:
-                        return _eingabe
-                elif _eingabe == 13:
-                    count = 1
+                match _eingabe:
+                    case 10:
+                        if maxequal > 2:
+                            return _eingabe
+                    case 11:
+                        if maxequal > 3:
+                            return _eingabe
+                    case 12:
+                        if (maxequal == 3 and secondequal == 2) or maxequal == 5:
+                            return _eingabe
+                    case 13:
+                        count = 1
 
-                    for i in range(len(sortdice) - 1):
-                        if sortdice[i] == sortdice[i + 1] - 1:
-                            count += 1
-                        else:
-                            if not sortdice[i] == sortdice[i+1]:
-                                count = 1
-                    if count >= 4:
-                        return _eingabe
+                        for i in range(len(sortdice) - 1):
+                            if sortdice[i] == sortdice[i + 1] - 1:
+                                count += 1
+                            else:
+                                if not sortdice[i] == sortdice[i+1]:
+                                    count = 1
+                        if count >= 4:
+                            return _eingabe
 
-                elif _eingabe == 14:
-                    if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                    case 14:
+                        if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                            return _eingabe
+                    case 15:
+                        if maxequal == 5:
+                            return _eingabe
+                    case 16:
                         return _eingabe
-                elif _eingabe == 15:
-                    if maxequal == 5:
-                        return _eingabe
-                elif _eingabe == 16:
-                    return _eingabe
                 _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                                "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                                "Für eine neue Auswahl geben sie etwas anders ein")
@@ -191,15 +192,17 @@ class UI:
         """
         print("\n\n\nEs ist ", playername, "dran")
 
-    def endgame(self, winner):
+    def endgame(self, winner, name1, name2):
         """
 
+        @param name2:
+        @param name1:
         @param winner:
         @type winner:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe()
+        self.spielblock.ausgabe(name1, name2)
         print("Der Gewinner ist", winner)
 
     @classmethod
