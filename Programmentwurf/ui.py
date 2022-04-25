@@ -189,6 +189,7 @@ class UI:
         @param _eingabe:
         @return:
         """
+        self.getequals(sortdice)
         check = False
         match _eingabe:
             case 10:
