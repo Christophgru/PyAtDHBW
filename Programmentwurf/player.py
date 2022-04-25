@@ -15,9 +15,9 @@ class Player:
         self.istecht: bool = istecht
         self.name: str = name
 
-    def choosediceorcheck(self, dicedict, ui, player1, activeplayer):
-        if activeplayer == 2 and not self.istecht:
-            inputstring = "1\n1\n1\n"
+    def choosediceorcheck(self, dicedict, ui, activeplayer):
+        if activeplayer == 1 and not self.istecht:
+            inputstring = "1\n"
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 with patch('sys.stdin', new=StringIO(inputstring)) as fake_in:
                     ui.choosediceorcheck(dicedict)
@@ -28,11 +28,15 @@ class Player:
                                     dicedict,
                                     spielblock,
                                     activeplayer,
-                                    p1name):
-        if activeplayer == 2 and not self.istecht:
-            inputstring = "1\n1\n1\n"
+                                    p1name,iter):
+        if activeplayer == 1 and not self.istecht:
+            options:list=[1,2,3,4,5,6,10,11,12,13,14,15,16]
+            wahl=options[iter]
+            inputstring :str= str(wahl)+"\n"
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 with patch('sys.stdin', new=StringIO(inputstring)) as fake_in:
-                    ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)
+                    if "Sind Sie Sicher?" in fake_out.read(20):
+                        fake_in.write("0\n")
+                    return ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)
         else:
-            ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)
+            return ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)
