@@ -264,6 +264,6 @@ class Spielblock:
         """
 
         @return: the final values of each player
-        @rtype: int
+        @rtype: bool
         """
         return self.ende[0] and self.ende[1]
