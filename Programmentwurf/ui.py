@@ -2,8 +2,9 @@
 #todo
 """
 import string
-import spielblock
 import os
+import spielblock
+
 
 
 class UI:
@@ -118,15 +119,14 @@ class UI:
                 if _eingabe in (7, 8, 9, 17, 18, 19):
                     print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
                     break
-                elif _eingabe < 1 or _eingabe > 19:
+                if _eingabe < 1 or _eingabe > 19:
                     print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
                     break
-                if _eingabe < 7:
+                if _eingabe < 7 or _eingabe == 16:
                     if block.first_line[_eingabe - 1][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                    else:
-                        return _eingabe
+                    return _eingabe
                 if _eingabe > 9:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
@@ -173,8 +173,6 @@ class UI:
                     case 15:
                         if maxequal == 5:
                             return _eingabe
-                    case 16:
-                        return _eingabe
                 _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                                "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                                "Für eine neue Auswahl geben sie etwas anders ein")
