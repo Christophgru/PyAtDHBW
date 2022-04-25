@@ -54,30 +54,24 @@ class Spiel:
         for j in range(0, len(self.dicedict)):  # Gewuerfelte wuerfel werden nicht nochmal
             self.dicedict.get(j).activate()
 
-        while anzahlwuerfe <= 3:  # anzahl w
+        while anzahlwuerfe <= 2:  # anzahl w
 
-            for j in range(0, len(self.dicedict)):  # Alle wuerfel werden gewuerfelt
-                wuerfelx = self.dicedict.get(j)
-                if wuerfelx.isactivated is True:
-                    wuerfelx.throw()
-                else:
-                    wuerfelx.deactivate()
+            self.throw()
 
             self.player2.choosediceorcheck(self.dicedict, self._ui, self.activeplayer)
 
-            anzahlgewaehlt = 0
+            weiterspielen:bool = False
             for j in range(0, len(self.dicedict)):
-                if not self.dicedict.get(j).isactivated:
-                    anzahlgewaehlt += 1
-            if anzahlgewaehlt == 5:
-                anzahlwuerfe = 3
+                if self.dicedict.get(j).isactivated:
+                    weiterspielen=True
+            if not weiterspielen:
+                anzahlwuerfe = 2
             anzahlwuerfe += 1
 
-            # Nach 3. Versuch restliche wuerfel auffüllen
-            for j in range(0, 5):  # fuer jeden wuerfel, der noch nicht eingetragen wurde...
-                if self.dicedict.get(j).isactivated:  # finde einen wuerfel, der noch aktiviert war
-                    self.dicedict.get(j).activate()
 
+
+        #noch einmal wuerfeln
+        self.throw()
         # waehle was eingetragen werden soll
 
         wahl = self.player2.choose_action_with_dice_arr({"activeplayer": self.activeplayer,
@@ -100,6 +94,14 @@ class Spiel:
 
         self.spielblock.punkteeinlesen(wahl, self.activeplayer, self._ui.leer, *augenarray)
         self._ui.leer = False
+
+    def throw(self):
+        for j in range(0, len(self.dicedict)):  # Alle wuerfel werden gewuerfelt
+            wuerfelx = self.dicedict.get(j)
+            if wuerfelx.isactivated is True:
+                wuerfelx.throw()
+            else:
+                wuerfelx.deactivate()
 
     def spielvorbei(self, spielvorbei: bool) -> bool:
         """
