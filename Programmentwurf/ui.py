@@ -131,48 +131,7 @@ class UI:
                         print("Zeile bereits gefüllt")
                         break
                 sortdice = sorted(augenarray)
-                maxequal = 1
-                secondequal = 1
-                equal = 1
-                check = False
-                for i in range(len(sortdice) - 1):
-                    if i != range(len(sortdice)):
-                        if sortdice[i] == sortdice[i + 1]:
-                            equal += 1
-                            if maxequal < equal:
-                                maxequal = equal
-                            elif maxequal != equal:
-                                secondequal = equal
-                        else:
-                            equal = 1
-                match _eingabe:
-                    case 10:
-                        if maxequal > 2:
-                            check = True
-                    case 11:
-                        if maxequal > 3:
-                            check = True
-                    case 12:
-                        if (maxequal == 3 and secondequal == 2) or maxequal == 5:
-                            check = True
-                    case 13:
-                        count = 1
-
-                        for i in range(len(sortdice) - 1):
-                            if sortdice[i] == sortdice[i + 1] - 1:
-                                count += 1
-                            else:
-                                if not sortdice[i] == sortdice[i+1]:
-                                    count = 1
-                        if count >= 4:
-                            check = True
-
-                    case 14:
-                        if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
-                            check = True
-                    case 15:
-                        if maxequal == 5:
-                            check = True
+                check = self.checkline(sortdice, _eingabe)
                 if check:
                     return _eingabe
                 else:
@@ -215,8 +174,54 @@ class UI:
         @rtype:
         """
         print("Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.\n"
-              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte .")
+              "Falls sie die Spielregeln noch nicht kennen google sie sie bitte.")
 
     @classmethod
     def clear(cls):
         os.system('cls' if os.name == 'nt' else 'clear')
+
+    @classmethod
+    def checkline(cls, sortdice, _eingabe):
+        check = False
+        equal = 1
+        maxequal = 1
+        secondequal = 1
+        for i in range(len(sortdice) - 1):
+            if i != range(len(sortdice)):
+                if sortdice[i] == sortdice[i + 1]:
+                    equal += 1
+                    if maxequal < equal:
+                        maxequal = equal
+                    elif maxequal != equal:
+                        secondequal = equal
+                else:
+                    equal = 1
+        match _eingabe:
+            case 10:
+                if maxequal > 2:
+                    check = True
+            case 11:
+                if maxequal > 3:
+                    check = True
+            case 12:
+                if (maxequal == 3 and secondequal == 2) or maxequal == 5:
+                    check = True
+            case 13:
+                count = 1
+
+                for i in range(len(sortdice) - 1):
+                    if sortdice[i] == sortdice[i + 1] - 1:
+                        count += 1
+                    else:
+                        if not sortdice[i] == sortdice[i + 1]:
+                            count = 1
+                if count >= 4:
+                    check = True
+
+            case 14:
+                if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                    check = True
+            case 15:
+                if maxequal == 5:
+                    check = True
+        return check
