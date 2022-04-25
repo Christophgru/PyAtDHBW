@@ -39,7 +39,7 @@ class Player:
                     if "geben sie etwas anders ein" in fake_out.read(20):
                         fake_in.write("0\n")
 
-                    result = ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, p1name, self.name)
+                    result = ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, [p1name, self.name])
                     return result
         else:
-            return ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, namearr)
+            return ui.choose_action_with_dice_arr(dicedict, spielblock, activeplayer, [p1name, self.name])
