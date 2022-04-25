@@ -12,7 +12,9 @@ from prettytable import PrettyTable
 
 class Spielblock:
     """
-    game-block-class
+
+    Class for calculating and entering values of the dice game Kniffel
+
     """
     indexlist = ["Einser", "Zweier", "Dreier", "Vierer", "Funfer",
                  "Sechser", "Oben", "Bonus", "GesamtOben",
@@ -85,33 +87,23 @@ class Spielblock:
         @return: nothing
         @rtype: nothing
         """
-
+        possible_values = {12: 25, 13: 30, 14: 40, 15: 50}
         block = self.thaw()
         column = block[row - 1]
         category = column[str(row)]
         shelf = category[self.indexlist[row - 1]]
         calc_sum = 0
+        if leer:
+            possible_values[row] = 0
         match row:
             case 12:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 25
+                shelf[player] = possible_values[row]
             case 13:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 30
+                shelf[player] = possible_values[row]
             case 14:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 40
+                shelf[player] = possible_values[row]
             case 15:
-                if leer:
-                    shelf[player] = 0
-                else:
-                    shelf[player] = 50
+                shelf[player] = possible_values[row]
             case _:
                 if row in (10, 11, 16):
                     for number in value:
