@@ -91,11 +91,10 @@ class UI:
                     again = True
 
     def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int,
-                                    name1: string, name2: string) -> int:
+                                    namenarr: string) -> int:
         """
 
-        @param name2:
-        @param name1:
+        @param namenarr:
         @param wuerfelobjekte:
         @type wuerfelobjekte:
         @param block:
@@ -108,7 +107,7 @@ class UI:
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
                       wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
-        self.spielblock.ausgabe(name1, name2, *augenarray)
+        self.spielblock.ausgabe(namenarr[0], namenarr[1], *augenarray)
         while True:
             while True:
                 try:
@@ -123,8 +122,13 @@ class UI:
                 if _eingabe < 1 or _eingabe > 19:
                     print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
                     break
-                if _eingabe < 7 or _eingabe == 16:
+                if _eingabe < 7:
                     if block.first_line[_eingabe - 1][playernumber]:
+                        print("Zeile bereits gefüllt")
+                        break
+                    return _eingabe
+                if _eingabe == 16:
+                    if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
                     return _eingabe
@@ -136,13 +140,13 @@ class UI:
                 check = self.checkline(sortdice, _eingabe)
                 if check:
                     return _eingabe
-                else:
-                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                                   "Für eine neue Auswahl geben sie etwas anders ein")
-                    if _einga == '0':
-                        self.leer = True
-                        return _eingabe
+
+                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                               "Für eine neue Auswahl geben sie etwas anders ein")
+                if _einga == '0':
+                    self.leer = True
+                    return _eingabe
 
     @classmethod
     def chooseplayer(cls, playername):
@@ -180,6 +184,10 @@ class UI:
 
     @classmethod
     def clear(cls):
+        """
+
+        @return:
+        """
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def checkline(self, sortdice, _eingabe):
@@ -237,4 +245,3 @@ class UI:
                         self.secondequal = equal
                 else:
                     equal = 1
-        return
