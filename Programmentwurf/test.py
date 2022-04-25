@@ -1,4 +1,7 @@
-from unittest.mock import patch
+
+import unittest
+
+
 
 import spiel as Spiel
 import spielblock as Block
@@ -20,6 +23,20 @@ class TestSnackautomat3(TestCase):
         block.freeze(block)
         thawed = block.thaw()
 
+        self.assertEqual(type(thawed), type(block))
+        self.assertEqual(block.gamened(), False)
+
+    def testblockAusgabe(self):
+        block: Block = Block.Spielblock()
+        block.ausgabe("Steve", "Steve's Opfer'")
+
+    def testinvalidSpielblock(self):
+        block: Block = Block.Spielblock()
+        block.punkteeinlesen(1, 0, False, 1, 1, 2, 3, 1)
+
+
+
+
     def testPVE(self):
         inputstring = "2\n"
         options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
@@ -29,4 +46,5 @@ class TestSnackautomat3(TestCase):
             with patch('sys.stdin', new=StringIO(inputstring)) as fake_in:
                 spiel = Spiel.Spiel()
                 spiel.spielstarten()
+
 
