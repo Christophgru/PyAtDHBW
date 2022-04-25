@@ -33,9 +33,9 @@ class Spiel:
         @rtype:
         """
         pvp: bool = self._ui.pvp_or_pve()
-        self.player1 = player.Player(True, self._ui.choosename(1))
+        self.player1 = player.Player(True, self._ui.choosename(1, None))
         if pvp:
-            self.player2 = player.Player(True, self._ui.choosename(2))
+            self.player2 = player.Player(True, self._ui.choosename(2, self.player1.name))
         else:
             self.player2 = player.Player(False, "E-Gegner")
 

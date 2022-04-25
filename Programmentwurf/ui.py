@@ -19,7 +19,7 @@ class UI:
         self.secondequal = 1
 
     @classmethod
-    def choosename(cls, playernumber) -> string:
+    def choosename(cls, playernumber, playername) -> string:
         """
 
         @param playernumber:
@@ -27,8 +27,18 @@ class UI:
         @return:
         @rtype:
         """
-        aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
-        name = input(aufforderung)
+        name = None
+        run = True
+        while (run):
+            aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
+            name = input(aufforderung)
+            if playername is not None:
+                if name == playername:
+                    print("Geben sie bitte einen Namen ein, der sich vom Namen des 1. Spielers unterscheidet.")
+                else:
+                    run = False
+            else:
+                run = False
         return name
 
     @classmethod
