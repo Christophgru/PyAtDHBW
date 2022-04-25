@@ -131,7 +131,7 @@ class Spielblock:
         """
         trie = self.thaw()
         _table = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
-        for i in range(trie.__len__()):
+        for i in range(18):
             zeile = trie[i]
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
@@ -144,7 +144,7 @@ class Spielblock:
         @param player: same as in punkteeinlesen(), indicates the player who's playing right now
         @type player: int
         @param calc_sum: int to calculate the values of the rows
-        @param folder: the thawed obkect from json
+        @param folder: the thawed object from json
         @type folder: Spielblock
         """
         for i in range(1, 7):
@@ -261,7 +261,7 @@ class Spielblock:
     def gamened(self):
         """
 
-        @return: the final values of each player
-        @rtype: int
+        @return: bool whether the game is over or not
+        @rtype: bool
         """
         return self.ende[0] and self.ende[1]
