@@ -116,8 +116,8 @@ class UI:
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
                     break
-                if _eingabe < 1 or _eingabe > 19 or _eingabe in (7, 8, 9, 17, 18, 19):
-                    print("Geben sie nur Zahlen zwischen 1 und 16 ein und nicht 7,8,9\n")
+                if _eingabe < 1 or _eingabe > 16 or _eingabe in (7, 8, 9):
+                    print("Geben sie nur Zahlen zwischen 1 und 6 oder 10 und 16 ein\n")
                     break
                 if _eingabe < 7:
                     if block.first_line[_eingabe - 1][playernumber]:
@@ -231,14 +231,15 @@ class UI:
         @param sortdice:
         @return:
         """
+        checkcounter = 0
         equal = 1
         for i in range(len(sortdice) - 1):
-            if i != range(len(sortdice)):
-                if sortdice[i] == sortdice[i + 1]:
-                    equal += 1
-                    if self.maxequal < equal:
-                        self.maxequal = equal
-                    elif self.maxequal != equal:
-                        self.secondequal = equal
-                else:
-                    equal = 1
+            if sortdice[i] == sortdice[i + 1]:
+                equal += 1
+                if self.maxequal <= equal:
+                    if sortdice[checkcounter] == sortdice[i]:
+                        self.secondequal = self.maxequal
+                    self.maxequal = equal
+            else:
+                equal = 1
+                checkcounter = i
