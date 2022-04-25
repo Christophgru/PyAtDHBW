@@ -137,8 +137,11 @@ class Spielblock:
             zwischen3 = zwischen2[self.indexlist[i]]
             _table.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
         print(_table)
-        print("Würfel:" + str(diceeyes[0]) + " " + str(diceeyes[1]) + " " + str(diceeyes[2]) + " " + str(diceeyes[3]) + " " + str(diceeyes[
-            4]))
+        try:
+            print("Würfel:" + str(diceeyes[0]) + " " + str(diceeyes[1]) + " " + str(diceeyes[2])
+                  + " " + str(diceeyes[3]) + " " + str(diceeyes[4]))
+        except:
+            print("Spiel Vorbei")
 
     def addoben(self, player, calc_sum, folder):
         """
