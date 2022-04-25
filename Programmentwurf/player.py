@@ -32,8 +32,8 @@ class Player:
         namearr = [p1name, self.name]
         if activeplayer == 1 and not self.istecht:
             options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
-            wahl=options[iter]
-            inputstring :str= str(wahl)+"\n"
+            wahl = options[iter]
+            inputstring: str = str(wahl) + "\n"
             with patch('sys.stdout', new=StringIO()) as fake_out:
                 with patch('sys.stdin', new=StringIO(inputstring)) as fake_in:
                     if "Sind Sie Sicher?" in fake_out.read(20):
