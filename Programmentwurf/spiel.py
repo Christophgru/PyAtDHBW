@@ -63,7 +63,7 @@ class Spiel:
                 else:
                     wuerfelx.deactivate()
 
-            self._ui.choosediceorcheck(self.dicedict)
+            self.player2.choosediceorcheck(self.dicedict, self._ui, self.player1, self.activeplayer)
 
             anzahlgewaehlt = 0
             for j in range(0, len(self.dicedict)):
