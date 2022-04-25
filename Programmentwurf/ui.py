@@ -15,6 +15,8 @@ class UI:
         self.output = None
         self.spielblock = s_b
         self.leer = False
+        self.maxequal = 1
+        self.secondequal = 1
 
     @classmethod
     def choosename(cls, playernumber) -> string:
@@ -89,11 +91,10 @@ class UI:
                     again = True
 
     def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int,
-                                    name1: string, name2: string) -> int:
+                                    namenarr: string) -> int:
         """
 
-        @param name2:
-        @param name1:
+        @param namenarr:
         @param wuerfelobjekte:
         @type wuerfelobjekte:
         @param block:
@@ -106,7 +107,7 @@ class UI:
 
         augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
                       wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
-        self.spielblock.ausgabe(name1, name2, *augenarray)
+        self.spielblock.ausgabe(namenarr[0], namenarr[1], *augenarray)
         while True:
             while True:
                 try:
@@ -115,14 +116,16 @@ class UI:
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
                     break
-                if _eingabe in (7, 8, 9, 17, 18, 19):
-                    print("Geben sie bitte mögliche Zeilen ein, alle außer 7,8,9,17,18,19\n")
+                if _eingabe < 1 or _eingabe > 19 or _eingabe in (7, 8, 9, 17, 18, 19):
+                    print("Geben sie nur Zahlen zwischen 1 und 19 ein und nicht 7,8,9,17,18, oder 19\n")
                     break
-                if _eingabe < 1 or _eingabe > 19:
-                    print("Geben sie nur Zahlen zwischen 1 und 19 ein\n")
-                    break
-                if _eingabe < 7 or _eingabe == 16:
+                if _eingabe < 7:
                     if block.first_line[_eingabe - 1][playernumber]:
+                        print("Zeile bereits gefüllt")
+                        break
+                    return _eingabe
+                if _eingabe == 16:
+                    if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
                     return _eingabe
@@ -134,13 +137,13 @@ class UI:
                 check = self.checkline(sortdice, _eingabe)
                 if check:
                     return _eingabe
-                else:
-                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                                   "Für eine neue Auswahl geben sie etwas anders ein")
-                    if _einga == '0':
-                        self.leer = True
-                        return _eingabe
+
+                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                               "Für eine neue Auswahl geben sie etwas anders ein")
+                if _einga == '0':
+                    self.leer = True
+                    return _eingabe
 
     @classmethod
     def chooseplayer(cls, playername):
@@ -178,33 +181,30 @@ class UI:
 
     @classmethod
     def clear(cls):
+        """
+
+        @return:
+        """
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    @classmethod
-    def checkline(cls, sortdice, _eingabe):
+    def checkline(self, sortdice, _eingabe):
+        """
+
+        @param sortdice:
+        @param _eingabe:
+        @return:
+        """
+        self.getequals(sortdice)
         check = False
-        equal = 1
-        maxequal = 1
-        secondequal = 1
-        for i in range(len(sortdice) - 1):
-            if i != range(len(sortdice)):
-                if sortdice[i] == sortdice[i + 1]:
-                    equal += 1
-                    if maxequal < equal:
-                        maxequal = equal
-                    elif maxequal != equal:
-                        secondequal = equal
-                else:
-                    equal = 1
         match _eingabe:
             case 10:
-                if maxequal > 2:
+                if self.maxequal > 2:
                     check = True
             case 11:
-                if maxequal > 3:
+                if self.maxequal > 3:
                     check = True
             case 12:
-                if (maxequal == 3 and secondequal == 2) or maxequal == 5:
+                if (self.maxequal == 3 and self.secondequal == 2) or self.maxequal == 5:
                     check = True
             case 13:
                 count = 1
@@ -212,16 +212,33 @@ class UI:
                 for i in range(len(sortdice) - 1):
                     if sortdice[i] == sortdice[i + 1] - 1:
                         count += 1
-                    else:
-                        if not sortdice[i] == sortdice[i + 1]:
-                            count = 1
+                    elif not sortdice[i] == sortdice[i + 1]:
+                        count = 1
                 if count >= 4:
                     check = True
 
             case 14:
-                if maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                if self.maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
                     check = True
             case 15:
-                if maxequal == 5:
+                if self.maxequal == 5:
                     check = True
         return check
+
+    def getequals(self, sortdice):
+        """
+
+        @param sortdice:
+        @return:
+        """
+        equal = 1
+        for i in range(len(sortdice) - 1):
+            if i != range(len(sortdice)):
+                if sortdice[i] == sortdice[i + 1]:
+                    equal += 1
+                    if self.maxequal < equal:
+                        self.maxequal = equal
+                    elif self.maxequal != equal:
+                        self.secondequal = equal
+                else:
+                    equal = 1
