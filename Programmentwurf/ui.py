@@ -91,9 +91,10 @@ class UI:
                     again = True
 
     def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int,
-                                    namenarr: string) -> int:
+                                    namenarr: string, istPVE=False) -> int:
         """
 
+        @param istPVE:
         @param namenarr:
         @param wuerfelobjekte:
         @type wuerfelobjekte:
@@ -138,9 +139,12 @@ class UI:
                 if check:
                     return _eingabe
 
-                _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                               "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                               "Für eine neue Auswahl geben sie etwas anders ein")
+                if not istPVE:
+                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                                   "Für eine neue Auswahl geben sie etwas anders ein")
+                else:
+                    _einga = '0'
                 if _einga == '0':
                     self.leer = True
                     return _eingabe
