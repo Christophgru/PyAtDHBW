@@ -10,17 +10,16 @@ class Dice:
     dice-class, that contains the value of generated dices
     """
     def __init__(self):
-        self.augen = None
+        self.eyes = None
         self.isactivated = False
         random.seed(datetime.now().microsecond)
 
     def throw(self) -> int:
-        """todo:ali set self. augen auf random wert"""
-        self.augen = random.randint(1, 6)
-        return self.augen
+        self.eyes = random.randint(1, 6)
+        return self.eyes
 
     def deactivate(self):
-        """setzte activated auf F und augen auf -1 oder so
+        """setzte activated auf F und eyes auf -1 oder so
         """
         self.isactivated = False
 

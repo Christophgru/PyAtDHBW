@@ -2,7 +2,7 @@
 main-file
 """
 
-import spiel
+import game
 
 
 def main():
@@ -11,8 +11,8 @@ def main():
     @return: no return -> main method
     @rtype:
     """
-    neuesspiel = spiel.Spiel()
-    neuesspiel.spielstarten()
+    neuesspiel = game.Game()
+    neuesspiel.startgame()
 
 
 if __name__ == "__main__":
