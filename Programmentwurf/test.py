@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-import spiel as Spiel
-import spielblock as Block
+import game as Spiel
+import gameblock as Block
 from io import StringIO
 from unittest import TestCase
 
@@ -14,7 +14,7 @@ class TestKniffel(TestCase):
 
 
     def testSpielblock(self):
-        block: Block = Block.Spielblock()
+        block: Block = Block.Gameblock()
         block.freeze(block)
         thawed = block.thaw()
 
@@ -22,7 +22,7 @@ class TestKniffel(TestCase):
         self.assertEqual(block.gamened(), False)
 
     def testblockAusgabe(self):
-        block: Block = Block.Spielblock()
+        block: Block = Block.Gameblock()
         block.ausgabe("Steve", "Steve's Opfer'")
 
 
@@ -42,14 +42,14 @@ class TestKniffel(TestCase):
         # insert String, check ob durchgelaufen ist
         with patch('sys.stdout', new=StringIO()) as fake_out:
             with patch('sys.stdin', new=StringIO(inputstring)) as fakein:
-                spiel = Spiel.Spiel()
-                spiel.spielstarten()
+                spiel = Spiel.Game()
+                spiel.startgame()
                 strout: str = fake_out.getvalue()
-                self.assertTrue("Spiel Vorbei" in strout)
+                self.assertTrue("Game Vorbei" in strout)
 
 
     def testinvalidSpielblock(self):
-        block: Block = Block.Spielblock()
+        block: Block = Block.Gameblock()
         block.punkteeinlesen(1, 0, False, 1, 1, 2, 3, 1)
 
     def testPVE(self):
@@ -66,7 +66,7 @@ class TestKniffel(TestCase):
                 inputstring += "0\n0\n0\n"
         with patch('sys.stdout', new=StringIO()) as fakeout:
             with patch('sys.stdin', new=StringIO(inputstring)) as fakein:
-                spiel = Spiel.Spiel()
-                spiel.spielstarten()
+                spiel = Spiel.Game()
+                spiel.startgame()
                 self.assertTrue("Der Gewinner ist" in fakeout.read(100))
 

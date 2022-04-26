@@ -4,12 +4,12 @@ game-class-file
 """
 
 import dice
-import spielblock
+import gameblock
 import player
 import ui
 
 
-class Spiel:
+class Game:
     """
     game-class
     """
@@ -18,15 +18,15 @@ class Spiel:
         self.dicedict: dict = {}
         for i in range(0, 5):
             self.dicedict[i] = dice.Dice()
-        self.spielblock: spielblock.Spielblock = spielblock.Spielblock()
+        self.gameblock: gameblock.Gameblock = gameblock.Gameblock()
         self.nrround: int = 0
         self.activeplayer: int = 0
         self.player1: player.Player  # einfügen
         self.player2: player.Player  # einfügen
-        self._ui = ui.UI(self.spielblock)
+        self._ui = ui.UI(self.gameblock)
         self._ui.welcome()
 
-    def spielstarten(self):
+    def startgame(self):
         """
 
         @return:
@@ -39,58 +39,58 @@ class Spiel:
         else:
             self.player2 = player.Player(False, "E-Gegner")
 
-        while not self.spielvorbei(False):
-            self.wuerfeln()
-            self.spielerwechsel()
-        self.spielvorbei(True)
+        while not self.gameover(False):
+            self.playround()
+            self.switchplayer()
+        self.gameover(True)
         return True
 
-    def wuerfeln(self):
+    def playround(self):
         """
-          würfeln, auswahl, nochmalwürfeln, Wahl (bsp full house...) tätigen, punkteeintragen...
+          würfeln, auschoice, nochmalwürfeln, choice (bsp full house...) tätigen, punkteeintragen...
               """
-        anzahlwuerfe = 1
+        nrthrows = 1
 
         for j in range(0, len(self.dicedict)):  # Gewuerfelte wuerfel werden nicht nochmal
             self.dicedict.get(j).activate()
 
-        while anzahlwuerfe <= 2:  # anzahl w
+        while nrthrows <= 2:  # anzahl w
 
             self.throw()
 
             self.player2.choosediceorcheck(self.dicedict, self._ui, self.activeplayer)
 
-            weiterspielen: bool = False
+            keep_playing: bool = False
             for j in range(0, len(self.dicedict)):
                 if self.dicedict.get(j).isactivated:
-                    weiterspielen = True
-            if not weiterspielen:
-                anzahlwuerfe = 2
-            anzahlwuerfe += 1
+                    keep_playing = True
+            if not keep_playing:
+                nrthrows = 2
+            nrthrows += 1
 
         # noch einmal wuerfeln
         self.throw()
         # waehle was eingetragen werden soll
 
-        wahl = self.player2.choose_action_with_dice_arr({"activeplayer": self.activeplayer,
+        choice = self.player2.choose_action_with_dice_arr({"activeplayer": self.activeplayer,
                                                          "nrround": self.nrround,
                                                          "ui": self._ui, "dicedict": self.dicedict,
-                                                         "spielblock": self.spielblock,
+                                                         "gameblock": self.gameblock,
                                                          "player1_name": self.player1.name})
         self._ui.clear()
 
-        # wahl=self.nrround+1
-        # packe würfelaugen in array zur übergabe an steve: punkteeinlesen()
-        augenarray: list = [None, None, None, None, None]
+        # choice=self.nrround+1
+        # packe würfeleyes in array zur übergabe an steve: punkteeinlesen()
+        eyesarray: list = [None, None, None, None, None]
         for k in range(0, len(self.dicedict)):
-            augen = self.dicedict.get(k).augen
-            if augen is None:
-                augen = -1
-            augenarray[k] = augen
+            eyes = self.dicedict.get(k).eyes
+            if eyes is None:
+                eyes = -1
+            eyesarray[k] = eyes
 
-        # gib das eingelesene an spielblock weiter
+        # gib das eingelesene an gameblock weiter
 
-        self.spielblock.punkteeinlesen(wahl, self.activeplayer, self._ui.leer, *augenarray)
+        self.gameblock.inputpoints(choice, self.activeplayer, self._ui.leer, *eyesarray)
         self._ui.leer = False
 
     def throw(self):
@@ -101,22 +101,22 @@ class Spiel:
             else:
                 wuerfelx.deactivate()
 
-    def spielvorbei(self, spielvorbei: bool) -> bool:
+    def gameover(self, gameover: bool) -> bool:
         """
 
-        @param spielvorbei:
-        @type spielvorbei:
+        @param gameover:
+        @type gameover:
         @return:
         @rtype:
         """
-        if not spielvorbei:
-            return self.spielblock.gamened()
-        if self.spielblock.endstand[0] > self.spielblock.endstand[1]:
+        if not gameover:
+            return self.gameblock.gamened()
+        if self.gameblock.endstand[0] > self.gameblock.endstand[1]:
             self._ui.endgame(self.player1.name, self.player1.name, self.player2.name)
         else:
             self._ui.endgame(self.player2.name, self.player1.name, self.player2.name)
 
-    def spielerwechsel(self):
+    def switchplayer(self):
         """
 
         @return:

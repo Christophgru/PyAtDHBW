@@ -10,7 +10,7 @@ import jsonpickle
 from prettytable import PrettyTable
 
 
-class Spielblock:
+class Gameblock:
     """
 
     Class for calculating and entering values of the dice game Kniffel
@@ -52,8 +52,8 @@ class Spielblock:
     def freeze(cls, item):
         """
 
-        @param item: Objekt der Klasse Spielblock:
-        @type item: Spielblock:
+        @param item: Objekt der Klasse Gameblock:
+        @type item: Gameblock:
         @return: -
         @rtype: -
         """
@@ -67,14 +67,14 @@ class Spielblock:
         """
 
         @return: json Spielblock object
-        @rtype: Spielblock
+        @rtype: Gameblock
         """
         with open("Block.json", encoding="utf-8") as heater:
             frozen_list = json.load(heater)
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
-    def punkteeinlesen(self, row, player, leer, *value):
+    def inputpoints(self, row, player, leer, *value):
         """
 
         @param leer: bool if row already has a value in it
@@ -123,9 +123,9 @@ class Spielblock:
         self.freeze(block)
         self.valuing(player)
 
-    def ausgabe(self, name1: string, name2: string, *diceeyes):
+    def output(self, name1: string, name2: string, *diceeyes):
         """
-        Method to print the entire Spielblock
+        Method to print the entire Gameblock
         @return: nothing
         @rtype: nothing
         """
@@ -141,16 +141,16 @@ class Spielblock:
             print("Würfel:" + str(diceeyes[0]) + " " + str(diceeyes[1]) + " " + str(diceeyes[2])
                   + " " + str(diceeyes[3]) + " " + str(diceeyes[4]))
         except:
-            print("Spiel Vorbei")
+            print("Game Vorbei")
 
     def addoben(self, player, calc_sum, folder):
         """
 
-        @param player: same as in punkteeinlesen(), indicates the player who's playing right now
+        @param player: same as in inputpoints(), indicates the player who's playing right now
         @type player: int
         @param calc_sum: int to calculate the values of the rows
         @param folder: the thawed object from json
-        @type folder: Spielblock
+        @type folder: Gameblock
         """
         for i in range(1, 7):
             column = folder[i - 1]
@@ -196,11 +196,11 @@ class Spielblock:
     def addunten(self, player, calc_sum, folder):
         """
 
-        @param player: same as in punkteeinlesen(), indicates the player who's playing right now
+        @param player: same as in inputpoints(), indicates the player who's playing right now
         @type player: int
         @param calc_sum: int to calculate the values of the rows
         @param folder: the thawed obkect from json
-        @type folder: Spielblock
+        @type folder: Gameblock
         """
         for i in range(10, 17):
             column = folder[i - 1]
@@ -217,7 +217,7 @@ class Spielblock:
     def valuing(self, player):
         """
 
-        @param player: same as in punkteeinlesen(), indicates the player who's playing right now
+        @param player: same as in inputpoints(), indicates the player who's playing right now
         @type player: int
         @return: if the game is over returns gameover
         @rtype: bool
