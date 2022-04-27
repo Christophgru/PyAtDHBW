@@ -63,4 +63,4 @@ class Player:
                                                              "gameblock": params["gameblock"],
                                                              "activeplayer": params["activeplayer"],
                                                              "playernames": [params["player1_name"], self.name],
-                                                             "isPVE": False})
+                                                             "is_PVE": False})
