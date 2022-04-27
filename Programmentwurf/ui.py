@@ -245,15 +245,11 @@ class UI:
         """
         self.maxequal = 1
         self.secondequal = 1
-        checkcounter = 0
-        equal = 1
-        for i in range(len(sortdice) - 1):
+        for i in range(len(sortdice)-1):
             if sortdice[i] == sortdice[i + 1]:
-                equal += 1
-                if self.maxequal <= equal:
-                    if not sortdice[checkcounter] == sortdice[i]:
-                        self.secondequal = self.maxequal
-                    self.maxequal = equal
-            else:
-                equal = 1
-                checkcounter = i
+                if sortdice[0] == sortdice[i]:
+                    self.maxequal += 1
+                else:
+                    self.secondequal += 1
+        if self.maxequal < self.secondequal:
+            self.maxequal, self.secondequal = self.secondequal, self.maxequal
