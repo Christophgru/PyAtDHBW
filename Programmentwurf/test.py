@@ -1,4 +1,6 @@
-import unittest
+"""
+created by chris
+"""
 from unittest.mock import patch
 
 import game as Game
@@ -58,14 +60,15 @@ class TestKniffel(TestCase):
     da der TEst und der E-Player den delben eingabestrem nutzen
         @return:
         """
-        inputstring = "2\n"
+        inputstring = "2\nspieler1\n"
         options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
         for i in range(0, 13):
             inputstring += "0\n0\n" + str(options[i]) + "\n"
             if options[i] >= 10:
                 inputstring += "0\n0\n0\n"
         with patch('sys.stdout', new=StringIO()) as fakeout:
-            with patch('sys.stdin', new=StringIO(inputstring)) :
+            with patch('sys.stdin', new=StringIO(inputstring)):
                 game = Game.Game()
                 game.startgame()
-                self.assertTrue("Der Gewinner ist" in fakeout.read(100))
+                ausgabe = fakeout.getvalue()
+                self.assertTrue("Der Gewinner ist" in ausgabe)

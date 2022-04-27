@@ -1,0 +1,1604 @@
+Im Nachfolgenden ist ein gesamtes Spiel Beispielhaft dargestellt.  löscht die Console (funktioniert nicht in pyCharm)
+
+
+
+
+Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.
+Falls sie die Spielregeln noch nicht kennen google sie sie bitte.
+Wollen sie gegen eine andere Person spielen drücken sie: 1
+Wollen sie gegen einen Computer spielen drücken sie    : 2
+1
+Spieler 1, bitte wählen sie ihren NamenElias
+Spieler 2, bitte wählen sie ihren NamenYannic
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 1
+Würfel 3 : 6
+Würfel 4 : 1
+Würfel 5 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3
+Gewählte Würfel:
+
+Würfel 3 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 1
+Würfel 4 : 5
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   -   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   -   |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   -    |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   -    |
+|   14  |  Große-Straße |   -   |   -    |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 3 3 1 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+1
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 3
+Würfel 3 : 4
+Würfel 4 : 3
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,3
+Gewählte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 3
+Würfel 3 : 4
+
+Gewürfelte Würfel:
+
+Würfel 4 : 3
+Würfel 5 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+5
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   -   |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   -    |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   -    |
+|   14  |  Große-Straße |   -   |   -    |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:2 3 4 5 1
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+14
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 1
+Würfel 3 : 1
+Würfel 4 : 5
+Würfel 5 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,4,5
+Gewählte Würfel:
+
+Würfel 1 : 6
+Würfel 4 : 5
+Würfel 5 : 4
+
+Gewürfelte Würfel:
+
+Würfel 2 : 2
+Würfel 3 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+2,3
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   -   |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   -    |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   -    |
+|   14  |  Große-Straße |   -   |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 2 3 5 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+14
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 2 : 6
+Würfel 3 : 3
+Würfel 4 : 5
+Würfel 5 : 6
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+2,5
+Gewählte Würfel:
+
+Würfel 2 : 6
+Würfel 5 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 3 : 2
+Würfel 4 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   -   |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   -    |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   -    |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 6 5 5 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+10
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 4
+Würfel 3 : 6
+Würfel 4 : 6
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3,
+4Wählen sie bite bloß 1,2,3,4 oder 5 aus
+Gewählte Würfel:
+
+Würfel 3 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 4
+Würfel 4 : 6
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
+Gewählte Würfel:
+
+Würfel 3 : 6
+Würfel 4 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 3
+Würfel 5 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   -   |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   -    |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 1 6 6 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+6
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 4
+Würfel 3 : 1
+Würfel 4 : 1
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,3,5
+Gewählte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 4
+Würfel 3 : 1
+Würfel 5 : 2
+
+Gewürfelte Würfel:
+
+Würfel 4 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   -    |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:3 4 1 1 2
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+13
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 5
+Würfel 3 : 2
+Würfel 4 : 3
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,5
+Gewählte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 5
+Würfel 5 : 5
+
+Gewürfelte Würfel:
+
+Würfel 3 : 6
+Würfel 4 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   -   |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:5 5 2 1 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+5
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 2 : 2
+Würfel 3 : 2
+Würfel 4 : 5
+Würfel 5 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
+Gewählte Würfel:
+
+Würfel 4 : 5
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 2
+Würfel 3 : 3
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+5
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   -    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:4 2 4 5 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+2
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 2
+Würfel 3 : 6
+Würfel 4 : 3
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,5
+Gewählte Würfel:
+
+Würfel 1 : 5
+Würfel 5 : 5
+
+Gewürfelte Würfel:
+
+Würfel 2 : 6
+Würfel 3 : 5
+Würfel 4 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3,4
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   -   |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:5 3 5 5 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+11
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 4
+Würfel 3 : 1
+Würfel 4 : 1
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+5
+Gewählte Würfel:
+
+Würfel 5 : 5
+
+Gewürfelte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 4
+Würfel 3 : 2
+Würfel 4 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   -    |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:5 4 4 5 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+12
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 4
+Würfel 2 : 2
+Würfel 3 : 3
+Würfel 4 : 3
+Würfel 5 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,3,4,5
+Gewählte Würfel:
+
+Würfel 1 : 4
+Würfel 3 : 3
+Würfel 4 : 3
+Würfel 5 : 4
+
+Gewürfelte Würfel:
+
+Würfel 2 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   -   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:4 6 3 3 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+3
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 4
+Würfel 3 : 2
+Würfel 4 : 4
+Würfel 5 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+2,4,5
+Gewählte Würfel:
+
+Würfel 2 : 4
+Würfel 4 : 4
+Würfel 5 : 4
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 3 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   -    |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:3 4 3 4 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+4
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 1
+Würfel 3 : 1
+Würfel 4 : 4
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,4,5
+Gewählte Würfel:
+
+Würfel 1 : 6
+Würfel 4 : 4
+Würfel 5 : 5
+
+Gewürfelte Würfel:
+
+Würfel 2 : 5
+Würfel 3 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,3,4
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   -   |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 5 5 5 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+10
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 6
+Würfel 3 : 6
+Würfel 4 : 1
+Würfel 5 : 6
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,3,5
+Gewählte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 6
+Würfel 3 : 6
+Würfel 5 : 6
+
+Gewürfelte Würfel:
+
+Würfel 4 : 6
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   -    |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 6 6 6 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+15
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 5
+Würfel 3 : 1
+Würfel 4 : 6
+Würfel 5 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 3
+Würfel 3 : 5
+Würfel 4 : 4
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,3,4,5
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   -   |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:5 3 5 4 2
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+13
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 1
+Würfel 3 : 2
+Würfel 4 : 2
+Würfel 5 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1
+Gewählte Würfel:
+
+Würfel 1 : 5
+
+Gewürfelte Würfel:
+
+Würfel 2 : 4
+Würfel 3 : 5
+Würfel 4 : 2
+Würfel 5 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   -    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:5 1 5 3 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+1
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 4
+Würfel 2 : 5
+Würfel 3 : 6
+Würfel 4 : 1
+Würfel 5 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1
+Gewählte Würfel:
+
+Würfel 1 : 4
+
+Gewürfelte Würfel:
+
+Würfel 2 : 2
+Würfel 3 : 1
+Würfel 4 : 1
+Würfel 5 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   -   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:1 2 4 2 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+2
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 2
+Würfel 3 : 6
+Würfel 4 : 1
+Würfel 5 : 6
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3,5
+Gewählte Würfel:
+
+Würfel 3 : 6
+Würfel 5 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 2 : 4
+Würfel 4 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   -    |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 6 6 5 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+11
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 4
+Würfel 2 : 2
+Würfel 3 : 5
+Würfel 4 : 6
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
+Gewählte Würfel:
+
+Würfel 4 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 2 : 2
+Würfel 3 : 2
+Würfel 5 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   -   |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 2 3 6 3
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+16
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 4
+Würfel 2 : 6
+Würfel 3 : 5
+Würfel 4 : 1
+Würfel 5 : 6
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+2,5
+Gewählte Würfel:
+
+Würfel 2 : 6
+Würfel 5 : 6
+
+Gewürfelte Würfel:
+
+Würfel 1 : 6
+Würfel 3 : 1
+Würfel 4 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   -    |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:6 6 6 6 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+15
+Zeile bereits gefüllt
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+6
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 4
+Würfel 3 : 1
+Würfel 4 : 2
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+2
+Gewählte Würfel:
+
+Würfel 2 : 4
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 3 : 6
+Würfel 4 : 2
+Würfel 5 : 1
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   -   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   -   |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   -   |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   -   |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:1 4 1 2 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+4
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 4
+Würfel 3 : 6
+Würfel 4 : 2
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,5
+Gewählte Würfel:
+
+Würfel 1 : 5
+Würfel 5 : 5
+
+Gewürfelte Würfel:
+
+Würfel 2 : 5
+Würfel 3 : 5
+Würfel 4 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+2,3
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   8   |   12   |
+|   5   |     Funfer    |   15  |   -    |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   52  |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   52  |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   52  |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:5 5 5 5 5
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+5
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 4
+Würfel 2 : 2
+Würfel 3 : 3
+Würfel 4 : 5
+Würfel 5 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3,5
+Gewählte Würfel:
+
+Würfel 3 : 3
+Würfel 5 : 3
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 2 : 2
+Würfel 4 : 3
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   8   |   12   |
+|   5   |     Funfer    |   15  |   25   |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   52  |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   52  |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   -   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   52  |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:2 5 3 3 3
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+15
+Sie haben nicht die Anforderungen für diese Zeile!
+Wenn sei 0 Punkte eintragen möchten geben sie 0 ein
+Für eine neue Auswahl geben sie etwas anders ein0
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 1
+Würfel 2 : 5
+Würfel 3 : 2
+Würfel 4 : 3
+Würfel 5 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+4
+Gewählte Würfel:
+
+Würfel 4 : 3
+
+Gewürfelte Würfel:
+
+Würfel 1 : 2
+Würfel 2 : 1
+Würfel 3 : 3
+Würfel 5 : 5
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+3
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   -    |
+|   4   |     Vierer    |   8   |   12   |
+|   5   |     Funfer    |   15  |   25   |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   52  |   -    |
+|   8   |     Bonus     |   -   |   -    |
+|   9   |   GesamtOben  |   52  |   -    |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   0   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   52  |   -    |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:2 4 3 3 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+3
+
+
+
+Es ist  Elias dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 4
+Würfel 3 : 1
+Würfel 4 : 3
+Würfel 5 : 4
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,4,5
+Gewählte Würfel:
+
+Würfel 1 : 3
+Würfel 2 : 4
+Würfel 4 : 3
+Würfel 5 : 4
+
+Gewürfelte Würfel:
+
+Würfel 3 : 2
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+0
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   6    |
+|   4   |     Vierer    |   8   |   12   |
+|   5   |     Funfer    |   15  |   25   |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   52  |   76   |
+|   8   |     Bonus     |   -   |   35   |
+|   9   |   GesamtOben  |   52  |  111   |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   -   |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   0   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |   -   |   -    |
+|   18  |      Oben     |   52  |  111   |
+|   19  |     Gesamt    |   -   |   -    |
++-------+---------------+-------+--------+
+Würfel:3 4 3 3 4
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+12
+
+
+
+Es ist  Yannic dran
+Gewählte Würfel:
+
+
+Gewürfelte Würfel:
+
+Würfel 1 : 5
+Würfel 2 : 6
+Würfel 3 : 6
+Würfel 4 : 6
+Würfel 5 : 6
+Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen,
+oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein
+Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen
+Wenn sie nichts auswählen möchten geben sie 0 ein.
+1,2,3,4,5
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   6    |
+|   4   |     Vierer    |   8   |   12   |
+|   5   |     Funfer    |   15  |   25   |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   52  |   76   |
+|   8   |     Bonus     |   -   |   35   |
+|   9   |   GesamtOben  |   52  |  111   |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   25  |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   0   |   50   |
+|   16  |     Chance    |   20  |   -    |
+|   17  |     Unten     |  164  |   -    |
+|   18  |      Oben     |   52  |  111   |
+|   19  |     Gesamt    |  216  |   -    |
++-------+---------------+-------+--------+
+Würfel:5 6 6 6 6
+Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen
+16
+
+
+
+Es ist  Elias dran
++-------+---------------+-------+--------+
+| Zeile |    Kniffel©   | Elias | Yannic |
++-------+---------------+-------+--------+
+|   1   |     Einser    |   1   |   1    |
+|   2   |     Zweier    |   4   |   2    |
+|   3   |     Dreier    |   6   |   6    |
+|   4   |     Vierer    |   8   |   12   |
+|   5   |     Funfer    |   15  |   25   |
+|   6   |    Sechser    |   18  |   30   |
+|   7   |      Oben     |   52  |   76   |
+|   8   |     Bonus     |   -   |   35   |
+|   9   |   GesamtOben  |   52  |  111   |
+|   10  |  Dreierpasch  |   26  |   28   |
+|   11  |  Viererpasch  |   23  |   29   |
+|   12  |   Full-House  |   25  |   25   |
+|   13  | Kleine-Straße |   30  |   30   |
+|   14  |  Große-Straße |   40  |   40   |
+|   15  |    Kniffel    |   0   |   50   |
+|   16  |     Chance    |   20  |   29   |
+|   17  |     Unten     |  164  |  231   |
+|   18  |      Oben     |   52  |  111   |
+|   19  |     Gesamt    |  216  |  342   |
++-------+---------------+-------+--------+
+Game Vorbei
+Der Gewinner ist Yannic
