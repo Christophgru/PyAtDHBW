@@ -17,6 +17,7 @@ class UI:
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
+        self.kniffel = False
 
     @classmethod
     def choosename(cls, playernumber) -> string:
@@ -135,7 +136,7 @@ class UI:
                         print("Zeile bereits gefüllt")
                         break
                 sortdice = sorted(augenarray)
-                check = self.checkline(sortdice, _eingabe)
+                check = self.checkline(sortdice, _eingabe, playernumber)
                 if check:
                     return _eingabe
 
@@ -191,7 +192,7 @@ class UI:
         """
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def checkline(self, sortdice, _eingabe):
+    def checkline(self, sortdice, _eingabe: int, playernumber: int):
         """
 
         @param sortdice:
@@ -199,6 +200,8 @@ class UI:
         @return:
         """
         self.getequals(sortdice)
+        if self.maxequal == 5 and self.kniffel:
+            self.spielblock.pluskniffel(playernumber)
         check = False
         match _eingabe:
             case 10:
@@ -226,6 +229,7 @@ class UI:
                     check = True
             case 15:
                 if self.maxequal == 5:
+                    self.kniffel = True
                     check = True
         return check
 
@@ -249,3 +253,4 @@ class UI:
             else:
                 equal = 1
                 checkcounter = i
+
