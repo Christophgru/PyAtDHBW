@@ -73,10 +73,10 @@ class Game:
         # waehle was eingetragen werden soll
 
         choice = self.player2.choose_action_with_dice_arr({"activeplayer": self.activeplayer,
-                                                         "nrround": self.nrround,
-                                                         "ui": self._ui, "dicedict": self.dicedict,
-                                                         "gameblock": self.gameblock,
-                                                         "player1_name": self.player1.name})
+                                                           "nrround": self.nrround,
+                                                           "ui": self._ui, "dicedict": self.dicedict,
+                                                           "gameblock": self.gameblock,
+                                                           "player1_name": self.player1.name})
         self._ui.clear()
 
         # choice=self.nrround+1
@@ -94,12 +94,16 @@ class Game:
         self._ui.leer = False
 
     def throw(self):
+        """
+        wuerfel wuerfeln
+        @return:
+        """
         for j in range(0, len(self.dicedict)):  # Alle wuerfel werden gewuerfelt
-            wuerfelx = self.dicedict.get(j)
-            if wuerfelx.isactivated is True:
-                wuerfelx.throw()
+            dicex: dice.Dice = self.dicedict.get(j)
+            if dicex.isactivated is True:
+                dicex.throw()
             else:
-                wuerfelx.deactivate()
+                dicex.deactivate()
 
     def gameover(self, gameover: bool) -> bool:
         """
@@ -115,6 +119,7 @@ class Game:
             self._ui.endgame(self.player1.name, self.player1.name, self.player2.name)
         else:
             self._ui.endgame(self.player2.name, self.player1.name, self.player2.name)
+        return False
 
     def switchplayer(self):
         """

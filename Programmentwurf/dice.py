@@ -15,6 +15,10 @@ class Dice:
         random.seed(datetime.now().microsecond)
 
     def throw(self) -> int:
+        """
+        random wert würfeln
+        @return:
+        """
         self.eyes = random.randint(1, 6)
         return self.eyes
 
