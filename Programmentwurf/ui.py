@@ -1,5 +1,5 @@
 """
-
+Created by Elias Keimer
 """
 import string
 import os
@@ -101,21 +101,18 @@ class UI:
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: gameblock.Gameblock, playernumber: int,
-                                    namenarr: string, istPVE=False) -> int:
+    def choose_action_with_dice_arr(self, params: dict) -> int:
+        """
+        USer interaction um die entsprechenden würfel auszuwaehlen
+        @param params:
+        @return:
         """
 
-        @param istPVE:
-        @param namenarr:
-        @param wuerfelobjekte:
-        @type wuerfelobjekte:
-        @param block:
-        @type block:
-        @param playernumber:
-        @type playernumber:
-        @return:
-        @rtype:
-        """
+        wuerfelobjekte: dict = params["dicedict"]
+        block: gameblock.Gameblock = params["gameblock"]
+        playernumber: int = params["activeplayer"]
+        namenarr: string = params["playernames"]
+        is_pve = params["isPVE"]
 
         augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
                       wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
@@ -150,7 +147,7 @@ class UI:
                 if check:
                     return _eingabe
 
-                if not istPVE:
+                if not is_pve:
                     _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                                    "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                                    "Für eine neue Auswahl geben sie etwas anders ein")
@@ -233,7 +230,7 @@ class UI:
                     check = True
 
             case 14:
-                if self.maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                if self.maxequal == 1 and ((sortdice[0] == 1) ^ (sortdice[len(sortdice) - 1] == 6)):
                     check = True
             case 15:
                 if self.maxequal == 5:

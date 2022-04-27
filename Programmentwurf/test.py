@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-import game as Spiel
+import game as Game
 import gameblock as Block
 from io import StringIO
 from unittest import TestCase
@@ -12,8 +12,7 @@ class TestKniffel(TestCase):
     todo: all: testet was das zeug hält
     """
 
-
-    def testSpielblock(self):
+    def testGameblock(self):
         block: Block = Block.Gameblock()
         block.freeze(block)
         thawed = block.thaw()
@@ -23,8 +22,7 @@ class TestKniffel(TestCase):
 
     def testblockAusgabe(self):
         block: Block = Block.Gameblock()
-        block.ausgabe("Steve", "Steve's Opfer'")
-
+        block.output("Steve", "Steve's Opfer'")
 
     def testPVP(self):
         # buildString
@@ -36,21 +34,20 @@ class TestKniffel(TestCase):
             if options[i] >= 10:  # zeile nicht erfüllbar nur bei >10
                 inputstring += "0\n0\n0\n"  # falls Zeile nicht erfüllbar trage 0 ein
 
-            inputstring += "0\n0\n" + str(options[i]) + "\n"  # das selbe für den anderen mitspieler
+            inputstring += "0\n0\n" + str(options[i]) + "\n"  # das selbe für den anderen mitgameer
             if options[i] >= 10:
                 inputstring += "0\n0\n0\n"
         # insert String, check ob durchgelaufen ist
         with patch('sys.stdout', new=StringIO()) as fake_out:
             with patch('sys.stdin', new=StringIO(inputstring)) as fakein:
-                spiel = Spiel.Game()
-                spiel.startgame()
+                game = Game.Game()
+                game.startgame()
                 strout: str = fake_out.getvalue()
                 self.assertTrue("Game Vorbei" in strout)
 
-
-    def testinvalidSpielblock(self):
+    def testinvalidGameblock(self):
         block: Block = Block.Gameblock()
-        block.punkteeinlesen(1, 0, False, 1, 1, 2, 3, 1)
+        block.inputpoints(1, 0, False, 1, 1, 2, 3, 1)
 
     def testPVE(self):
         """
@@ -66,7 +63,6 @@ class TestKniffel(TestCase):
                 inputstring += "0\n0\n0\n"
         with patch('sys.stdout', new=StringIO()) as fakeout:
             with patch('sys.stdin', new=StringIO(inputstring)) as fakein:
-                spiel = Spiel.Game()
-                spiel.startgame()
+                game = Game.Game()
+                game.startgame()
                 self.assertTrue("Der Gewinner ist" in fakeout.read(100))
-

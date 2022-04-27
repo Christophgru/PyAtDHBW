@@ -74,10 +74,10 @@ class Gameblock:
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
-    def inputpoints(self, row, player, leer, *value):
+    def inputpoints(self, row, player, empty, *value):
         """
 
-        @param leer: bool if row already has a value in it
+        @param empty: bool if row already has a value in it
         @param row: the row you want to enter your value
         @type row: int
         @param player: 0= if it's player 1's turn 1 if it's player 2's turn
@@ -93,7 +93,7 @@ class Gameblock:
         category = column[str(row)]
         shelf = category[self.indexlist[row - 1]]
         calc_sum = 0
-        if leer:
+        if empty:
             possible_values[row] = 0
         match row:
             case 12:
@@ -108,7 +108,7 @@ class Gameblock:
                 if row in (10, 11, 16):
                     for number in value:
                         calc_sum += number
-                    if leer:
+                    if empty:
                         shelf[player] = 0
                     else:
                         shelf[player] = calc_sum
@@ -140,7 +140,7 @@ class Gameblock:
         try:
             print("Würfel:" + str(diceeyes[0]) + " " + str(diceeyes[1]) + " " + str(diceeyes[2])
                   + " " + str(diceeyes[3]) + " " + str(diceeyes[4]))
-        except:
+        except IndexError:
             print("Game Vorbei")
 
     def addoben(self, player, calc_sum, folder):
