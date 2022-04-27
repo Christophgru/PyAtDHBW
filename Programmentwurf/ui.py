@@ -17,7 +17,6 @@ class UI:
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
-        self.kniffel = False
 
     @classmethod
     def choosename(cls, playernumber, playername) -> string:
@@ -113,7 +112,7 @@ class UI:
         block: gameblock.Gameblock = params["gameblock"]
         playernumber: int = params["activeplayer"]
         namenarr: string = params["playernames"]
-        is_pve = params["is_PVE"]
+        is_pve = params["isPVE"]
 
         augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
                       wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
@@ -144,7 +143,7 @@ class UI:
                         print("Zeile bereits gefüllt")
                         break
                 sortdice = sorted(augenarray)
-                check = self.checkline(sortdice, _eingabe, playernumber)
+                check = self.checkline(sortdice, _eingabe)
                 if check:
                     return _eingabe
 
@@ -200,7 +199,7 @@ class UI:
         """
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def checkline(self, sortdice, _eingabe: int, playernumber: int):
+    def checkline(self, sortdice, _eingabe):
         """
 
         @param sortdice:
@@ -208,8 +207,6 @@ class UI:
         @return:
         """
         self.getequals(sortdice)
-        if self.maxequal == 5 and self.kniffel:
-            self.gameblock.pluskniffel(playernumber)
         check = False
         match _eingabe:
             case 10:
@@ -237,7 +234,6 @@ class UI:
                     check = True
             case 15:
                 if self.maxequal == 5:
-                    self.kniffel = True
                     check = True
         return check
 
@@ -249,16 +245,11 @@ class UI:
         """
         self.maxequal = 1
         self.secondequal = 1
-        checkcounter = 0
-        equal = 1
-        for i in range(len(sortdice) - 1):
+        for i in range(len(sortdice)-1):
             if sortdice[i] == sortdice[i + 1]:
-                equal += 1
-                if self.maxequal <= equal:
-                    if not sortdice[checkcounter] == sortdice[i]:
-                        self.secondequal = self.maxequal
-                    self.maxequal = equal
-            else:
-                equal = 1
-                checkcounter = i
-
+                if sortdice[0] == sortdice[i]:
+                    self.maxequal += 1
+                else:
+                    self.secondequal += 1
+        if self.maxequal < self.secondequal:
+            self.maxequal, self.secondequal = self.secondequal, self.maxequal
