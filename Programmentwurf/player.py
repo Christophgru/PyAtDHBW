@@ -48,8 +48,6 @@ class Player:
             inputstring: str = str(choice) + "\n"
             with patch('sys.stdout', new=StringIO()):
                 with patch('sys.stdin', new=StringIO(inputstring)):
-                    # if "geben sie etwas anders ein" in fake_out.read(20):
-                    #    fake_in.write("0\n0\n")
                     result = params["ui"].choose_action_with_dice_arr({"dicedict": params["dicedict"],
                                                                        "gameblock": params["gameblock"],
                                                                        "activeplayer": params["activeplayer"],

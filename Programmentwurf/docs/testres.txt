@@ -1,0 +1,98 @@
+Test: testGameblock:
+
+C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\PythonProjects\pythongitshared\Scripts\python.exe "C:\Program Files\JetBrains\PyCharm 2021.3.2\plugins\python\helpers\pycharm\_jb_unittest_runner.py" --target test.TestKniffel.testGameblock
+Testing started at 3:18 PM ...
+Launching unittests with arguments python -m unittest test.TestKniffel.testGameblock in C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\pythongitshared\Programmentwurf
+
+
+
+Ran 1 test in 0.009s
+
+OK
+
+Process finished with exit code 0
+
+
+
+
+
+
+Test: testblockAusgabe
+C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\PythonProjects\pythongitshared\Scripts\python.exe "C:\Program Files\JetBrains\PyCharm 2021.3.2\plugins\python\helpers\pycharm\_jb_unittest_runner.py" --target test.TestKniffel.testblockAusgabe
+Testing started at 3:19 PM ...
+Launching unittests with arguments python -m unittest test.TestKniffel.testblockAusgabe in C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\pythongitshared\Programmentwurf
+
+
+
+Ran 1 test in 0.015s
+
+OK
++-------+---------------+-------+----------------+
+| Zeile |    Kniffel©   | Steve | Steve's Opfer' |
++-------+---------------+-------+----------------+
+|   1   |     Einser    |   -   |       -        |
+|   2   |     Zweier    |   -   |       -        |
+|   3   |     Dreier    |   -   |       -        |
+|   4   |     Vierer    |   -   |       -        |
+|   5   |     Funfer    |   -   |       -        |
+|   6   |    Sechser    |   -   |       -        |
+|   7   |      Oben     |   -   |       -        |
+|   8   |     Bonus     |   -   |       -        |
+|   9   |   GesamtOben  |   -   |       -        |
+|   10  |  Dreierpasch  |   -   |       -        |
+|   11  |  Viererpasch  |   -   |       -        |
+|   12  |   Full-House  |   -   |       -        |
+|   13  | Kleine-Straße |   -   |       -        |
+|   14  |  Große-Straße |   -   |       -        |
+|   15  |    Kniffel    |   -   |       -        |
+|   16  |     Chance    |   -   |       -        |
+|   17  |     Unten     |   -   |       -        |
+|   18  |      Oben     |   -   |       -        |
++-------+---------------+-------+----------------+
+Game Vorbei
+
+Process finished with exit code 0
+
+
+
+
+
+
+Test: testPVP
+
+
+C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\PythonProjects\pythongitshared\Scripts\python.exe "C:\Program Files\JetBrains\PyCharm 2021.3.2\plugins\python\helpers\pycharm\_jb_unittest_runner.py" --target test.TestKniffel.testPVP
+Testing started at 3:20 PM ...
+Launching unittests with arguments python -m unittest test.TestKniffel.testPVP in C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\pythongitshared\Programmentwurf
+
+
+Process finished with exit code 0
+
+
+Ran 1 test in 0.961s
+
+OK
+
+
+
+
+
+
+
+
+Test:testinvalidGameblock
+
+
+C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\PythonProjects\pythongitshared\Scripts\python.exe "C:\Program Files\JetBrains\PyCharm 2021.3.2\plugins\python\helpers\pycharm\_jb_unittest_runner.py" --target test.TestKniffel.testinvalidGameblock
+Testing started at 3:21 PM ...
+Launching unittests with arguments python -m unittest test.TestKniffel.testinvalidGameblock in C:\Users\chris\OneDrive\Dokumente\DHBW\Programmieren\pythongitshared\Programmentwurf
+
+
+
+Ran 1 test in 0.015s
+
+OK
+Herzlich willkommen bei Kniffel, sie können Player vs Player oder Player vs Computer spielen.
+Falls sie die Spielregeln noch nicht kennen google sie sie bitte.
+
+Process finished with exit code 0
