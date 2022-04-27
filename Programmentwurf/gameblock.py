@@ -131,7 +131,7 @@ class Gameblock:
         """
         trie = self.thaw()
         _table = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
-        for i in range(18):
+        for i in range(19):
             zeile = trie[i]
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]

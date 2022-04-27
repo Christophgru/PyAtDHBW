@@ -55,7 +55,7 @@ class Player:
                                                                        "activeplayer": params["activeplayer"],
                                                                        "playernames": [params["player1_name"],
                                                                                        self.name],
-                                                                       "isPVE": True})
+                                                                       "is_PVE": True})
 
                     return result
         else:

@@ -112,7 +112,7 @@ class UI:
         block: gameblock.Gameblock = params["gameblock"]
         playernumber: int = params["activeplayer"]
         namenarr: string = params["playernames"]
-        is_pve = params["isPVE"]
+        is_pve = params["is_PVE"]
 
         augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
                       wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
