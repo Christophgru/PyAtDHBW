@@ -156,7 +156,11 @@ class Gameblock:
             column = folder[i - 1]
             category = column[str(i)]
             shelf = category[self.indexlist[i - 1]]
-            calc_sum += shelf[player]
+            wert = shelf[player]
+            try:
+                calc_sum += int(wert)
+            except ValueError:
+                calc_sum += 0
         column = folder[6]
         category = column[str(7)]
         shelf = category[self.indexlist[6]]
@@ -206,7 +210,11 @@ class Gameblock:
             column = folder[i - 1]
             category = column[str(i)]
             shelf = category[self.indexlist[i - 1]]
-            calc_sum += shelf[player]
+            wert = shelf[player]
+            try:
+                calc_sum += int(wert)
+            except ValueError:
+                calc_sum += 0
         column = folder[16]
         category = column[str(17)]
         shelf = category[self.indexlist[16]]
@@ -250,16 +258,20 @@ class Gameblock:
             column = folder[16]
             category = column[str(17)]
             shelf = category[self.indexlist[16]]
-            calc1 = shelf[player]
+            calc1: int = shelf[player]
             column = folder[17]
             category = column[str(18)]
             shelf = category[self.indexlist[17]]
-            calc2 = shelf[player]
+            calc2: int = shelf[player]
             column = folder[18]
             category = column[str(19)]
             shelf = category[self.indexlist[18]]
-            shelf[player] = calc1 + calc2
-            self.endstand[player] = calc1 + calc2
+            try:
+                shelf[player] = calc1 + calc2
+                self.endstand[player] = calc1 + calc2
+            except TypeError:
+                shelf[player] = 0
+                self.endstand[player] = 0
             self.ende[player] = True
             self.freeze(folder)
 
