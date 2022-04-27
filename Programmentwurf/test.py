@@ -27,10 +27,11 @@ class TestKniffel(TestCase):
     def testPVP(self):
         # buildString
         inputstring = "1\n"  # choose gamemode: pvp
-        inputstring += "player1\nplayer2\n"
+        inputstring += "Ulli\nDulli\n"
         options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]  # zeileneingabe vorbereitung
         for i in range(0, 13):
-            inputstring += "0\n0\n" + str(options[i]) + "\n"  # waehle keine wuerfel, dann zeile für eintrag aus Options
+            inputstring += "1,2\n3,4\n"  # waehle keine wuerfel
+            inputstring += str(options[i]) + "\n"  # dann zeile für eintrag aus Options
             if options[i] >= 10:  # zeile nicht erfüllbar nur bei >10
                 inputstring += "0\n0\n0\n"  # falls Zeile nicht erfüllbar trage 0 ein
 
@@ -44,9 +45,11 @@ class TestKniffel(TestCase):
                 game.startgame()
                 strout: str = fake_out.getvalue()
                 self.assertTrue("Game Vorbei" in strout)
+        print(strout)
 
     def testinvalidGameblock(self):
-        block: Block = Block.Gameblock()
+        spiel: Game = Game.Game()
+        block: Block = spiel.gameblock
         block.inputpoints(1, 0, False, 1, 1, 2, 3, 1)
 
     def testPVE(self):
@@ -62,7 +65,7 @@ class TestKniffel(TestCase):
             if options[i] >= 10:
                 inputstring += "0\n0\n0\n"
         with patch('sys.stdout', new=StringIO()) as fakeout:
-            with patch('sys.stdin', new=StringIO(inputstring)) as fakein:
+            with patch('sys.stdin', new=StringIO(inputstring)) :
                 game = Game.Game()
                 game.startgame()
                 self.assertTrue("Der Gewinner ist" in fakeout.read(100))
