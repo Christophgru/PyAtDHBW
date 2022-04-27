@@ -1,9 +1,9 @@
 """
-#todo
+Created by Elias Keimer
 """
 import string
 import os
-import spielblock
+import gameblock
 
 
 class UI:
@@ -11,25 +11,36 @@ class UI:
     User-interface-class
     """
 
-    def __init__(self, s_b: spielblock.Spielblock):
+    def __init__(self, s_b: gameblock.Gameblock):
         self.output = None
-        self.spielblock = s_b
+        self.gameblock = s_b
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
         self.kniffel = False
 
     @classmethod
-    def choosename(cls, playernumber) -> string:
+    def choosename(cls, playernumber, playername) -> string:
         """
 
+        @param playername:
         @param playernumber:
         @type playernumber:
         @return:
         @rtype:
         """
-        aufforderung: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
-        name = input(aufforderung)
+        name = None
+        run = True
+        while run:
+            readin: string = "Spieler " + str(playernumber) + ", bitte wählen sie ihren Namen"
+            name = input(readin)
+            if playername is not None:
+                if name == playername:
+                    print("Geben sie bitte einen Namen ein, der sich vom Namen des 1. Spielers unterscheidet.")
+                else:
+                    run = False
+            else:
+                run = False
         return name
 
     @classmethod
@@ -51,11 +62,11 @@ class UI:
                     print("Geben sie bitte nur 1 oder 2 ein")
 
     @classmethod
-    def choosediceorcheck(cls, wuerfel_im_becher: dict):
+    def choosediceorcheck(cls, dice_in_cup: dict):
         """
 
-        @param wuerfel_im_becher:
-        @type wuerfel_im_becher:
+        @param dice_in_cup:
+        @type dice_in_cup:
         @return:
         @rtype:
         """
@@ -64,16 +75,16 @@ class UI:
             again = False
             print("Gewählte Würfel:\n")
             i = 1
-            for wuerfel in wuerfel_im_becher.values():
+            for wuerfel in dice_in_cup.values():
                 if not wuerfel.isactivated:
-                    print("Würfel", i, ":", wuerfel.augen)
+                    print("Würfel", i, ":", wuerfel.eyes)
                 i += 1
 
             print("\nGewürfelte Würfel:\n")
             i = 1
-            for wuerfelx in wuerfel_im_becher.values():
+            for wuerfelx in dice_in_cup.values():
                 if wuerfelx.isactivated:
-                    print("Würfel", i, ":", wuerfelx.augen)
+                    print("Würfel", i, ":", wuerfelx.eyes)
                 i += 1
 
             eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
@@ -83,33 +94,30 @@ class UI:
             eing = eing.split(",")
             for choosen_dice in eing:
                 if choosen_dice in ("1", "2", "3", "4", "5"):
-                    if wuerfel_im_becher[int(choosen_dice) - 1].isactivated:
-                        wuerfel_im_becher[int(choosen_dice) - 1].deactivate()
+                    if dice_in_cup[int(choosen_dice) - 1].isactivated:
+                        dice_in_cup[int(choosen_dice) - 1].deactivate()
                     else:
-                        wuerfel_im_becher[int(choosen_dice) - 1].activate()
+                        dice_in_cup[int(choosen_dice) - 1].activate()
                 elif choosen_dice != "0":
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-    def choose_action_with_dice_arr(self, wuerfelobjekte: dict, block: spielblock.Spielblock, playernumber: int,
-                                    namenarr: string, istPVE=False) -> int:
+    def choose_action_with_dice_arr(self, params: dict) -> int:
         """
-
-        @param istPVE:
-        @param namenarr:
-        @param wuerfelobjekte:
-        @type wuerfelobjekte:
-        @param block:
-        @type block:
-        @param playernumber:
-        @type playernumber:
+        USer interaction um die entsprechenden würfel auszuwaehlen
+        @param params:
         @return:
-        @rtype:
         """
 
-        augenarray = [wuerfelobjekte[0].augen, wuerfelobjekte[1].augen, wuerfelobjekte[2].augen,
-                      wuerfelobjekte[3].augen, wuerfelobjekte[4].augen]
-        self.spielblock.ausgabe(namenarr[0], namenarr[1], *augenarray)
+        wuerfelobjekte: dict = params["dicedict"]
+        block: gameblock.Gameblock = params["gameblock"]
+        playernumber: int = params["activeplayer"]
+        namenarr: string = params["playernames"]
+        is_pve = params["isPVE"]
+
+        augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
+                      wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
+        self.gameblock.output(namenarr[0], namenarr[1], *augenarray)
         while True:
             while True:
                 try:
@@ -140,7 +148,7 @@ class UI:
                 if check:
                     return _eingabe
 
-                if not istPVE:
+                if not is_pve:
                     _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                                    "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                                    "Für eine neue Auswahl geben sie etwas anders ein")
@@ -171,7 +179,7 @@ class UI:
         @return:
         @rtype:
         """
-        self.spielblock.ausgabe(name1, name2)
+        self.gameblock.output(name1, name2)
         print("Der Gewinner ist", winner)
 
     @classmethod
@@ -225,7 +233,7 @@ class UI:
                     check = True
 
             case 14:
-                if self.maxequal == 1 and sortdice[0] == 1 or sortdice[len(sortdice) - 1] == 6:
+                if self.maxequal == 1 and ((sortdice[0] == 1) ^ (sortdice[len(sortdice) - 1] == 6)):
                     check = True
             case 15:
                 if self.maxequal == 5:

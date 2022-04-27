@@ -10,7 +10,7 @@ import jsonpickle
 from prettytable import PrettyTable
 
 
-class Spielblock:
+class Gameblock:
     """
 
     Class for calculating and entering values of the dice game Kniffel
@@ -35,16 +35,16 @@ class Spielblock:
     endstand = [0, 0]
 
     def __init__(self):
-        liste = [{"1": {"Einser": [None, None]}}, {"2": {"Zweier": [None, None]}},
-                 {"3": {"Dreier": [None, None]}}, {"4": {"Vierer": [None, None]}},
-                 {"5": {"Funfer": [None, None]}}, {"6": {"Sechser": [None, None]}},
-                 {"7": {"Oben": [None, None]}}, {"8": {"Bonus": [None, None]}},
-                 {"9": {"GesamtOben": [None, None]}}, {"10": {"Dreierpasch": [None, None]}},
-                 {"11": {"Viererpasch": [None, None]}}, {"12": {"Full-House": [None, None]}},
-                 {"13": {"Kleine-Straße": [None, None]}}, {"14": {"Große-Straße": [None, None]}},
-                 {"15": {"Kniffel": [None, None]}}, {"16": {"Chance": [None, None]}},
-                 {"17": {"Unten": [None, None]}}, {"18": {"Oben": [None, None]}},
-                 {"19": {"Gesamt": [None, None]}}]
+        liste = [{"1": {"Einser": ['-', '-']}}, {"2": {"Zweier": ['-', '-']}},
+                 {"3": {"Dreier": ['-', '-']}}, {"4": {"Vierer": ['-', '-']}},
+                 {"5": {"Funfer": ['-', '-']}}, {"6": {"Sechser": ['-', '-']}},
+                 {"7": {"Oben": ['-', '-']}}, {"8": {"Bonus": ['-', '-']}},
+                 {"9": {"GesamtOben": ['-', '-']}}, {"10": {"Dreierpasch": ['-', '-']}},
+                 {"11": {"Viererpasch": ['-', '-']}}, {"12": {"Full-House": ['-', '-']}},
+                 {"13": {"Kleine-Straße": ['-', '-']}}, {"14": {"Große-Straße": ['-', '-']}},
+                 {"15": {"Kniffel": ['-', '-']}}, {"16": {"Chance": ['-', '-']}},
+                 {"17": {"Unten": ['-', '-']}}, {"18": {"Oben": ['-', '-']}},
+                 {"19": {"Gesamt": ['-', '-']}}]
 
         self.freeze(liste)
 
@@ -52,8 +52,8 @@ class Spielblock:
     def freeze(cls, item):
         """
 
-        @param item: Objekt der Klasse Spielblock:
-        @type item: Spielblock:
+        @param item: Objekt der Klasse Gameblock:
+        @type item: Gameblock:
         @return: -
         @rtype: -
         """
@@ -67,17 +67,17 @@ class Spielblock:
         """
 
         @return: json Spielblock object
-        @rtype: Spielblock
+        @rtype: Gameblock
         """
         with open("Block.json", encoding="utf-8") as heater:
             frozen_list = json.load(heater)
             thawed_list = jsonpickle.decode(frozen_list)
             return thawed_list
 
-    def punkteeinlesen(self, row, player, leer, *value):
+    def inputpoints(self, row, player, empty, *value):
         """
 
-        @param leer: bool if row already has a value in it
+        @param empty: bool if row already has a value in it
         @param row: the row you want to enter your value
         @type row: int
         @param player: 0= if it's player 1's turn 1 if it's player 2's turn
@@ -93,7 +93,7 @@ class Spielblock:
         category = column[str(row)]
         shelf = category[self.indexlist[row - 1]]
         calc_sum = 0
-        if leer:
+        if empty:
             possible_values[row] = 0
         match row:
             case 12:
@@ -108,7 +108,7 @@ class Spielblock:
                 if row in (10, 11, 16):
                     for number in value:
                         calc_sum += number
-                    if leer:
+                    if empty:
                         shelf[player] = 0
                     else:
                         shelf[player] = calc_sum
@@ -123,9 +123,9 @@ class Spielblock:
         self.freeze(block)
         self.valuing(player)
 
-    def ausgabe(self, name1: string, name2: string, *diceeyes):
+    def output(self, name1: string, name2: string, *diceeyes):
         """
-        Method to print the entire Spielblock
+        Method to print the entire Gameblock
         @return: nothing
         @rtype: nothing
         """
@@ -137,17 +137,20 @@ class Spielblock:
             zwischen3 = zwischen2[self.indexlist[i]]
             _table.add_row([str(i + 1), self.indexlist[i], zwischen3[0], zwischen3[1]])
         print(_table)
-        print("Würfel:" + str(diceeyes[0]) + " " + str(diceeyes[1]) + " " + str(diceeyes[2]) + " " + str(diceeyes[3]) + " " + str(diceeyes[
-            4]))
+        try:
+            print("Würfel:" + str(diceeyes[0]) + " " + str(diceeyes[1]) + " " + str(diceeyes[2])
+                  + " " + str(diceeyes[3]) + " " + str(diceeyes[4]))
+        except IndexError:
+            print("Game Vorbei")
 
     def addoben(self, player, calc_sum, folder):
         """
 
-        @param player: same as in punkteeinlesen(), indicates the player who's playing right now
+        @param player: same as in inputpoints(), indicates the player who's playing right now
         @type player: int
         @param calc_sum: int to calculate the values of the rows
         @param folder: the thawed object from json
-        @type folder: Spielblock
+        @type folder: Gameblock
         """
         for i in range(1, 7):
             column = folder[i - 1]
@@ -193,11 +196,11 @@ class Spielblock:
     def addunten(self, player, calc_sum, folder):
         """
 
-        @param player: same as in punkteeinlesen(), indicates the player who's playing right now
+        @param player: same as in inputpoints(), indicates the player who's playing right now
         @type player: int
         @param calc_sum: int to calculate the values of the rows
         @param folder: the thawed obkect from json
-        @type folder: Spielblock
+        @type folder: Gameblock
         """
         for i in range(10, 17):
             column = folder[i - 1]
@@ -214,7 +217,7 @@ class Spielblock:
     def valuing(self, player):
         """
 
-        @param player: same as in punkteeinlesen(), indicates the player who's playing right now
+        @param player: same as in inputpoints(), indicates the player who's playing right now
         @type player: int
         @return: if the game is over returns gameover
         @rtype: bool
