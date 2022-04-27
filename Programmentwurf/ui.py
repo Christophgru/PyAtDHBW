@@ -6,6 +6,8 @@ import os
 import gameblock
 
 
+
+
 class UI:
     """
     User-interface-class
@@ -61,7 +63,7 @@ class UI:
                     print("Geben sie bitte nur 1 oder 2 ein")
 
     @classmethod
-    def choosediceorcheck(cls, dice_in_cup: dict):
+    def choosediceorcheck(cls, dice_in_cup: dict, input_pve=""):
         """
 
         @param dice_in_cup:
@@ -85,23 +87,23 @@ class UI:
                 if wuerfelx.isactivated:
                     print("Würfel", i, ":", wuerfelx.eyes)
                 i += 1
+            req = "Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n" \
+                  "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n" \
+                  "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n" \
+                  "Wenn sie nichts auswählen möchten geben sie 0 ein.\n"
+        eing = input(req) if input_pve == "" else input_pve
+        eing = eing.split(",")
+        for choosen_dice in eing:
+            if choosen_dice in ("1", "2", "3", "4", "5"):
+                if dice_in_cup[int(choosen_dice) - 1].isactivated:
+                    dice_in_cup[int(choosen_dice) - 1].deactivate()
+                else:
+                    dice_in_cup[int(choosen_dice) - 1].activate()
+            elif choosen_dice != "0":
+                print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
+                again = True
 
-            eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
-                         "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n"
-                         "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n"
-                         "Wenn sie nichts auswählen möchten geben sie 0 ein.\n")
-            eing = eing.split(",")
-            for choosen_dice in eing:
-                if choosen_dice in ("1", "2", "3", "4", "5"):
-                    if dice_in_cup[int(choosen_dice) - 1].isactivated:
-                        dice_in_cup[int(choosen_dice) - 1].deactivate()
-                    else:
-                        dice_in_cup[int(choosen_dice) - 1].activate()
-                elif choosen_dice != "0":
-                    print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
-                    again = True
-
-    def choose_action_with_dice_arr(self, params: dict) -> int:
+    def choose_action_with_dice_arr(self, params: dict, choice_pve=0) -> int:
         """
         USer interaction um die entsprechenden würfel auszuwaehlen
         @param params:
@@ -120,7 +122,8 @@ class UI:
         while True:
             while True:
                 try:
-                    _eing = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
+                    request = "Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n"
+                    _eing = input(request) if choice_pve == 0 else choice_pve
                     _eingabe = int(_eing)
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
@@ -147,12 +150,7 @@ class UI:
                 if check:
                     return _eingabe
 
-                if not is_pve:
-                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                                   "Für eine neue Auswahl geben sie etwas anders ein")
-                else:
-                    _einga = '0'
+                _einga = row_read(is_pve)
                 if _einga == '0':
                     self.leer = True
                     return _eingabe
@@ -245,11 +243,28 @@ class UI:
         """
         self.maxequal = 1
         self.secondequal = 1
-        for i in range(len(sortdice)-1):
+        checkcounter = 0
+        equal = 1
+        for i in range(len(sortdice) - 1):
             if sortdice[i] == sortdice[i + 1]:
-                if sortdice[0] == sortdice[i]:
-                    self.maxequal += 1
-                else:
-                    self.secondequal += 1
-        if self.maxequal < self.secondequal:
-            self.maxequal, self.secondequal = self.secondequal, self.maxequal
+                equal += 1
+                if self.maxequal <= equal:
+                    if not sortdice[checkcounter] == sortdice[i]:
+                        self.secondequal = self.maxequal
+                    self.maxequal = equal
+            else:
+                equal = 1
+                checkcounter = i
+
+def row_read(is_pve):
+    """
+
+    @return:
+    """
+    if not is_pve:
+        _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                       "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                       "Für eine neue Auswahl geben sie etwas anders ein")
+    else:
+        _einga = '0'
+    return _einga
