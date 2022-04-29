@@ -9,6 +9,7 @@ class Dice:
     """
     dice-class, that contains the value of generated dices
     """
+
     def __init__(self):
         self.eyes = None
         self.isactivated = False
@@ -26,7 +27,6 @@ class Dice:
         """setzte activated auf F und eyes auf -1 oder so
         """
         self.isactivated = False
-
 
     def activate(self):
         """setzte activated auf T"""

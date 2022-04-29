@@ -1,11 +1,9 @@
 """
-Created by Elias Keimer
+user-interface-class-file
 """
 import string
 import os
 import gameblock
-
-
 
 
 class UI:
@@ -255,6 +253,7 @@ class UI:
             else:
                 equal = 1
                 checkcounter = i
+
 
 def row_read(is_pve):
     """

@@ -1,6 +1,5 @@
 """
-@todo Steve bitte Docstrings ausfüllen/Vorschlag für too many branches in L:71 & => switch case
-@todo/too many branches&statements in 149 muss selbst lösen XD
+gameblock-class-file
 """
 
 import json
