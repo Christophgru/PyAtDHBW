@@ -17,6 +17,7 @@ class UI:
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
+        self.kniffel = {1: False, 2: False}
 
     @classmethod
     def choosename(cls, playernumber, playername) -> string:
@@ -144,7 +145,13 @@ class UI:
                         break
                 sortdice = sorted(augenarray)
                 check = self.checkline(sortdice, _eingabe)
+
                 if check:
+                    if _eingabe == 15:
+                        if self.kniffel[playernumber]:
+                            self.bonuskniffel(playernumber)
+                        else:
+                            self.kniffel[playernumber] = True
                     return _eingabe
 
                 if not is_pve:
@@ -263,3 +270,6 @@ class UI:
         else:
             _einga = '0'
         return _einga
+
+    def bonuskniffel(self, playernumber):
+        self.gameblock.bonus(playernumber)
