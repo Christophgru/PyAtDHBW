@@ -247,8 +247,8 @@ class UI:
                     self.maxequal += 1
                 else:
                     self.secondequal += 1
-                if self.maxequal < self.secondequal:
-                    self.maxequal, self.secondequal = self.secondequal, self.maxequal
+        if self.maxequal < self.secondequal:
+            self.maxequal, self.secondequal = self.secondequal, self.maxequal
 
     @classmethod
     def checkpve(cls, is_pve: bool):
