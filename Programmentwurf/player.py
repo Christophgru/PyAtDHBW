@@ -2,8 +2,6 @@
 @todo pve in player class, dann ist der letzte pylint fehler weg (man braucht min 2 public methoden)
 player-class-file
 """
-from io import StringIO
-from unittest.mock import patch
 
 
 class Player:
@@ -28,16 +26,14 @@ class Player:
         @rtype:
         """
         if activeplayer == 1 and not self.isreal:
-            inputstring = "1\n1\n"
-            with patch('sys.stdout', new=StringIO()):
-                with patch('sys.stdin', new=StringIO(inputstring)):
-                    _ui.choosediceorcheck(dicedict)
+            _ui.choosediceorcheck(dicedict, "1\n1\n")
         else:
             _ui.choosediceorcheck(dicedict)
 
     def choose_action_with_dice_arr(self, params: dict):
         """
 
+        @param mocked_input:
         @param params:
         @return:
         """
@@ -45,20 +41,16 @@ class Player:
 
             options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
             choice = options[params["nrround"] - 1]
-            inputstring: str = str(choice) + "\n"
-            with patch('sys.stdout', new=StringIO()):
-                with patch('sys.stdin', new=StringIO(inputstring)):
-                    result = params["ui"].choose_action_with_dice_arr({"dicedict": params["dicedict"],
-                                                                       "gameblock": params["gameblock"],
-                                                                       "activeplayer": params["activeplayer"],
-                                                                       "playernames": [params["player1_name"],
-                                                                                       self.name],
-                                                                       "is_PVE": True})
+            result = params["ui"].choose_action_with_dice_arr({"dicedict": params["dicedict"],
+                                                               "gameblock": params["gameblock"],
+                                                               "activeplayer": params["activeplayer"],
+                                                               "playernames": [params["player1_name"],
+                                                                               self.name],
+                                                               "isPVE": True}, choice)
+            return result
 
-                    return result
-        else:
-            return params["ui"].choose_action_with_dice_arr({"dicedict": params["dicedict"],
-                                                             "gameblock": params["gameblock"],
-                                                             "activeplayer": params["activeplayer"],
-                                                             "playernames": [params["player1_name"], self.name],
-                                                             "is_PVE": False})
+        return params["ui"].choose_action_with_dice_arr({"dicedict": params["dicedict"],
+                                                         "gameblock": params["gameblock"],
+                                                         "activeplayer": params["activeplayer"],
+                                                         "playernames": [params["player1_name"], self.name],
+                                                         "isPVE": False})
