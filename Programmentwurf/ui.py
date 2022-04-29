@@ -20,14 +20,14 @@ class UI:
         self.kniffel = {0: False, 1: False}
 
     @classmethod
-    def choosename(cls, playernumber, playername) -> string:
+    def choosename(cls, playernumber: int, playername: string) -> string:
         """
 
-        @param playername:
-        @param playernumber:
-        @type playernumber:
-        @return:
-        @rtype:
+        @param playername: Name of the first Player  or None
+        @param playernumber: Number of the aktive Player
+        @type playernumber: int
+        @return: Playername
+        @rtype: string
         """
         name = None
         run = True
@@ -47,8 +47,8 @@ class UI:
     def pvp_or_pve(cls) -> bool:
         """
 
-        @return:
-        @rtype:
+        @return: bool if PvP or PvE
+        @rtype: bool
         """
         while True:
             ret = input("Wollen sie gegen eine andere Person spielen drücken sie: 1\n"
@@ -64,11 +64,11 @@ class UI:
     @classmethod
     def choosediceorcheck(cls, dice_in_cup: dict):
         """
-
-        @param dice_in_cup:
-        @type dice_in_cup:
-        @return:
-        @rtype:
+        check which dices the Player want to change
+        @param dice_in_cup: all Dices
+        @type dice_in_cup: dict
+        @return: -
+        @rtype: -
         """
         again = True
         while again:
@@ -104,9 +104,9 @@ class UI:
 
     def choose_action_with_dice_arr(self, params: dict) -> int:
         """
-        USer interaction um die entsprechenden würfel auszuwaehlen
-        @param params:
-        @return:
+        User interaction to chooce the line of the block
+        @param params: dices, gameblock, aktive Playernumber, both Playernames, bool if PvE
+        @return: linenumber
         """
 
         wuerfelobjekte: dict = params["dicedict"]
@@ -120,8 +120,7 @@ class UI:
         self.gameblock.output(namenarr[0], namenarr[1], *augenarray)
         sortdice = sorted(augenarray)
         self.getequals(sortdice)
-        if self.kniffel[playernumber]:
-            self.gameblock.pluskniffel(playernumber)
+        self.checkbonus(playernumber)
         while True:
             while True:
                 try:
@@ -147,18 +146,11 @@ class UI:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                check = self.checkline(sortdice, _eingabe)
-                if check:
+                if self.checkline(sortdice, _eingabe):
                     if _eingabe == 15:
                         self.kniffel[playernumber] = True
                     return _eingabe
-
-                if not is_pve:
-                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                                   "Für eine neue Auswahl geben sie etwas anders ein")
-                else:
-                    _einga = '0'
+                _einga = self.zeroline(is_pve)
                 if _einga == '0':
                     self.leer = True
                     return _eingabe
@@ -167,22 +159,22 @@ class UI:
     def chooseplayer(cls, playername):
         """
 
-        @param playername:
-        @type playername:
-        @return:
-        @rtype:
+        @param playername: aktive Playername
+        @type playername: string
+        @return: -
+        @rtype: -
         """
         print("\n\n\nEs ist ", playername, "dran")
 
     def endgame(self, winner, name1, name2):
         """
 
-        @param name2:
-        @param name1:
-        @param winner:
-        @type winner:
-        @return:
-        @rtype:
+        @param name2: Player 2 Name
+        @param name1: Player 1 Name
+        @param winner: Name of the Winner
+        @type winner: string
+        @return: -
+        @rtype: -
         """
         self.gameblock.output(name1, name2)
         print("Der Gewinner ist", winner)
@@ -190,7 +182,7 @@ class UI:
     @classmethod
     def welcome(cls):
         """
-
+        welcome text
         @return:
         @rtype:
         """
@@ -200,7 +192,7 @@ class UI:
     @classmethod
     def clear(cls):
         """
-
+        clear the console
         @return:
         """
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -208,9 +200,9 @@ class UI:
     def checkline(self, sortdice, _eingabe):
         """
 
-        @param sortdice:
-        @param _eingabe:
-        @return:
+        @param sortdice: sorted dices
+        @param _eingabe: the line which should be checked
+        @return: -
         """
         check = False
         match _eingabe:
@@ -245,7 +237,7 @@ class UI:
     def getequals(self, sortdice):
         """
 
-        @param sortdice:
+        @param sortdice: sorted Dices
         @return:
         """
         self.maxequal = 1
@@ -263,10 +255,10 @@ class UI:
     def checkpve(cls, is_pve: bool):
         """
 
-        @param is_pve:
-        @type is_pve:
-        @return:
-        @rtype:
+        @param is_pve: if its PvE
+        @type is_pve:bool
+        @return: -
+        @rtype: -
         """
         if not is_pve:
             _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
@@ -275,3 +267,18 @@ class UI:
         else:
             _einga = '0'
         return _einga
+
+    @classmethod
+    def zeroline(cls, pve: bool) -> string:
+        if not pve:
+            _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                           "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                           "Für eine neue Auswahl geben sie etwas anders ein")
+        else:
+            _einga = '0'
+        return _einga
+
+    def checkbonus(self, playernumber: int):
+        if self.maxequal == 5:
+            if self.kniffel[playernumber]:
+                self.gameblock.pluskniffel(playernumber)
