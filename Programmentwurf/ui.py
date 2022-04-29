@@ -1,5 +1,5 @@
 """
-Created by Elias Keimer
+user-interface-class-file
 """
 import string
 import os
@@ -254,13 +254,15 @@ class UI:
         self.secondequal = 1
         for i in range(len(sortdice)-1):
             if sortdice[i] == sortdice[i + 1]:
+
+def row_read(is_pve):
                 if sortdice[0] == sortdice[i]:
                     self.maxequal += 1
                 else:
                     self.secondequal += 1
         if self.maxequal < self.secondequal:
             self.maxequal, self.secondequal = self.secondequal, self.maxequal
-
+            
     @classmethod
     def checkpve(cls, is_pve: bool):
         if not is_pve:
