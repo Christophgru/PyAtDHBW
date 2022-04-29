@@ -147,8 +147,7 @@ class UI:
                         print("Zeile bereits gefüllt")
                         break
                 if self.checkline(sortdice, _eingabe):
-                    if _eingabe == 15:
-                        self.kniffel[playernumber] = True
+                    self.checkfirstkniffel(playernumber, _eingabe)
                     return _eingabe
                 _einga = self.zeroline(is_pve)
                 if _einga == '0':
@@ -270,6 +269,13 @@ class UI:
 
     @classmethod
     def zeroline(cls, pve: bool) -> string:
+        """
+
+        @param pve:
+        @type pve:
+        @return:
+        @rtype:
+        """
         if not pve:
             _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                            "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
@@ -279,6 +285,26 @@ class UI:
         return _einga
 
     def checkbonus(self, playernumber: int):
+        """
+
+        @param playernumber:
+        @type playernumber:
+        @return:
+        @rtype:
+        """
         if self.maxequal == 5:
             if self.kniffel[playernumber]:
                 self.gameblock.pluskniffel(playernumber)
+
+    def checkfirstkniffel(self, playernumber: int, _eingabe: int):
+        """
+
+        @param playernumber:
+        @type playernumber:
+        @param _eingabe:
+        @type _eingabe:
+        @return:
+        @rtype:
+        """
+        if _eingabe == 15 and not self.kniffel[playernumber]:
+            self.kniffel[playernumber] = True
