@@ -1,6 +1,5 @@
 """
-@todo Steve bitte Docstrings ausfüllen/Vorschlag für too many branches in L:71 & => switch case
-@todo/too many branches&statements in 149 muss selbst lösen XD
+gameblock-class-file
 """
 
 import json
@@ -284,11 +283,16 @@ class Gameblock:
         return self.ende[0] and self.ende[1]
 
     def pluskniffel(self, playernumber: int):
+        """
 
+        @param playernumber: number of active player
+        @type playernumber: int
+        @return: -
+        @rtype: -
+        """
         block = self.thaw()
         column = block[14]
         category = column[str(15)]
         shelf = category[self.indexlist[14]]
         shelf[playernumber] += 50
-
-
+        self.freeze(block)

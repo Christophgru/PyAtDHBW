@@ -1,5 +1,5 @@
 """
-Created by Elias Keimer
+user-interface-class-file
 """
 import string
 import os
@@ -17,7 +17,7 @@ class UI:
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
-        self.kniffel = {1: False, 2: False}
+        self.kniffel = {0: False, 1: False}
 
     @classmethod
     def choosename(cls, playernumber, playername) -> string:
@@ -118,6 +118,10 @@ class UI:
         augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
                       wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
         self.gameblock.output(namenarr[0], namenarr[1], *augenarray)
+        sortdice = sorted(augenarray)
+        self.getequals(sortdice)
+        if self.kniffel[playernumber]:
+            self.gameblock.pluskniffel(playernumber)
         while True:
             while True:
                 try:
@@ -143,15 +147,10 @@ class UI:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                sortdice = sorted(augenarray)
                 check = self.checkline(sortdice, _eingabe)
-
                 if check:
                     if _eingabe == 15:
-                        if self.kniffel[playernumber]:
-                            self.gameblock.bonus(playernumber)
-                        else:
-                            self.kniffel[playernumber] = True
+                        self.kniffel[playernumber] = True
                     return _eingabe
 
                 if not is_pve:
@@ -208,12 +207,11 @@ class UI:
 
     def checkline(self, sortdice, _eingabe):
         """
-        Überprüfung der Anforderungen für die einzutragende Linie
-        @param sortdice: Sortierte Würfelaugen
-        @param _eingabe: Liniennummer
+
+        @param sortdice:
+        @param _eingabe:
         @return:
         """
-        self.getequals(sortdice)
         check = False
         match _eingabe:
             case 10:
@@ -246,27 +244,29 @@ class UI:
 
     def getequals(self, sortdice):
         """
-        maximale und zweit größte Anzahl an gleichen in dem Würfelarray finden
+
         @param sortdice:
         @return:
         """
         self.maxequal = 1
         self.secondequal = 1
-        for i in range(len(sortdice)-1):
+        for i in range(len(sortdice) - 1):
             if sortdice[i] == sortdice[i + 1]:
                 if sortdice[0] == sortdice[i]:
                     self.maxequal += 1
                 else:
                     self.secondequal += 1
-        if self.maxequal < self.secondequal:
-            self.maxequal, self.secondequal = self.secondequal, self.maxequal
+                if self.maxequal < self.secondequal:
+                    self.maxequal, self.secondequal = self.secondequal, self.maxequal
 
     @classmethod
     def checkpve(cls, is_pve: bool):
         """
-        Eingabe fürs weiterspielen ausgefüllt auch für PVE
+
         @param is_pve:
+        @type is_pve:
         @return:
+        @rtype:
         """
         if not is_pve:
             _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"

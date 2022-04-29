@@ -1,5 +1,4 @@
 """
-ausgaben an Console nur ueber methoden in _ui, um alle "oberflaechen aktionen" zu kapseln
 game-class-file
 """
 
