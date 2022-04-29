@@ -22,11 +22,11 @@ class UI:
     def choosename(cls, playernumber, playername) -> string:
         """
 
-        @param playername:
-        @param playernumber:
-        @type playernumber:
-        @return:
-        @rtype:
+        @param playername: Player 1 Name or None
+        @param playernumber: Number of the aktive Player
+        @type playernumber: int
+        @return: Name of the aktive Player
+        @rtype: string
         """
         name = None
         run = True
@@ -146,13 +146,7 @@ class UI:
                 check = self.checkline(sortdice, _eingabe)
                 if check:
                     return _eingabe
-
-                if not is_pve:
-                    _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                                   "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                                   "Für eine neue Auswahl geben sie etwas anders ein")
-                else:
-                    _einga = '0'
+                _einga = self.checkpve(is_pve)
                 if _einga == '0':
                     self.leer = True
                     return _eingabe
@@ -253,3 +247,13 @@ class UI:
                     self.secondequal += 1
         if self.maxequal < self.secondequal:
             self.maxequal, self.secondequal = self.secondequal, self.maxequal
+
+    @classmethod
+    def checkpve(cls, is_pve: bool):
+        if not is_pve:
+            _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                           "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                           "Für eine neue Auswahl geben sie etwas anders ein")
+        else:
+            _einga = '0'
+        return _einga
