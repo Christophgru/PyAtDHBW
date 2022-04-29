@@ -17,7 +17,7 @@ class UI:
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
-        self.kniffel = {1: False, 2: False}
+        self.kniffel = {0: False, 1: False}
 
     @classmethod
     def choosename(cls, playernumber, playername) -> string:
@@ -118,6 +118,10 @@ class UI:
         augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
                       wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
         self.gameblock.output(namenarr[0], namenarr[1], *augenarray)
+        sortdice = sorted(augenarray)
+        self.getequals(sortdice)
+        if self.kniffel[playernumber]:
+            self.gameblock.pluskniffel(playernumber)
         while True:
             while True:
                 try:
@@ -143,15 +147,10 @@ class UI:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                sortdice = sorted(augenarray)
                 check = self.checkline(sortdice, _eingabe)
-
                 if check:
                     if _eingabe == 15:
-                        if self.kniffel[playernumber]:
-                            self.bonuskniffel(playernumber)
-                        else:
-                            self.kniffel[playernumber] = True
+                        self.kniffel[playernumber] = True
                     return _eingabe
 
                 if not is_pve:
@@ -213,7 +212,6 @@ class UI:
         @param _eingabe:
         @return:
         """
-        self.getequals(sortdice)
         check = False
         match _eingabe:
             case 10:
@@ -252,19 +250,24 @@ class UI:
         """
         self.maxequal = 1
         self.secondequal = 1
-        for i in range(len(sortdice)-1):
+        for i in range(len(sortdice) - 1):
             if sortdice[i] == sortdice[i + 1]:
-
-def row_read(is_pve):
                 if sortdice[0] == sortdice[i]:
                     self.maxequal += 1
                 else:
                     self.secondequal += 1
-        if self.maxequal < self.secondequal:
-            self.maxequal, self.secondequal = self.secondequal, self.maxequal
-            
+                if self.maxequal < self.secondequal:
+                    self.maxequal, self.secondequal = self.secondequal, self.maxequal
+
     @classmethod
     def checkpve(cls, is_pve: bool):
+        """
+
+        @param is_pve:
+        @type is_pve:
+        @return:
+        @rtype:
+        """
         if not is_pve:
             _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                            "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
@@ -272,6 +275,3 @@ def row_read(is_pve):
         else:
             _einga = '0'
         return _einga
-
-    def bonuskniffel(self, playernumber):
-        self.gameblock.bonus(playernumber)
