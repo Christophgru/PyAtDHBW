@@ -71,12 +71,13 @@ class Game:
         self.throw()
         # waehle was eingetragen werden soll
 
+        self._ui.clear()
+
         choice = self.player2.choose_action_with_dice_arr({"activeplayer": self.activeplayer,
                                                            "nrround": self.nrround,
                                                            "ui": self._ui, "dicedict": self.dicedict,
                                                            "gameblock": self.gameblock,
                                                            "player1_name": self.player1.name})
-        self._ui.clear()
 
         # choice=self.nrround+1
         # packe würfeleyes in array zur übergabe an steve: punkteeinlesen()
