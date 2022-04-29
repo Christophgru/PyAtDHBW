@@ -149,7 +149,7 @@ class UI:
                 if check:
                     if _eingabe == 15:
                         if self.kniffel[playernumber]:
-                            self.bonuskniffel(playernumber)
+                            self.gameblock.bonus(playernumber)
                         else:
                             self.kniffel[playernumber] = True
                     return _eingabe
@@ -208,9 +208,9 @@ class UI:
 
     def checkline(self, sortdice, _eingabe):
         """
-
-        @param sortdice:
-        @param _eingabe:
+        Überprüfung der Anforderungen für die einzutragende Linie
+        @param sortdice: Sortierte Würfelaugen
+        @param _eingabe: Liniennummer
         @return:
         """
         self.getequals(sortdice)
@@ -246,7 +246,7 @@ class UI:
 
     def getequals(self, sortdice):
         """
-
+        maximale und zweit größte Anzahl an gleichen in dem Würfelarray finden
         @param sortdice:
         @return:
         """
@@ -263,6 +263,11 @@ class UI:
 
     @classmethod
     def checkpve(cls, is_pve: bool):
+        """
+        Eingabe fürs weiterspielen ausgefüllt auch für PVE
+        @param is_pve:
+        @return:
+        """
         if not is_pve:
             _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
                            "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
@@ -270,6 +275,3 @@ class UI:
         else:
             _einga = '0'
         return _einga
-
-    def bonuskniffel(self, playernumber):
-        self.gameblock.bonus(playernumber)
