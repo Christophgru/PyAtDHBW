@@ -130,7 +130,7 @@ class Gameblock:
         """
         trie = self.thaw()
         _table = PrettyTable(['Zeile', 'Kniffel©', name1, name2])
-        for i in range(18):
+        for i in range(19):
             zeile = trie[i]
             zwischen2 = zeile[str(i + 1)]
             zwischen3 = zwischen2[self.indexlist[i]]
@@ -281,3 +281,13 @@ class Gameblock:
         @rtype: bool
         """
         return self.ende[0] and self.ende[1]
+
+    def pluskniffel(self, playernumber: int):
+
+        block = self.thaw()
+        column = block[14]
+        category = column[str(15)]
+        shelf = category[self.indexlist[14]]
+        shelf[playernumber] += 50
+
+
