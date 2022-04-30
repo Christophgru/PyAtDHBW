@@ -1,5 +1,4 @@
 """
-@todo pve in player class, dann ist der letzte pylint fehler weg (man braucht min 2 public methoden)
 player-class-file
 """
 
@@ -38,7 +37,6 @@ class Player:
         @return:
         """
         if params["activeplayer"] == 1 and not self.isreal:
-
             options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
             choice = options[params["nrround"] - 1]
             result = params["ui"].choose_action_with_dice_arr({"dicedict": params["dicedict"],

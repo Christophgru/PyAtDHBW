@@ -1,11 +1,9 @@
 """
-Created by Elias Keimer
+user-interface-class-file
 """
 import string
 import os
 import gameblock
-
-
 
 
 class UI:
@@ -19,16 +17,17 @@ class UI:
         self.leer = False
         self.maxequal = 1
         self.secondequal = 1
+        self.kniffel = {0: False, 1: False}
 
     @classmethod
-    def choosename(cls, playernumber, playername) -> string:
+    def choosename(cls, playernumber: int, playername: string) -> string:
         """
 
-        @param playername:
-        @param playernumber:
-        @type playernumber:
-        @return:
-        @rtype:
+        @param playername: Name of the first Player  or None
+        @param playernumber: Number of the aktive Player
+        @type playernumber: int
+        @return: Playername
+        @rtype: string
         """
         name = None
         run = True
@@ -48,8 +47,8 @@ class UI:
     def pvp_or_pve(cls) -> bool:
         """
 
-        @return:
-        @rtype:
+        @return: bool if PvP or PvE
+        @rtype: bool
         """
         while True:
             ret = input("Wollen sie gegen eine andere Person spielen drücken sie: 1\n"
@@ -63,13 +62,13 @@ class UI:
                     print("Geben sie bitte nur 1 oder 2 ein")
 
     @classmethod
-    def choosediceorcheck(cls, dice_in_cup: dict, input_pve=""):
+    def choosediceorcheck(cls, dice_in_cup: dict):
         """
-
-        @param dice_in_cup:
-        @type dice_in_cup:
-        @return:
-        @rtype:
+        check which dices the Player want to change
+        @param dice_in_cup: all Dices
+        @type dice_in_cup: dict
+        @return: -
+        @rtype: -
         """
         again = True
         while again:
@@ -87,27 +86,27 @@ class UI:
                 if wuerfelx.isactivated:
                     print("Würfel", i, ":", wuerfelx.eyes)
                 i += 1
-            req = "Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n" \
-                  "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n" \
-                  "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n" \
-                  "Wenn sie nichts auswählen möchten geben sie 0 ein.\n"
-        eing = input(req) if input_pve == "" else input_pve
-        eing = eing.split(",")
-        for choosen_dice in eing:
-            if choosen_dice in ("1", "2", "3", "4", "5"):
-                if dice_in_cup[int(choosen_dice) - 1].isactivated:
-                    dice_in_cup[int(choosen_dice) - 1].deactivate()
-                else:
-                    dice_in_cup[int(choosen_dice) - 1].activate()
-            elif choosen_dice != "0":
-                print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
-                again = True
 
-    def choose_action_with_dice_arr(self, params: dict, choice_pve=0) -> int:
+            eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
+                         "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n"
+                         "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n"
+                         "Wenn sie nichts auswählen möchten geben sie 0 ein.\n")
+            eing = eing.split(",")
+            for choosen_dice in eing:
+                if choosen_dice in ("1", "2", "3", "4", "5"):
+                    if dice_in_cup[int(choosen_dice) - 1].isactivated:
+                        dice_in_cup[int(choosen_dice) - 1].deactivate()
+                    else:
+                        dice_in_cup[int(choosen_dice) - 1].activate()
+                elif choosen_dice != "0":
+                    print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
+                    again = True
+
+    def choose_action_with_dice_arr(self, params: dict) -> int:
         """
-        USer interaction um die entsprechenden würfel auszuwaehlen
-        @param params:
-        @return:
+        User interaction to chooce the line of the block
+        @param params: dices, gameblock, aktive Playernumber, both Playernames, bool if PvE
+        @return: linenumber
         """
 
         wuerfelobjekte: dict = params["dicedict"]
@@ -119,11 +118,13 @@ class UI:
         augenarray = [wuerfelobjekte[0].eyes, wuerfelobjekte[1].eyes, wuerfelobjekte[2].eyes,
                       wuerfelobjekte[3].eyes, wuerfelobjekte[4].eyes]
         self.gameblock.output(namenarr[0], namenarr[1], *augenarray)
+        sortdice = sorted(augenarray)
+        self.getequals(sortdice)
+        self.checkbonus(playernumber)
         while True:
             while True:
                 try:
-                    request = "Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n"
-                    _eing = input(request) if choice_pve == 0 else choice_pve
+                    _eing = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
                     _eingabe = int(_eing)
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
@@ -145,12 +146,10 @@ class UI:
                     if block.second_line[_eingabe - 10][playernumber]:
                         print("Zeile bereits gefüllt")
                         break
-                sortdice = sorted(augenarray)
-                check = self.checkline(sortdice, _eingabe)
-                if check:
+                if self.checkline(sortdice, _eingabe):
+                    self.checkfirstkniffel(playernumber, _eingabe)
                     return _eingabe
-
-                _einga = row_read(is_pve)
+                _einga = self.zeroline(is_pve)
                 if _einga == '0':
                     self.leer = True
                     return _eingabe
@@ -159,22 +158,22 @@ class UI:
     def chooseplayer(cls, playername):
         """
 
-        @param playername:
-        @type playername:
-        @return:
-        @rtype:
+        @param playername: aktive Playername
+        @type playername: string
+        @return: -
+        @rtype: -
         """
         print("\n\n\nEs ist ", playername, "dran")
 
     def endgame(self, winner, name1, name2):
         """
 
-        @param name2:
-        @param name1:
-        @param winner:
-        @type winner:
-        @return:
-        @rtype:
+        @param name2: Player 2 Name
+        @param name1: Player 1 Name
+        @param winner: Name of the Winner
+        @type winner: string
+        @return: -
+        @rtype: -
         """
         self.gameblock.output(name1, name2)
         print("Der Gewinner ist", winner)
@@ -182,7 +181,7 @@ class UI:
     @classmethod
     def welcome(cls):
         """
-
+        welcome text
         @return:
         @rtype:
         """
@@ -192,7 +191,7 @@ class UI:
     @classmethod
     def clear(cls):
         """
-
+        clear the console
         @return:
         """
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -200,11 +199,10 @@ class UI:
     def checkline(self, sortdice, _eingabe):
         """
 
-        @param sortdice:
-        @param _eingabe:
-        @return:
+        @param sortdice: sorted dices
+        @param _eingabe: the line which should be checked
+        @return: -
         """
-        self.getequals(sortdice)
         check = False
         match _eingabe:
             case 10:
@@ -238,33 +236,75 @@ class UI:
     def getequals(self, sortdice):
         """
 
-        @param sortdice:
+        @param sortdice: sorted Dices
         @return:
         """
         self.maxequal = 1
         self.secondequal = 1
-        checkcounter = 0
-        equal = 1
         for i in range(len(sortdice) - 1):
             if sortdice[i] == sortdice[i + 1]:
-                equal += 1
-                if self.maxequal <= equal:
-                    if not sortdice[checkcounter] == sortdice[i]:
-                        self.secondequal = self.maxequal
-                    self.maxequal = equal
-            else:
-                equal = 1
-                checkcounter = i
+                if sortdice[0] == sortdice[i]:
+                    self.maxequal += 1
+                else:
+                    self.secondequal += 1
+        if self.maxequal < self.secondequal:
+            self.maxequal, self.secondequal = self.secondequal, self.maxequal
 
-def row_read(is_pve):
-    """
+    @classmethod
+    def checkpve(cls, is_pve: bool):
+        """
 
-    @return:
-    """
-    if not is_pve:
-        _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
-                       "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
-                       "Für eine neue Auswahl geben sie etwas anders ein")
-    else:
-        _einga = '0'
-    return _einga
+        @param is_pve: if its PvE
+        @type is_pve:bool
+        @return: -
+        @rtype: -
+        """
+        if not is_pve:
+            _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                           "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                           "Für eine neue Auswahl geben sie etwas anders ein")
+        else:
+            _einga = '0'
+        return _einga
+
+    @classmethod
+    def zeroline(cls, pve: bool) -> string:
+        """
+
+        @param pve:
+        @type pve:
+        @return:
+        @rtype:
+        """
+        if not pve:
+            _einga = input("Sie haben nicht die Anforderungen für diese Zeile!\n"
+                           "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
+                           "Für eine neue Auswahl geben sie etwas anders ein")
+        else:
+            _einga = '0'
+        return _einga
+
+    def checkbonus(self, playernumber: int):
+        """
+
+        @param playernumber:
+        @type playernumber:
+        @return:
+        @rtype:
+        """
+        if self.maxequal == 5:
+            if self.kniffel[playernumber]:
+                self.gameblock.pluskniffel(playernumber)
+
+    def checkfirstkniffel(self, playernumber: int, _eingabe: int):
+        """
+
+        @param playernumber:
+        @type playernumber:
+        @param _eingabe:
+        @type _eingabe:
+        @return:
+        @rtype:
+        """
+        if _eingabe == 15 and not self.kniffel[playernumber]:
+            self.kniffel[playernumber] = True
