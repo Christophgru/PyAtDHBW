@@ -10,9 +10,6 @@ from unittest import TestCase
 
 
 class TestKniffel(TestCase):
-    """
-    todo: all: testet was das zeug hält
-    """
 
     def testGameblock(self):
         block: Block = Block.Gameblock()
@@ -21,10 +18,6 @@ class TestKniffel(TestCase):
 
         self.assertEqual(type(thawed), type(block))
         self.assertEqual(block.gamened(), False)
-
-    def testblockAusgabe(self):
-        block: Block = Block.Gameblock()
-        block.output("Steve", "Steve's Opfer'")
 
     def testPVP(self):
         # buildString
@@ -42,7 +35,7 @@ class TestKniffel(TestCase):
                 inputstring += "0\n0\n0\n"
         # insert String, check ob durchgelaufen ist
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            with patch('sys.stdin', new=StringIO(inputstring)) as fakein:
+            with patch('sys.stdin', new=StringIO(inputstring)):
                 game = Game.Game()
                 game.startgame()
                 strout: str = fake_out.getvalue()
