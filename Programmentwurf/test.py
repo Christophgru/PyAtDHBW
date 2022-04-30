@@ -63,7 +63,7 @@ class TestKniffel(TestCase):
         inputstring = "2\nspieler1\n"
         options: list = [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 16]
         for i in range(0, 13):
-            inputstring += "0\n0\n" + str(options[i]) + "\n"
+            inputstring += "1,2,3\n4\n" + str(options[i]) + "\n"
             if options[i] >= 10:
                 inputstring += "0\n0\n0\n"
         with patch('sys.stdout', new=StringIO()) as fakeout:

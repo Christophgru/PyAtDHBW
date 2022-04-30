@@ -25,7 +25,7 @@ class Player:
         @rtype:
         """
         if activeplayer == 1 and not self.isreal:
-            _ui.choosediceorcheck(dicedict, "1\n1\n")
+            _ui.choosediceorcheck(dicedict, "0")
         else:
             _ui.choosediceorcheck(dicedict)
 

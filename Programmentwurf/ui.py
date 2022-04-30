@@ -62,9 +62,10 @@ class UI:
                     print("Geben sie bitte nur 1 oder 2 ein")
 
     @classmethod
-    def choosediceorcheck(cls, dice_in_cup: dict):
+    def choosediceorcheck(cls, dice_in_cup: dict, input_pve=""):
         """
         check which dices the Player want to change
+        @param input_pve:
         @param dice_in_cup: all Dices
         @type dice_in_cup: dict
         @return: -
@@ -87,10 +88,11 @@ class UI:
                     print("Würfel", i, ":", wuerfelx.eyes)
                 i += 1
 
-            eing = input("Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n"
-                         "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n"
-                         "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n"
-                         "Wenn sie nichts auswählen möchten geben sie 0 ein.\n")
+            req = "Wollen Sie schon ausgewählte Würfel wieder in den Becher werfen, \n" \
+                  "oder gewürfelte Würfel beiseite legen, dann geben Sie bitte den Würfelindex ein \n" \
+                  "Bei mehreren Würfeln den Würfelindex bitte ohne Leerzeichen eingeben und mit Komma trennen\n" \
+                  "Wenn sie nichts auswählen möchten geben sie 0 ein.\n"
+            eing = input(req) if input_pve == "" else input_pve
             eing = eing.split(",")
             for choosen_dice in eing:
                 if choosen_dice in ("1", "2", "3", "4", "5"):
@@ -102,9 +104,10 @@ class UI:
                     print("Wählen sie bite bloß 1,2,3,4 oder 5 aus")
                     again = True
 
-    def choose_action_with_dice_arr(self, params: dict) -> int:
+    def choose_action_with_dice_arr(self, params: dict, choice_pve=0) -> int:
         """
         User interaction to chooce the line of the block
+        @param choice_pve:
         @param params: dices, gameblock, aktive Playernumber, both Playernames, bool if PvE
         @return: linenumber
         """
@@ -124,7 +127,8 @@ class UI:
         while True:
             while True:
                 try:
-                    _eing = input("Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n")
+                    request = "Geben sie bitte die Zeile an in welche sie das Gewürfelte eintragen wollen\n"
+                    _eing = input(request) if choice_pve == 0 else choice_pve
                     _eingabe = int(_eing)
                 except ValueError:
                     print("Geben sie bloß Zahlen ein\n")
@@ -281,7 +285,7 @@ class UI:
                            "Wenn sei 0 Punkte eintragen möchten geben sie 0 ein\n"
                            "Für eine neue Auswahl geben sie etwas anders ein")
         else:
-            _einga = '0'
+            _einga = "0"
         return _einga
 
     def checkbonus(self, playernumber: int):
